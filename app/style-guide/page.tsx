@@ -12,7 +12,10 @@ import {
 const sampleQuotes: Record<ThemeName, string> = {
   lotus: 'Clarity arrives when the heart is soothed-design becomes a quiet invitation inward.',
   manipura: 'Solar warmth flows with generous spacing and gentle contrast. Let the interface breathe.',
-  twilight: 'Depth emerges in the twilight tones; this palette holds the mystery with steadiness.'
+  twilight: 'Depth emerges in the twilight tones; this palette holds the mystery with steadiness.',
+  anahata: 'Soft verdant rhythm tends to the heart; align components to breathe with compassion.',
+  vishuddha: 'Clear communication sings when the layout grants airy space for thoughtful pacing.',
+  sahasrara: 'Crown-light gradients inspire reverence; let the interface glow with mindful intention.'
 }
 
 export const metadata = {
