@@ -133,7 +133,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16">
       <WaiIntroOverlay theme={HOME_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
-      <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-200 via-sky-100 to-white py-20">
+      <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-300 via-sky-200 to-sky-100 py-20">
         <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
           <div className="space-y-6 text-sky-900">
             <div className="space-y-3">

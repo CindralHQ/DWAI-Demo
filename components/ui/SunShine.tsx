@@ -49,8 +49,8 @@ export function SunShine({ className }: SunShineProps) {
         }
 
         .sunshine__core {
-          width: 11rem;
-          height: 11rem;
+          width: 7rem;
+          height: 7rem;
           border-radius: 50%;
           background: #ffffff;
           box-shadow:
