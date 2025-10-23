@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Header />
-        <main className="container py-10">
+        <main className="px-4 pb-10 sm:px-6 lg:px-8">
           <PageFade>{children}</PageFade>
         </main>
         <Footer />

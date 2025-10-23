@@ -11,7 +11,7 @@ const quickLinks = [
   { label: 'Who Am I – Part 2', href: '/wai2' },
   { label: 'Who Am I – Part 3', href: '/wai3' },
   { label: 'Who Am I – Part 4', href: '/wai4' },
-  { label: 'Books & Publications', href: '/books' },
+  { label: 'Books & Publications', href: 'https://santoshsachdeva.com/books/' }
 ]
 
 const seriesLinks = [

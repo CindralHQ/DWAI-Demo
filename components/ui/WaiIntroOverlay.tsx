@@ -12,6 +12,7 @@ type WaiIntroOverlayProps = {
   label: string
   durationMs?: number
   size?: 'default' | 'hero'
+  applyBodyTint?: boolean
 }
 
 const overlayTint: Record<ThemeName, string> = {
@@ -45,7 +46,14 @@ const sizeStyles = {
   }
 } as const
 
-export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600, size = 'default' }: WaiIntroOverlayProps) {
+export function WaiIntroOverlay({
+  theme,
+  icon,
+  label,
+  durationMs = 2600,
+  size = 'default',
+  applyBodyTint = true
+}: WaiIntroOverlayProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [isFading, setIsFading] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
@@ -56,7 +64,7 @@ export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600, size = 
   }, [])
 
   useEffect(() => {
-    if (typeof document === 'undefined') return
+    if (!applyBodyTint || typeof document === 'undefined') return
     const previousBackground = document.body.style.background
     const previousBackgroundColor = document.body.style.backgroundColor
     document.body.style.background = ''
@@ -66,7 +74,7 @@ export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600, size = 
       document.body.style.background = previousBackground
       document.body.style.backgroundColor = previousBackgroundColor
     }
-  }, [theme])
+  }, [applyBodyTint, theme])
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => setHasMounted(true))

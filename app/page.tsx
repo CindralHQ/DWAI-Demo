@@ -3,6 +3,7 @@ import Image, { type StaticImageData } from 'next/image'
 import { ButtonLink } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
+import { SunShine } from '@/components/ui/SunShine'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
@@ -130,23 +131,23 @@ export default function HomePage() {
   const palette = themeLibrary[HOME_THEME].classes
 
   return (
-    <div className="space-y-20">
-      <WaiIntroOverlay theme={HOME_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" />
-      <section className="space-y-10 rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-800 to-slate-900 p-10 text-white shadow-lg">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-200">
+    <div className="space-y-16">
+      <WaiIntroOverlay theme={HOME_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
+      <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-200 via-sky-100 to-white py-20">
+        <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
+          <div className="space-y-6 text-sky-900">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-600">
                 About The Series
               </p>
               <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Who Am I</h1>
-              <p className="text-xl font-medium text-indigo-100">
+              <p className="text-xl font-medium text-sky-700">
                 Journey of Jeev Atma to the Blossoming of Consciousness
               </p>
             </div>
-            <p className="max-w-xl text-base leading-7 text-indigo-100">
-              The 'Who Am I Series' is a gift for humanity. A must-watch journey for every seeker, yoga
-              teacher, yoga practitioner, and meditator - no matter the path.
+            <p className="max-w-2xl text-base leading-7 text-sky-800">
+              The 'Who Am I Series' is a gift for humanity. A must-watch journey for every seeker, yoga teacher,
+              yoga practitioner, and meditator - no matter the path.
             </p>
             <div className="flex flex-wrap gap-3">
               <ButtonLink href="/wai1" theme={SUPPORT_THEME} size="lg">
@@ -154,83 +155,81 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </div>
-          <VisualPlaceholder label="Hero Visual" />
+          <SunShine className="mx-auto scale-95 sm:scale-105 lg:scale-110" />
         </div>
-        <div className="rounded-3xl bg-indigo-900/70 p-4 text-sm font-medium text-indigo-100 ring-1 ring-white/10">
-          The 'Who Am I Series' is a gift for humanity. A must watch for every seeker, yoga teacher, yoga
-          practitioner, meditator. No matter your path.
-        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
-      <Quote
-        theme={SUPPORT_THEME}
-        text="Today, I realise that my life has been touched by a love and a gentleness to a depth which no individual can possibly match - as is given to me, in the course of the daily meditation by the Kundalini force residing within my own being. I am aware that this feeling of being cherished must emanate from the very Source itself."
-        author="Santosh Ma"
-        role="Kundalini Diary"
-      />
+      <div className="container space-y-20">
+        <Quote
+          theme={SUPPORT_THEME}
+          text="Today, I realise that my life has been touched by a love and a gentleness to a depth which no individual can possibly match - as is given to me, in the course of the daily meditation by the Kundalini force residing within my own being. I am aware that this feeling of being cherished must emanate from the very Source itself."
+          author="Santosh Ma"
+          role="Kundalini Diary"
+        />
 
-      <section className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
-        <VisualPlaceholder label="Series Visual" />
-        <div className="space-y-6">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            About The 'Who Am I' Series
-          </h2>
-          <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
-            {aboutBulletPoints.map((point, index) => (
-              <li key={index} className="flex gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        <section className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
+          <VisualPlaceholder label="Series Visual" />
+          <div className="space-y-6">
+            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+              About The 'Who Am I' Series
+            </h2>
+            <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
+              {aboutBulletPoints.map((point, index) => (
+                <li key={index} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-      <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-start">
-        <div className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <header className="space-y-2">
-            <h3 className={`text-2xl font-semibold ${palette.text}`}>
-              Santosh Ma's Spiritual Awakening has been Unique
-            </h3>
-            <p className={`text-base leading-7 ${palette.muted}`}>
-              The question surfaced in her mind,
-              <br />
-              Who am I? Where do I come from? Where am I going?
-            </p>
+        <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-start">
+          <div className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <header className="space-y-2">
+              <h3 className={`text-2xl font-semibold ${palette.text}`}>
+                Santosh Ma's Spiritual Awakening has been Unique
+              </h3>
+              <p className={`text-base leading-7 ${palette.muted}`}>
+                The question surfaced in her mind,
+                <br />
+                Who am I? Where do I come from? Where am I going?
+              </p>
+            </header>
+            <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
+              {awakeningHighlights.map((item, index) => (
+                <li key={index} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <VisualPlaceholder label="Portrait Placeholder" />
+        </section>
+
+        <section className="space-y-8">
+          <header className="space-y-2 text-center">
+            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+              Need of the Hour: Rapid Evolution of Human Consciousness
+            </h2>
           </header>
-          <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
-            {awakeningHighlights.map((item, index) => (
-              <li key={index} className="flex gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <VisualPlaceholder label="Portrait Placeholder" />
-      </section>
-
-      <section className="space-y-8">
-        <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            Need of the Hour: Rapid Evolution of Human Consciousness
-          </h2>
-        </header>
-        <div className="grid gap-6 md:grid-cols-3">
-          {needOfHour.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col gap-4 rounded-3xl border border-indigo-100 bg-white p-6 text-left shadow-sm"
-            >
-              <VisualPlaceholder label="Visual" />
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
-                <p className="text-base leading-7 text-indigo-700">{item.body}</p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {needOfHour.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col gap-4 rounded-3xl border border-indigo-100 bg-white p-6 text-left shadow-sm"
+              >
+                <VisualPlaceholder label="Visual" />
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
+                  <p className="text-base leading-7 text-indigo-700">{item.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
       <section className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
         <div className="space-y-4">
@@ -398,6 +397,7 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+    </div>
     </div>
   )
 }

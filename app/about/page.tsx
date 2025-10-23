@@ -16,10 +16,6 @@ const supportHighlights = [
     body: "A self-study course that distils Santosh Ma's insights into an accessible daily practice for seekers of all backgrounds."
   },
   {
-    title: 'Books & Study Material',
-    body: 'Over ten publications, including the Kundalini Trilogy, chronicle the awakening process with rare illustrative detail.'
-  },
-  {
     title: 'Guided Sangha',
     body: 'Weekly online and in-person meditations provide a safe space to discuss experiences and receive personalised counsel.'
   }

@@ -23,7 +23,7 @@ export function Header({ theme = 'twilight', className, sticky = true }: HeaderP
         className
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
+      <div className="flex h-16 w-full items-center justify-between px-6 md:px-10">
         <Link href="/" className={cx('text-lg font-semibold tracking-tight', text)}>
           Discover Who Am I
         </Link>

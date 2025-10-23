@@ -72,13 +72,13 @@ export default function WaiTwoPage() {
         ].join(' ')}
       >
         <div className="space-y-16 md:space-y-20">
-      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-green-600 p-6 text-white shadow-lg ring-1 ring-emerald-300/40 sm:p-8 md:p-10">
+      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-green-600 p-6 text-white shadow-lg ring-1 ring-emerald-300/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
           <VisualPlaceholder label="Hero Illustration" />
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
-              <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Part 2</h1>
+                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part II</h1>
               <p className="text-xl font-semibold text-white">Shaktipat & Blossoming of the Spiritual Heart</p>
             </div>
             <p className="text-base leading-7 text-white/90">

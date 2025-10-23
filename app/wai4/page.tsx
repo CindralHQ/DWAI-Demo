@@ -78,13 +78,13 @@ export default function WaiFourPage() {
         ].join(' ')}
       >
         <div className="space-y-16 md:space-y-20">
-      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-violet-600 via-violet-700 to-purple-900 p-6 text-white shadow-lg shadow-[0_0_45px_rgba(245,197,53,0.28)] ring-1 ring-amber-200/40 sm:p-8 md:p-10">
+      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-violet-600 via-violet-700 to-purple-900 p-6 text-white shadow-lg shadow-[0_0_45px_rgba(245,197,53,0.28)] ring-1 ring-amber-200/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
           <VisualPlaceholder label="Hero Illustration" />
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
-              <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Part 4</h1>
+              <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part IV</h1>
               <p className="text-xl font-semibold text-white">
                 Beyond the Veil: The Secret of the Three Granthis, the Shiva-Lingam, and the Body of Gold
               </p>

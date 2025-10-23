@@ -20,7 +20,7 @@ type ChakraNavItem = {
 const chakras: ChakraNavItem[] = [
   {
     slug: '/wai1',
-    part: 'Part 1',
+    part: 'Part I',
     chakra: 'Manipura',
     icon: manipuraIcon,
     ring: 'ring-amber-300/70',
@@ -30,7 +30,7 @@ const chakras: ChakraNavItem[] = [
   },
   {
     slug: '/wai2',
-    part: 'Part 2',
+    part: 'Part II',
     chakra: 'Anahata',
     icon: anahataIcon,
     ring: 'ring-emerald-300/70',
@@ -40,7 +40,7 @@ const chakras: ChakraNavItem[] = [
   },
   {
     slug: '/wai3',
-    part: 'Part 3',
+    part: 'Part III',
     chakra: 'Vishuddha',
     icon: vishuddhaIcon,
     ring: 'ring-sky-300/70',
@@ -50,7 +50,7 @@ const chakras: ChakraNavItem[] = [
   },
   {
     slug: '/wai4',
-    part: 'Part 4',
+    part: 'Part IV',
     chakra: 'Sahasrara',
     icon: sahasraraIcon,
     ring: 'ring-violet-300/70',
@@ -68,7 +68,7 @@ type ChakraNavProps = {
 export function ChakraNav({ active, className }: ChakraNavProps) {
   return (
     <nav
-      className={['flex flex-wrap items-center justify-center gap-4 sm:gap-5', className]
+      className={['flex flex-wrap items-center justify-center gap-4 sm:gap-5 md:justify-start md:text-left', className]
         .filter(Boolean)
         .join(' ')}
     >
@@ -78,7 +78,7 @@ export function ChakraNav({ active, className }: ChakraNavProps) {
         return (
           <div
             key={chakra.slug}
-            className="flex flex-col items-center gap-2 text-center text-[11px] font-medium text-white/80"
+            className="flex flex-col items-center gap-2 text-center text-[11px] font-medium text-white/80 md:items-start md:text-left"
           >
             <Link
               href={chakra.slug}
@@ -96,7 +96,7 @@ export function ChakraNav({ active, className }: ChakraNavProps) {
             >
               <Image src={chakra.icon} alt={`${chakra.chakra} symbol`} className="h-9 w-9" />
             </Link>
-            <div className="flex flex-col items-center gap-0.5">
+            <div className="flex flex-col items-center gap-0.5 md:items-start">
               <span className="text-[9px] font-semibold uppercase tracking-[0.35em] text-white/60">
                 {chakra.part}
               </span>
