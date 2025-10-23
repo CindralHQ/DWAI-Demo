@@ -11,6 +11,7 @@ type WaiIntroOverlayProps = {
   icon: StaticImageData
   label: string
   durationMs?: number
+  size?: 'default' | 'hero'
 }
 
 const overlayTint: Record<ThemeName, string> = {
@@ -31,7 +32,20 @@ const bodyTint: Record<ThemeName, string> = {
   sahasrara: '#F4ECFF'
 }
 
-export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600 }: WaiIntroOverlayProps) {
+const sizeStyles = {
+  default: {
+    wrapper: 'h-36 w-36 rounded-full',
+    image: 'h-16 w-16',
+    shadow: 'shadow-[0_0_45px_rgba(255,255,255,0.45)]'
+  },
+  hero: {
+    wrapper: 'h-52 w-52 rounded-full',
+    image: 'h-36 w-36',
+    shadow: 'shadow-[0_0_70px_rgba(255,255,255,0.55)]'
+  }
+} as const
+
+export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600, size = 'default' }: WaiIntroOverlayProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [isFading, setIsFading] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
@@ -90,15 +104,17 @@ export function WaiIntroOverlay({ theme, icon, label, durationMs = 2600 }: WaiIn
       >
         <div
           className={[
-            'flex h-36 w-36 items-center justify-center rounded-full bg-white/95 shadow-[0_0_45px_rgba(255,255,255,0.45)] transition-all duration-1000 ease-out',
+            'flex items-center justify-center bg-white/95 transition-all duration-1000 ease-out',
+            sizeStyles[size].wrapper,
+            sizeStyles[size].shadow,
             iconState
           ].join(' ')}
         >
-          <Image src={icon} alt={`${label} icon`} className="h-16 w-16" priority />
+          <Image src={icon} alt={`${label} icon`} className={sizeStyles[size].image} priority />
         </div>
       </div>
     )
-  }, [hasMounted, icon, isFading, isVisible, label, theme])
+  }, [hasMounted, icon, isFading, isVisible, label, size, theme])
 
   if (!portalEl) {
     return null

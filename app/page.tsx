@@ -3,21 +3,50 @@ import Image, { type StaticImageData } from 'next/image'
 import { ButtonLink } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
+import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
 import manipuraIcon from '@/assets/icons/Manipura.png'
 import anahataIcon from '@/assets/icons/Anahata.png'
 import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
+import homeLogo from '@/assets/Logo.png'
 
 const HOME_THEME: ThemeName = 'twilight'
 const SUPPORT_THEME: ThemeName = 'manipura'
 
-const courseIconMap: Record<string, { icon: StaticImageData; bg: string; ring: string }> = {
-  wai1: { icon: manipuraIcon, bg: 'bg-amber-50', ring: 'ring-amber-200/60' },
-  wai2: { icon: anahataIcon, bg: 'bg-emerald-50', ring: 'ring-emerald-200/60' },
-  wai3: { icon: vishuddhaIcon, bg: 'bg-sky-50', ring: 'ring-sky-200/60' },
-  wai4: { icon: sahasraraIcon, bg: 'bg-violet-50', ring: 'ring-violet-200/60' }
+const courseIconMap: Record<
+  string,
+  { icon: StaticImageData; iconBg: string; ring: string; cardClass: string }
+> = {
+  wai1: {
+    icon: manipuraIcon,
+    iconBg: 'bg-amber-100',
+    ring: 'ring-amber-200/60',
+    cardClass:
+      '!bg-amber-50 !border-amber-200 !shadow-none text-amber-900 hover:!border-amber-300 hover:!shadow-none'
+  },
+  wai2: {
+    icon: anahataIcon,
+    iconBg: 'bg-emerald-100',
+    ring: 'ring-emerald-200/60',
+    cardClass:
+      '!bg-emerald-50 !border-emerald-200 !shadow-none text-emerald-900 hover:!border-emerald-300 hover:!shadow-none'
+  },
+  wai3: {
+    icon: vishuddhaIcon,
+    iconBg: 'bg-sky-100',
+    ring: 'ring-sky-200/60',
+    cardClass:
+      '!bg-sky-50 !border-sky-200 !shadow-none text-sky-900 hover:!border-sky-300 hover:!shadow-none'
+  },
+  wai4: {
+    icon: sahasraraIcon,
+    iconBg: 'bg-violet-100',
+    ring: 'ring-violet-200/60',
+    cardClass:
+      '!bg-violet-50 !border-violet-200 !shadow-none text-violet-900 hover:!border-violet-300 hover:!shadow-none'
+  }
 }
 
 const aboutBulletPoints = [
@@ -102,6 +131,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-20">
+      <WaiIntroOverlay theme={HOME_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" />
       <section className="space-y-10 rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-800 to-slate-900 p-10 text-white shadow-lg">
         <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
           <div className="space-y-6">
@@ -121,9 +151,6 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-3">
               <ButtonLink href="/wai1" theme={SUPPORT_THEME} size="lg">
                 Explore the Course
-              </ButtonLink>
-              <ButtonLink href="/style-guide" variant="secondary" theme={SUPPORT_THEME} size="lg">
-                View Style Guide
               </ButtonLink>
             </div>
           </div>
@@ -315,6 +342,7 @@ export default function HomePage() {
             <Card
               key={course.slug}
               theme={(course.theme as ThemeName) ?? HOME_THEME}
+              className={iconConfig?.cardClass}
               eyebrow={`Part ${String(index + 1).padStart(2, '0')}`}
               title={course.title}
               description={course.subtitle}
@@ -322,17 +350,17 @@ export default function HomePage() {
                 iconConfig ? (
                   <div
                     className={[
-                      'inline-flex h-14 w-14 items-center justify-center rounded-2xl ring-4 ring-inset shadow-sm',
-                      iconConfig.bg,
+                      'inline-flex h-20 w-20 items-center justify-center rounded-2xl ring-4 ring-inset shadow-sm',
+                      iconConfig.iconBg,
                       iconConfig.ring
                     ].join(' ')}
                   >
                     <Image
                       src={iconConfig.icon}
                       alt={`${course.title} icon`}
-                      width={32}
-                      height={32}
-                      className="h-8 w-8"
+                      width={48}
+                      height={48}
+                      className="h-12 w-12"
                     />
                   </div>
                 ) : undefined
@@ -349,6 +377,25 @@ export default function HomePage() {
             </Card>
             )
           })}
+        </div>
+      </section>
+
+      <section className="space-y-4 rounded-3xl bg-emerald-50 p-8 text-base leading-7 text-slate-700 ring-1 ring-emerald-100/70">
+        <h3 className="text-center text-2xl font-semibold text-emerald-900">Disclaimer</h3>
+        <div className="space-y-4">
+          <p>
+            The information contained in 'the books by the author' and the 'Who Am I' are not intended to serve
+            as a replacement for professional medical advice. Any use of the information in the books and the
+            courses is at the participants discretion. Author specifically disclaims any implied warranties of
+            merchantability and fitness for a particular purpose and all liability arising directly or indirectly
+            from the use or application of any information contained in the book or the various courses.
+          </p>
+          <p>
+            The author does not recommend the self-management of health or mental health problems. You should
+            never disregard medical advice, or delay in seeking it, because of something you have learned in this
+            book or these courses. 'The Who Am I' are a structured self-study and self-development programme that
+            shouldn't be taken lightly.
+          </p>
         </div>
       </section>
     </div>

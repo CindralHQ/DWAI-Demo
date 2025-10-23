@@ -12,20 +12,18 @@ const quickLinks = [
   { label: 'Who Am I – Part 3', href: '/wai3' },
   { label: 'Who Am I – Part 4', href: '/wai4' },
   { label: 'Books & Publications', href: '/books' },
-  { label: 'Style Guide', href: '/style-guide' }
 ]
 
 const seriesLinks = [
-  { label: 'Santosh Ma Teachings', href: '#' },
+  { label: "About Santosh Ma's Teachings", href: '#' },
   { label: 'Kundalini Diary', href: '#' },
   { label: 'Eight Spiritual Breaths', href: '#' }
 ]
 
 const socialLinks = [
   { label: 'Instagram', href: '#' },
-  { label: 'YouTube', href: '#' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@SantoshSachdevaTalks' },
   { label: 'Facebook', href: '#' },
-  { label: 'Newsletter', href: '#' }
 ]
 
 export function Footer({ className }: FooterProps) {
@@ -96,10 +94,10 @@ export function Footer({ className }: FooterProps) {
             <ul className="grid grid-cols-1 gap-2 text-sm">
               <li>
                 <a
-                  href="mailto:hello@discoverwhoami.org"
+                  href="mailto:admin@discoverwhoami.org"
                   className="text-slate-700 transition hover:text-indigo-600 hover:underline"
                 >
-                  hello@discoverwhoami.org
+                  admin@discoverwhoami.org
                 </a>
               </li>
               <li className="text-slate-500">Mumbai · India</li>
