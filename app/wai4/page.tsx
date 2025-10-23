@@ -48,9 +48,11 @@ const uniqueness = [
   'Explains advanced inner mechanisms in a way that remains accessible.'
 ]
 
-const audience = [
+const uniquePoints = [...depthHighlights, ...uniqueness]
+
+const whyWatch = [
   'Seekers devoted to the question "Who Am I".',
-  'Yoga teachers and students deepening subtle-body mastery.',
+  'Yoga teachers and students ready to deepen subtle-body mastery.',
   'Scholars and researchers exploring kundalini, consciousness, and mysticism.',
   'Interdisciplinary faculties synthesising ancient wisdom with neurobiology and human evolution.'
 ]
@@ -86,7 +88,7 @@ export default function WaiFourPage() {
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
               <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part IV</h1>
               <p className="text-xl font-semibold text-white">
-                Beyond the Veil: The Secret of the Three Granthis, the Shiva-Lingam, and the Body of Gold
+                Beyond the Veil: Three Granthis, Shiva-Lingam & The Body of Gold 
               </p>
             </div>
             <div className="space-y-2 text-base leading-7 text-white/90">
@@ -94,11 +96,6 @@ export default function WaiFourPage() {
                 Based not on philosophy but on lived transformation, Part 4 reveals the deepest layers of
                 yogic evolution - teachings historically reserved for seekers guided by a realised master.
               </p>
-              <ul className="space-y-1">
-                <li>• Detailed teachings on the Brahma, Vishnu, and Rudra Granthis.</li>
-                <li>• Direct revelation of the inner Shiva-Linga.</li>
-                <li>• The mystery of the golden body, fully awakened.</li>
-              </ul>
             </div>
             <ChakraNav active="wai4" />
             <div className="flex flex-wrap gap-3">
@@ -166,28 +163,6 @@ export default function WaiFourPage() {
         </div>
       </section>
 
-      <section className="space-y-8">
-        <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            Depth and Distinction
-          </h2>
-        </header>
-        <div className="grid gap-6 md:grid-cols-3">
-          {depthHighlights.map((text, index) => (
-            <div
-              key={text}
-              className="flex flex-col gap-4 rounded-3xl border border-violet-200 bg-white p-5 shadow-sm sm:p-6"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-500">
-                Depth {String(index + 1).padStart(2, '0')}
-              </span>
-              <VisualPlaceholder label="Revelatory Visual" />
-              <p className="text-base leading-7 text-violet-800">{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
         <VisualPlaceholder label="Sacred Feet Artwork" />
         <div className="space-y-4">
@@ -195,7 +170,7 @@ export default function WaiFourPage() {
             What Makes This Series Unique
           </h2>
           <ul className="space-y-2 text-base leading-7 text-violet-800">
-            {uniqueness.map((item) => (
+            {uniquePoints.map((item) => (
               <li key={item} className="flex gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
                 <span>{item}</span>
@@ -205,23 +180,19 @@ export default function WaiFourPage() {
         </div>
       </section>
 
-      <section className="space-y-6 rounded-3xl bg-violet-100/70 p-6 sm:p-8">
-        <header className="text-center space-y-2">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>For Whom Is This Series?</h2>
-          <p className={`text-base leading-7 ${palette.muted}`}>
-            For seekers ready to receive the esoteric teachings of the golden body.
-          </p>
-        </header>
-        <div className="grid gap-4 md:grid-cols-2">
-          {audience.map((item) => (
-            <div
-              key={item}
-              className="rounded-3xl border border-violet-200 bg-white p-5 text-base leading-7 text-violet-800 shadow-sm"
-            >
-              {item}
-            </div>
-          ))}
+      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
+        <div className="space-y-4 rounded-3xl border border-violet-200 bg-violet-50 p-6 sm:p-8">
+          <h3 className={`text-2xl font-semibold text-violet-900`}>Why You Must Watch It</h3>
+          <ul className="space-y-2 text-base leading-7 text-violet-800">
+            {whyWatch.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+        <VisualPlaceholder label="Golden Body Visual" />
       </section>
 
       <EnrollBlock

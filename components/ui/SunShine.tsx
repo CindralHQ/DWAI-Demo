@@ -43,7 +43,7 @@ export function SunShine({ className }: SunShineProps) {
           position: absolute;
           inset: 0;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0) 75%);
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(209, 233, 255, 0.45) 55%, rgba(173, 216, 255, 0.18) 72%, rgba(173, 216, 255, 0) 85%);
           filter: blur(8px);
           transform: scale(1.5);
         }
@@ -52,11 +52,11 @@ export function SunShine({ className }: SunShineProps) {
           width: 7rem;
           height: 7rem;
           border-radius: 50%;
-          background: #ffffff;
+          background: radial-gradient(circle at 40% 30%, #ffffff 0%, rgba(227, 241, 255, 0.96) 45%, rgba(198, 227, 255, 0.6) 80%, rgba(173, 216, 255, 0.4) 100%);
           box-shadow:
-            0 0 45px rgba(255, 255, 255, 0.95),
-            0 0 120px rgba(255, 255, 255, 0.6),
-            0 0 200px rgba(255, 255, 255, 0.4);
+            0 0 38px rgba(198, 227, 255, 0.65),
+            0 0 110px rgba(173, 216, 255, 0.45),
+            0 0 180px rgba(173, 216, 255, 0.28);
           position: relative;
           z-index: 2;
         }
@@ -73,9 +73,9 @@ export function SunShine({ className }: SunShineProps) {
           top: 50%;
           left: 50%;
           margin: -0.5px 0 0 0;
-          background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+          background: linear-gradient(to right, rgba(215, 233, 255, 0.9) 0%, rgba(182, 217, 255, 0.35) 45%, rgba(180, 216, 255, 0) 100%);
           border-radius: 999px;
-          box-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
+          box-shadow: 0 0 18px rgba(173, 216, 255, 0.55);
           transform-origin: 0 0;
           animation: sunshineRaySpin var(--sunshine-ray-duration) linear infinite;
           filter: blur(0.2px);

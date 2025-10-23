@@ -40,7 +40,7 @@ const uniqueness = [
   'An invitation to step into a deeper experience of consciousness and recognise your true self.'
 ]
 
-const discoveries = [
+const courseContent = [
   'Understanding the human mind: thoughts, emotions, and intellect',
   'The true function of chakras in daily life',
   "The subtle body's cleansing process",
@@ -58,6 +58,8 @@ const callouts = [
   'Clear to understand, yet spiritually catalytic.',
   'Feels like a visual shaktipat that awakens the inner current.'
 ]
+
+const whyWatch = [...sacredOffering, ...callouts]
 
 function VisualPlaceholder({ label }: { label?: string }) {
   return (
@@ -138,13 +140,16 @@ export default function WaiOnePage() {
         </div>
       </section>
 
-      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
-        <div className="space-y-6 rounded-3xl bg-amber-50 p-6 shadow-sm sm:p-8">
-          <h3 className="text-2xl font-semibold text-amber-900">
-            A Sacred Offering for Every Seeker of Self-Realisation & Inner Mastery
-          </h3>
-          <ul className="space-y-3 text-base leading-7 text-amber-800">
-            {sacredOffering.map((item) => (
+      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
+        <VisualPlaceholder label="Course Modules Visual" />
+        <div className="space-y-4">
+          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
+          <p className="text-base leading-7 text-amber-800">
+            Whether you are beginning or advanced on the yogic path, these transmissions unlock vital keys for daily
+            practice and inner transformation.
+          </p>
+          <ul className="space-y-2 text-base leading-7 text-amber-800">
+            {courseContent.map((item) => (
               <li key={item} className="flex gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
                 <span>{item}</span>
@@ -152,12 +157,6 @@ export default function WaiOnePage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Heart Visual" />
-      </section>
-
-      <section className="rounded-3xl bg-amber-100/70 p-6 text-center text-lg font-semibold text-amber-700">
-        The sacred insights inspire seekers to stay committed to their teachers, masters, gurus, and the
-        living current of their spiritual paths.
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -177,28 +176,11 @@ export default function WaiOnePage() {
         <VisualPlaceholder label="Fire Meditation Artwork" />
       </section>
 
-      <section className="rounded-3xl bg-gradient-to-br from-orange-500 via-orange-600 to-amber-700 p-6 text-white shadow-lg sm:p-8 md:p-10">
-        <header className="text-center">
-          <h2 className="text-3xl font-semibold tracking-tight">Course Content: You Will Discover</h2>
-          <p className="mt-2 text-base leading-7 text-white/80">
-            Whether you are beginning or advanced on the yogic path, these transmissions unlock vital keys:
-          </p>
-        </header>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {discoveries.map((item) => (
-            <div key={item} className="flex gap-3 text-base leading-7 text-white">
-              <span className="mt-1 h-2 w-2 rounded-full bg-white/70" />
-              <span>{item}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
         <div className="space-y-4 rounded-3xl border border-amber-100 bg-amber-50 p-6 sm:p-8">
-          <h3 className="text-2xl font-semibold text-amber-900">Why You Must Watch This Now</h3>
+          <h3 className="text-2xl font-semibold text-amber-900">Why You Must Watch It</h3>
           <ul className="space-y-2 text-base leading-7 text-amber-800">
-            {callouts.map((item) => (
+            {whyWatch.map((item) => (
               <li key={item} className="flex gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
                 <span>{item}</span>
@@ -209,16 +191,11 @@ export default function WaiOnePage() {
         <VisualPlaceholder label="Serpent Energy Visual" />
       </section>
 
-      <section className="space-y-8">
-        <div className="rounded-3xl border border-amber-200 bg-white p-5 shadow-sm sm:p-6">
-          <VisualPlaceholder label="Video Placeholder" />
-        </div>
-        <EnrollBlock
-          theme={THEME}
-          price="INR 12,000"
-          description="For the first time in the history of spiritual literature, the process of awakening has been documented with such vivid detail through illustrations. These teachings show how kundalini shakti purifies and activates the subtle body, transforming the human body, mind, and intellect. The result is a deep, positive influence on daily living."
-        />
-      </section>
+      <EnrollBlock
+        theme={THEME}
+        price="INR 12,000"
+        description="For the first time in the history of spiritual literature, the process of awakening has been documented with such vivid detail through illustrations. These teachings show how kundalini shakti purifies and activates the subtle body, transforming the human body, mind, and intellect. The result is a deep, positive influence on daily living."
+      />
     </div>
       </div>
     </>

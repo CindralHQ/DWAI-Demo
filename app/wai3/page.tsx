@@ -61,6 +61,9 @@ const uniqueness = [
   'Each session is a living transmission - an energetic invitation into grace.'
 ]
 
+const uniquePoints = [...luminousResonance, ...uniqueness]
+const whyWatch = [...audience, ...sacredOffering]
+
 function VisualPlaceholder({ label }: { label?: string }) {
   return (
     <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-sky-200 bg-white/70 text-xs font-semibold uppercase tracking-[0.4em] text-sky-500">
@@ -114,52 +117,41 @@ export default function WaiThreePage() {
               role="Kundalini Diary"
             />
 
-      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
-        <div className="space-y-4">
+      <section className="space-y-8">
+        <header className="space-y-3 text-center">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            A Sacred Unveiling of the Final Ascent
+            About the Who Am I - Part 3 Series
           </h2>
           <p className="text-base leading-7 text-sky-800">
-            There comes a moment in the soul's long journey where the ascent is no longer an effort, but an
-            act of grace. Part 3 documents this luminous threshold with startling clarity and devotion.
+            There comes a moment in the soul&rsquo;s long journey where the ascent is no longer an effort, but an act of
+            grace. Part 3 documents this luminous threshold with startling clarity and devotion.
           </p>
           <p className="text-base leading-7 text-sky-800">
             Santosh Ma shares her direct inner experience of the culminating phases of spiritual evolution.
-            Sacred visuals - downloaded from the Empyrean realms - guide seekers through the final stages of
-            the soul's return.
+            Sacred visuals &mdash; downloaded from the Empyrean realms &mdash; guide seekers through the final stages of
+            the soul&rsquo;s return.
           </p>
-        </div>
-        <VisualPlaceholder label="Lotus Bloom Artwork" />
-      </section>
-
-      <section className="space-y-8">
-        <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            Luminous Images that Resonate
-          </h2>
         </header>
-        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start">
-          <VisualPlaceholder label="Empyrean Visuals" />
-          <div className="space-y-3">
-            <ul className="space-y-2 text-base leading-7 text-sky-800">
-              {luminousResonance.map((point) => (
-                <li key={point} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-sky-500" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="rounded-3xl bg-white p-5 text-base leading-7 text-sky-700 shadow-sm">
-              These transmissions are initiation through vision - an invitation to dwell in the frequency of
-              grace.
-            </p>
-          </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {ascentHighlights.map((item, index) => (
+            <div
+              key={item.title}
+              className="flex flex-col gap-4 rounded-3xl border border-sky-200 bg-white p-5 shadow-sm sm:p-6"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-400">
+                Insight {String(index + 1).padStart(2, '0')}
+              </span>
+              <VisualPlaceholder label="Vision Insight" />
+              <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+              <p className="text-base leading-7 text-sky-800">{item.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
         <div className="space-y-4 rounded-3xl bg-sky-50 p-6 shadow-sm sm:p-8">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>What This Course Reveals</h2>
+          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
           <ul className="space-y-2 text-base leading-7 text-sky-800">
             {courseReveals.map((item) => (
               <li key={item} className="flex gap-3">
@@ -176,58 +168,13 @@ export default function WaiThreePage() {
         <VisualPlaceholder label="Crown Transmission Visual" />
       </section>
 
-      <section className="space-y-6 rounded-3xl bg-sky-100/70 p-6 sm:p-8">
-        <header className="text-center space-y-2">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>For Whom Is This Course?</h2>
-          <p className={`text-base leading-7 ${palette.muted}`}>
-            Intended for seekers who feel the call of the crown and the grace of shaktipat.
-          </p>
-        </header>
-        <div className="grid gap-4 md:grid-cols-2">
-          {audience.map((item) => (
-            <div
-              key={item}
-              className="rounded-3xl border border-sky-200 bg-white p-5 text-base leading-7 text-sky-800 shadow-sm"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-8">
-        <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            A Sacred Offering for Every Seeker
-          </h2>
-        </header>
-        <div className="grid gap-6 md:grid-cols-3">
-          {sacredOffering.map((text, index) => (
-            <div
-              key={text}
-              className="flex flex-col gap-4 rounded-3xl border border-sky-200 bg-white p-5 text-center shadow-sm sm:p-6"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-400">
-                Gift {String(index + 1).padStart(2, '0')}
-              </span>
-              <VisualPlaceholder label="Sacred Visual" />
-              <p className="text-base leading-7 text-sky-800">{text}</p>
-            </div>
-          ))}
-        </div>
-        <p className="rounded-3xl bg-sky-200/60 p-6 text-center text-base leading-7 text-sky-800">
-          The sacred insights inspire all seekers to remain devoted to their teachers, masters, and the living
-          current of their spiritual lineage.
-        </p>
-      </section>
-
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
             What Makes This Series Unique?
           </h2>
           <ul className="space-y-3 text-base leading-7 text-sky-800">
-            {uniqueness.map((item) => (
+            {uniquePoints.map((item) => (
               <li key={item} className="flex gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full bg-sky-500" />
                 <span>{item}</span>
@@ -240,6 +187,21 @@ export default function WaiThreePage() {
           </p>
         </div>
         <VisualPlaceholder label="Transcendent Figure" />
+      </section>
+
+      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
+        <div className="space-y-4 rounded-3xl border border-sky-200 bg-sky-50 p-6 sm:p-8">
+          <h3 className={`text-2xl font-semibold text-sky-900`}>Why You Must Watch It</h3>
+          <ul className="space-y-2 text-base leading-7 text-sky-800">
+            {whyWatch.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-sky-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <VisualPlaceholder label="Crown Light Visual" />
       </section>
 
       <EnrollBlock

@@ -42,11 +42,12 @@ const uniqueness = [
   'Each session is a living transmission - a visual shaktipat that awakens inner knowing.'
 ]
 
-const audience = [
-  'Spiritual seekers on any path longing for heart-awakening.',
-  'Yoga teachers and meditators deepening subtle-body wisdom.',
-  'Students exploring kundalini, consciousness, and mystic physiology.',
-  'Interdisciplinary researchers integrating mysticism with modern science.'
+const whyWatch = [
+  'Feel the spiritual heart awaken through Santosh Ma’s lived transmissions.',
+  'Receive practical guidance on kundalini, consciousness, and mystic physiology.',
+  'Deepen yoga and meditation practice with precise subtle-body wisdom.',
+  'Witness the sacred ascent to the Anahat Chakra and blossoming of divine love.',
+  'Anchor your path with compassionate mentorship for seekers, teachers, and researchers alike.'
 ]
 
 function VisualPlaceholder({ label }: { label?: string }) {
@@ -165,23 +166,19 @@ export default function WaiTwoPage() {
         <VisualPlaceholder label="Living Transmission Visual" />
       </section>
 
-      <section className="space-y-6 rounded-3xl bg-emerald-100/70 p-6 sm:p-8">
-        <header className="text-center space-y-2">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Who Is This Series For?</h2>
-          <p className={`text-base leading-7 ${palette.muted}`}>
-            Designed for seekers who feel the call of the spiritual heart.
-          </p>
-        </header>
-        <div className="grid gap-4 md:grid-cols-2">
-          {audience.map((entry) => (
-            <div
-              key={entry}
-              className="rounded-3xl border border-emerald-200 bg-white p-5 text-base leading-7 text-emerald-800 shadow-sm"
-            >
-              {entry}
-            </div>
-          ))}
+      <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
+        <div className="space-y-4 rounded-3xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8">
+          <h3 className={`text-2xl font-semibold text-emerald-900`}>Why You Must Watch It</h3>
+          <ul className="space-y-2 text-base leading-7 text-emerald-800">
+            {whyWatch.map((entry) => (
+              <li key={entry} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-emerald-500" />
+                <span>{entry}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+        <VisualPlaceholder label="Heart Transmission Visual" />
       </section>
 
       <EnrollBlock
