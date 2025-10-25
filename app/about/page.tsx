@@ -1,3 +1,5 @@
+import homeLogo from '@/assets/Logo.png'
+import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 
 const ABOUT_THEME: ThemeName = 'twilight'
@@ -36,6 +38,7 @@ export default function About() {
 
   return (
     <div className="space-y-16">
+      <WaiIntroOverlay theme={ABOUT_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
       <section className="space-y-4 rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-800 to-slate-900 p-10 text-white shadow-lg">
         <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-200">About</p>
         <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Discover Who Am I</h1>

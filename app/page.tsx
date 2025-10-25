@@ -4,14 +4,25 @@ import { ButtonLink } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
 import { SunShine } from '@/components/ui/SunShine'
-import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
+import { HomeIntroOverlay } from '@/components/ui/HomeIntroOverlay'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
 import manipuraIcon from '@/assets/icons/Manipura.png'
 import anahataIcon from '@/assets/icons/Anahata.png'
 import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
-import homeLogo from '@/assets/Logo.png'
+import heroVisual from '@/assets/visuals/AllChakras.png'
+import seriesVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
+import portraitVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
+import journeyVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
+import signatureVisual from '@/assets/visuals/AllChakras.png'
+import callToActionVisual from '@/assets/visuals/Kundalini-Serpant.png'
+import steadyingSelfVisual from '@/assets/visuals/Pathway-To-Light.png'
+import livingTransmissionVisual from '@/assets/visuals/Kundalini-Serpant.png'
+import guidanceTodayVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
+import roadmapVisual from '@/assets/visuals/ShivLingam.png'
+import ancientKnowledgeVisual from '@/assets/visuals/Ajna-Chakra-Concentration.png'
+import clarityVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
 
 const HOME_THEME: ThemeName = 'twilight'
 const SUPPORT_THEME: ThemeName = 'manipura'
@@ -65,30 +76,54 @@ const awakeningHighlights = [
 const needOfHour = [
   {
     title: 'Steadying The Self',
-    body: 'This body of work arrives as human consciousness awakens rapidly. It keeps seekers rooted in spirit amid fast-paced, material distractions.'
+    body: 'This body of work arrives as human consciousness awakens rapidly. It keeps seekers rooted in spirit amid fast-paced, material distractions.',
+    visual: {
+      src: steadyingSelfVisual,
+      alt: 'Manipura chakra artwork representing steadying inner fire'
+    }
   },
   {
     title: 'Living Transmission',
-    body: 'The series is accessible yet profoundly transformative. Each visual lands like a mini shaktipat, awakening deeper self-realisation.'
+    body: 'The series is accessible yet profoundly transformative. Each visual lands like a mini shaktipat, awakening deeper self-realisation.',
+    visual: {
+      src: livingTransmissionVisual,
+      alt: 'Light radiating through the subtle body'
+    }
   },
   {
     title: 'Guidance For Today',
-    body: 'A rare, immersive four-part experience that meets humanity at a pivotal moment, answering the timeless question: Who Am I?'
+    body: 'A rare, immersive four-part experience that meets humanity at a pivotal moment, answering the timeless question: Who Am I?',
+    visual: {
+      src: guidanceTodayVisual,
+      alt: 'Ajna chakra receiving and transmitting divine energy'
+    }
   }
 ]
 
 const awakenTruth = [
   {
     title: 'A Roadmap Of Evolution',
-    body: 'Twelve parts chart the journey from the causal body through the awakening of Ajna and beyond.'
+    body: 'Twelve parts chart the journey from the causal body through the awakening of Ajna and beyond.',
+    visual: {
+      src: roadmapVisual,
+      alt: 'Ajna chakra concentration visual'
+    }
   },
   {
     title: 'Ancient Knowledge, Structured',
-    body: 'Meticulously organises ancient teachings on consciousness and subtle anatomy into an experiential curriculum.'
+    body: 'Meticulously organises ancient teachings on consciousness and subtle anatomy into an experiential curriculum.',
+    visual: {
+      src: ancientKnowledgeVisual,
+      alt: 'Sahasrara blossoming artwork'
+    }
   },
   {
     title: 'Clarity On Subtle Systems',
-    body: 'Offers unmatched insight into chakras, subtle bodies, and the phases of human evolution.'
+    body: 'Offers unmatched insight into chakras, subtle bodies, and the phases of human evolution.',
+    visual: {
+      src: clarityVisual,
+      alt: 'Kundalini serpent rising illustration'
+    }
   }
 ]
 
@@ -119,20 +154,12 @@ const audiences = [
   { label: 'Interdisciplinary Faculties', copy: 'Learners connecting mysticism, neurobiology, and human evolution.' }
 ]
 
-function VisualPlaceholder({ label }: { label?: string }) {
-  return (
-    <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white/60 text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
-      {label ?? 'Visual Placeholder'}
-    </div>
-  )
-}
-
 export default function HomePage() {
   const palette = themeLibrary[HOME_THEME].classes
 
   return (
     <div className="space-y-16">
-      <WaiIntroOverlay theme={HOME_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
+      <HomeIntroOverlay />
       <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-300 via-sky-200 to-sky-100 py-20">
         <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
           <div className="space-y-6 text-sky-900">
@@ -155,7 +182,16 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </div>
-          <VisualPlaceholder label="Hero Illustration" />
+          <div className="relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl md:aspect-square lg:max-w-none">
+            <Image
+              src={heroVisual}
+              alt="Radiant illustration of all chakras aligned through the subtle body"
+              fill
+              className="object-cover object-bottom"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+              priority
+            />
+          </div>
         </div>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
@@ -169,7 +205,15 @@ export default function HomePage() {
         />
 
         <section className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
-          <VisualPlaceholder label="Series Visual" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+            <Image
+              src={seriesVisual}
+              alt="Blue-hued guru guiding seeker with radiant blessings"
+              fill
+              className="object-cover object-bottom"
+              sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <div className="space-y-6">
             <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
               About The 'Who Am I' Series
@@ -206,7 +250,15 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <VisualPlaceholder label="Portrait Placeholder" />
+          <div className="relative aspect-[4/3] w-full max-w-xl overflow-hidden rounded-3xl">
+            <Image
+              src={portraitVisual}
+              alt="Portrait of Santosh Ma during her spiritual practice"
+              fill
+              className="object-cover object-top"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+            />
+          </div>
         </section>
 
         <section className="space-y-8">
@@ -221,7 +273,15 @@ export default function HomePage() {
                 key={index}
                 className="flex flex-col gap-4 rounded-3xl border border-indigo-100 bg-white p-6 text-left shadow-sm"
               >
-                <VisualPlaceholder label="Visual" />
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-indigo-50">
+                  <Image
+                    src={item.visual.src}
+                    alt={item.visual.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                  />
+                </div>
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
                   <p className="text-base leading-7 text-indigo-700">{item.body}</p>
@@ -252,7 +312,15 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-        <VisualPlaceholder label="Journey Visual" />
+        <div className="relative aspect-[3/2] w-full overflow-hidden">
+          <Image
+            src={journeyVisual}
+            alt="Blue guru guiding a seeker through inner light"
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 1280px) 640px, (min-width: 768px) 60vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="space-y-8">
@@ -264,7 +332,15 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-3">
           {awakenTruth.map((item, index) => (
             <div key={index} className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <VisualPlaceholder label="Illustration" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-50">
+                <Image
+                  src={item.visual.src}
+                  alt={item.visual.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
               <p className="text-base leading-7 text-indigo-700">{item.body}</p>
             </div>
@@ -274,7 +350,15 @@ export default function HomePage() {
 
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 p-10 text-white shadow-lg">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
-          <VisualPlaceholder label="Signature Visual" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+            <Image
+              src={signatureVisual}
+              alt="Radiant illustration of all chakras aligned through the subtle body"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold tracking-tight">
               Why This Series is Unlike Anything You've Seen Before
@@ -303,7 +387,15 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Call to Action Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/40 shadow-lg">
+          <Image
+            src={callToActionVisual}
+            alt="Blue lotus inviting viewers into contemplative practice"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 440px, (min-width: 768px) 40vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="space-y-8">

@@ -120,6 +120,9 @@ export function Footer({ className }: FooterProps) {
             © {new Date().getFullYear()} Discover Who Am I. All rights reserved.
           </div>
           <div className="flex flex-wrap gap-4">
+            <a href="/attributions" className="transition hover:text-indigo-600 hover:underline">
+              Attributions
+            </a>
             <a href="/legal/disclaimer" className="transition hover:text-indigo-600 hover:underline">
               Disclaimer
             </a>

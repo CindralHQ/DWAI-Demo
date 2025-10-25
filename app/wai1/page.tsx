@@ -1,3 +1,5 @@
+import Image, { type StaticImageData } from 'next/image'
+
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
@@ -6,24 +8,49 @@ import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import manipuraIcon from '@/assets/icons/Manipura.png'
+import heroVisual from '@/assets/visuals/Body-On-Fire.png'
+import roadmapVisual from '@/assets/visuals/AllChakras.png'
+import synthesisVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
+import clarityVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
+import courseVisual from '@/assets/visuals/Body-On-Fire-2.jpg'
+import uniquenessVisual from '@/assets/visuals/Head-on-Fire.png'
+import whyWatchVisual from '@/assets/visuals/Kundalini-Serpant.png'
 
 const THEME: ThemeName = 'manipura'
 
-const seriesHighlights = [
+type VisualAsset = { src: StaticImageData; alt: string }
+
+const seriesHighlights: Array<{
+  title: string
+  description: string
+  visual: VisualAsset
+}> = [
   {
     title: 'A Guided Roadmap',
     description:
-      'Its 12-part structure lays out the roadmap of human evolution from the causal body to awakening of the Ajna and beyond.'
+      'Its 12-part structure lays out the roadmap of human evolution from the causal body to awakening of the Ajna and beyond.',
+    visual: {
+      src: roadmapVisual,
+      alt: 'Illustration of the chakra system aligning along the spine'
+    }
   },
   {
     title: 'Meticulous Synthesis',
     description:
-      'The Who Am I Series presents a carefully structured synthesis of ancient knowledge on consciousness and the subtle anatomy.'
+      'The Who Am I Series presents a carefully structured synthesis of ancient knowledge on consciousness and the subtle anatomy.',
+    visual: {
+      src: synthesisVisual,
+      alt: 'Manipura chakra artwork dissolving energy blocks'
+    }
   },
   {
     title: 'Unmatched Clarity',
     description:
-      'Ancient yogic insights on chakras, subtle body, and human evolution are explained with rare precision and lived insight.'
+      'Ancient yogic insights on chakras, subtle body, and human evolution are explained with rare precision and lived insight.',
+    visual: {
+      src: clarityVisual,
+      alt: 'Meditation figure radiating golden light throughout the body'
+    }
   }
 ]
 
@@ -61,14 +88,6 @@ const callouts = [
 
 const whyWatch = [...sacredOffering, ...callouts]
 
-function VisualPlaceholder({ label }: { label?: string }) {
-  return (
-    <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-amber-200 bg-white/70 text-xs font-semibold uppercase tracking-[0.4em] text-amber-500">
-      {label ?? 'Visual Placeholder'}
-    </div>
-  )
-}
-
 export const metadata = { title: 'Who Am I - Part 1' }
 
 export default function WaiOnePage() {
@@ -86,7 +105,16 @@ export default function WaiOnePage() {
         <div className="space-y-16 md:space-y-20">
           <section className="space-y-8 rounded-3xl bg-gradient-to-br from-orange-400 via-orange-500 to-amber-600 p-6 text-white shadow-lg ring-1 ring-amber-300/40 sm:p-7 md:p-9">
             <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-              <VisualPlaceholder label="Hero Illustration" />
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-amber-200/40 bg-white/10 shadow-xl md:aspect-square">
+                <Image
+                  src={heroVisual}
+                  alt="Illustration of Manipura igniting the inner fire"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+                  priority
+                />
+              </div>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -134,14 +162,30 @@ export default function WaiOnePage() {
               title={feature.title}
               description={feature.description}
             >
-              <VisualPlaceholder label="Module Visual" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60">
+                <Image
+                  src={feature.visual.src}
+                  alt={feature.visual.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              </div>
             </Card>
           ))}
         </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <VisualPlaceholder label="Course Modules Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200/50 bg-amber-100/40 shadow-md">
+          <Image
+            src={courseVisual}
+            alt="Manipura-inspired illustration representing course modules"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
           <p className="text-base leading-7 text-amber-800">
@@ -173,7 +217,15 @@ export default function WaiOnePage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Fire Meditation Artwork" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-white shadow-lg">
+          <Image
+            src={uniquenessVisual}
+            alt="Illustration of inner fire rising through meditation"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -188,7 +240,15 @@ export default function WaiOnePage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Serpent Energy Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/50 shadow-lg">
+          <Image
+            src={whyWatchVisual}
+            alt="Kundalini serpent artwork symbolising awakened energy"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+          />
+        </div>
       </section>
 
       <EnrollBlock

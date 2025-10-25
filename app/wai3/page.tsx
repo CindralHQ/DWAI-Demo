@@ -1,3 +1,5 @@
+import Image, { type StaticImageData } from 'next/image'
+
 import { Button } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
@@ -5,24 +7,49 @@ import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
+import heroVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
+import crownRoadmapVisual from '@/assets/visuals/Ajna-Chakra-Concentration.png'
+import ascentPathVisual from '@/assets/visuals/Pathway-To-Light.png'
+import resonanceVisual from '@/assets/visuals/OM.png'
+import courseVisual from '@/assets/visuals/Gurus-Blessings-2.png'
+import uniquenessVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
+import whyWatchVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
 
 const THEME: ThemeName = 'vishuddha'
 
-const ascentHighlights = [
+type VisualAsset = { src: StaticImageData; alt: string }
+
+const ascentHighlights: Array<{
+  title: string
+  description: string
+  visual: VisualAsset
+}> = [
   {
     title: 'Crown of Awakening',
     description:
-      'For the first time, the ascent of consciousness to the Sahasrar - the crown of awakening - is mapped with precise visuals.'
+      'For the first time, the ascent of consciousness to the Sahasrar - the crown of awakening - is mapped with precise visuals.',
+    visual: {
+      src: crownRoadmapVisual,
+      alt: 'Ajna chakra concentration artwork guiding the ascent toward the crown'
+    }
   },
   {
     title: 'Inner Witness Accounts',
     description:
-      'Santosh Ma shares the culminating phases of her own evolution, received through sacred transmissions from the Empyrean realms.'
+      'Santosh Ma shares the culminating phases of her own evolution, received through sacred transmissions from the Empyrean realms.',
+    visual: {
+      src: ascentPathVisual,
+      alt: 'A luminous pathway ascending toward the sahasrar'
+    }
   },
   {
     title: 'Initiation Through Vision',
     description:
-      'These luminous images transmit not just knowledge but a resonance that invites seekers into direct experience.'
+      'These luminous images transmit not just knowledge but a resonance that invites seekers into direct experience.',
+    visual: {
+      src: resonanceVisual,
+      alt: 'Sacred Om symbol representing pure resonance'
+    }
   }
 ]
 
@@ -64,14 +91,6 @@ const uniqueness = [
 const uniquePoints = [...luminousResonance, ...uniqueness]
 const whyWatch = [...audience, ...sacredOffering]
 
-function VisualPlaceholder({ label }: { label?: string }) {
-  return (
-    <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-sky-200 bg-white/70 text-xs font-semibold uppercase tracking-[0.4em] text-sky-500">
-      {label ?? 'Visual Placeholder'}
-    </div>
-  )
-}
-
 export const metadata = { title: 'Who Am I - Part 3' }
 
 export default function WaiThreePage() {
@@ -89,7 +108,16 @@ export default function WaiThreePage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-blue-600 p-6 text-white shadow-lg ring-1 ring-sky-300/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <VisualPlaceholder label="Hero Illustration" />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-sky-200/40 bg-white/10 shadow-xl md:aspect-square">
+            <Image
+              src={heroVisual}
+              alt="Sahasrara blossoming with radiant light"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+              priority
+            />
+          </div>
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -141,7 +169,15 @@ export default function WaiThreePage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-400">
                 Insight {String(index + 1).padStart(2, '0')}
               </span>
-              <VisualPlaceholder label="Vision Insight" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-sky-100 bg-sky-50/60">
+                <Image
+                  src={item.visual.src}
+                  alt={item.visual.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
               <p className="text-base leading-7 text-sky-800">{item.description}</p>
             </div>
@@ -165,7 +201,15 @@ export default function WaiThreePage() {
             the soul's final ascent.
           </p>
         </div>
-        <VisualPlaceholder label="Crown Transmission Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 bg-white shadow-lg">
+          <Image
+            src={courseVisual}
+            alt="Guru's blessing transmitted through luminous light"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -186,7 +230,15 @@ export default function WaiThreePage() {
             this is your invitation.
           </p>
         </div>
-        <VisualPlaceholder label="Transcendent Figure" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-white shadow-lg">
+          <Image
+            src={uniquenessVisual}
+            alt="Sahasrara blossoming with cascades of light"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -201,7 +253,15 @@ export default function WaiThreePage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Crown Light Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-sky-100/40 shadow-lg">
+          <Image
+            src={whyWatchVisual}
+            alt="Guru enveloped in blue light symbolising sahasrara grace"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+          />
+        </div>
       </section>
 
       <EnrollBlock

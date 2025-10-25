@@ -1,3 +1,5 @@
+import Image, { type StaticImageData } from 'next/image'
+
 import { Button } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
@@ -5,24 +7,49 @@ import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import anahataIcon from '@/assets/icons/Anahata.png'
+import heroVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
+import ascentVisual from '@/assets/visuals/All-Chakras-Aligned.png'
+import journeyVisual from '@/assets/visuals/Blue_Lotus.jpeg'
+import heartMechanicsVisual from '@/assets/visuals/Gurus-Blessings-2.png'
+import courseVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
+import uniquenessVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
+import whyWatchVisual from '@/assets/visuals/Sitting-on-Lotus.jpg'
 
 const THEME: ThemeName = 'anahata'
 
-const aboutHighlights = [
+type VisualAsset = { src: StaticImageData; alt: string }
+
+const aboutHighlights: Array<{
+  title: string
+  description: string
+  visual: VisualAsset
+}> = [
   {
     title: 'Sacred Ascent Revealed',
     description:
-      'For the first time, the sacred ascent of consciousness and awakening of the Spiritual Heart is shared with vivid clarity.'
+      'For the first time, the sacred ascent of consciousness and awakening of the Spiritual Heart is shared with vivid clarity.',
+    visual: {
+      src: ascentVisual,
+      alt: 'Chakra alignment artwork symbolising sacred ascent'
+    }
   },
   {
     title: 'Journey to the Anahat Chakra',
     description:
-      "Part 2 traces the soul's journey from creation to reunion with the Self at the Anahat Chakra - the spiritual heart centre."
+      "Part 2 traces the soul's journey from creation to reunion with the Self at the Anahat Chakra - the spiritual heart centre.",
+    visual: {
+      src: journeyVisual,
+      alt: 'Blue lotus artwork representing the spiritual heart opening'
+    }
   },
   {
     title: 'Living Mechanics of the Heart',
     description:
-      'Through her own awakening, Santosh Ma unveils how divine love and wisdom blossom within the heart.'
+      'Through her own awakening, Santosh Ma unveils how divine love and wisdom blossom within the heart.',
+    visual: {
+      src: heartMechanicsVisual,
+      alt: 'Teacher bestowing blessings as light radiates through the heart'
+    }
   }
 ]
 
@@ -50,14 +77,6 @@ const whyWatch = [
   'Anchor your path with compassionate mentorship for seekers, teachers, and researchers alike.'
 ]
 
-function VisualPlaceholder({ label }: { label?: string }) {
-  return (
-    <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-emerald-200 bg-white/70 text-xs font-semibold uppercase tracking-[0.4em] text-emerald-500">
-      {label ?? 'Visual Placeholder'}
-    </div>
-  )
-}
-
 export const metadata = { title: 'Who Am I - Part 2' }
 
 export default function WaiTwoPage() {
@@ -75,7 +94,16 @@ export default function WaiTwoPage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-green-600 p-6 text-white shadow-lg ring-1 ring-emerald-300/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <VisualPlaceholder label="Hero Illustration" />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-emerald-200/40 bg-white/10 shadow-xl md:aspect-square">
+            <Image
+              src={heroVisual}
+              alt="Blessing visual symbolising the opening of the spiritual heart"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+              priority
+            />
+          </div>
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -121,7 +149,15 @@ export default function WaiTwoPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-400">
                 Insight {String(index + 1).padStart(2, '0')}
               </span>
-              <VisualPlaceholder label="Module Visual" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/60">
+                <Image
+                  src={item.visual.src}
+                  alt={item.visual.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-emerald-900">{item.title}</h3>
               <p className="text-base leading-7 text-emerald-700">{item.description}</p>
             </div>
@@ -130,7 +166,15 @@ export default function WaiTwoPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <VisualPlaceholder label="Heart Bloom Artwork" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200/50 bg-emerald-100/40 shadow-md">
+          <Image
+            src={courseVisual}
+            alt="Portrait of Santosh Ma channeling heart-centered wisdom"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
           <h3 className="text-lg font-semibold text-emerald-900">What You Will Learn</h3>
@@ -163,7 +207,15 @@ export default function WaiTwoPage() {
             awakens the heart's own remembering.
           </p>
         </div>
-        <VisualPlaceholder label="Living Transmission Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-white shadow-lg">
+          <Image
+            src={uniquenessVisual}
+            alt="Energy exchange illustration representing heart transmission"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -178,7 +230,15 @@ export default function WaiTwoPage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Heart Transmission Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-emerald-100/50 shadow-lg">
+          <Image
+            src={whyWatchVisual}
+            alt="Meditative figure seated on a lotus bathed in emerald light"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+          />
+        </div>
       </section>
 
       <EnrollBlock

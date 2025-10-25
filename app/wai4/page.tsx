@@ -1,3 +1,5 @@
+import Image, { type StaticImageData } from 'next/image'
+
 import { Button } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
@@ -5,24 +7,49 @@ import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
+import heroVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
+import granthiVisual from '@/assets/visuals/All-Chakras-Aligned.png'
+import shivLingaVisual from '@/assets/visuals/ShivLingam.png'
+import bodyOfGoldVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
+import courseVisual from '@/assets/visuals/OM.png'
+import uniquenessVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
+import whyWatchVisual from '@/assets/visuals/Pathway-To-Light.png'
 
 const THEME: ThemeName = 'sahasrara'
 
-const seriesOverview = [
+type VisualAsset = { src: StaticImageData; alt: string }
+
+const seriesOverview: Array<{
+  title: string
+  description: string
+  visual: VisualAsset
+}> = [
   {
     title: 'Teachings on the Three Granthis',
     description:
-      'Detailed revelations on the Brahma, Vishnu, and Rudra Granthis - the energetic knots guarding the highest ascent.'
+      'Detailed revelations on the Brahma, Vishnu, and Rudra Granthis - the energetic knots guarding the highest ascent.',
+    visual: {
+      src: granthiVisual,
+      alt: 'Chakra alignment artwork representing the three granthis'
+    }
   },
   {
     title: 'Inner Shiva-Linga',
     description:
-      'A direct transmission of the inner Shiva-Linga and its energetic counterpart experienced through deep meditation.'
+      'A direct transmission of the inner Shiva-Linga and its energetic counterpart experienced through deep meditation.',
+    visual: {
+      src: shivLingaVisual,
+      alt: 'Sacred Shiva Linga bathed in golden light'
+    }
   },
   {
     title: 'The Body of Gold',
     description:
-      'Guidance into the final emergence of the golden body - the awakened, luminous human vessel.'
+      'Guidance into the final emergence of the golden body - the awakened, luminous human vessel.',
+    visual: {
+      src: bodyOfGoldVisual,
+      alt: 'Sahasrara blossoming into the golden body'
+    }
   }
 ]
 
@@ -57,14 +84,6 @@ const whyWatch = [
   'Interdisciplinary faculties synthesising ancient wisdom with neurobiology and human evolution.'
 ]
 
-function VisualPlaceholder({ label }: { label?: string }) {
-  return (
-    <div className="flex min-h-[260px] items-center justify-center rounded-3xl border-2 border-dashed border-violet-300 bg-white/70 text-xs font-semibold uppercase tracking-[0.4em] text-violet-500">
-      {label ?? 'Visual Placeholder'}
-    </div>
-  )
-}
-
 export const metadata = { title: 'Who Am I - Part 4' }
 
 export default function WaiFourPage() {
@@ -82,7 +101,16 @@ export default function WaiFourPage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-violet-600 via-violet-700 to-purple-900 p-6 text-white shadow-lg shadow-[0_0_45px_rgba(245,197,53,0.28)] ring-1 ring-amber-200/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <VisualPlaceholder label="Hero Illustration" />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-violet-200/40 bg-white/10 shadow-xl md:aspect-square">
+            <Image
+              src={heroVisual}
+              alt="Sahasrara blossoming into the body of gold"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+              priority
+            />
+          </div>
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -133,7 +161,15 @@ export default function WaiFourPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-500">
                 Teaching {String(index + 1).padStart(2, '0')}
               </span>
-              <VisualPlaceholder label="Series Visual" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-violet-100 bg-violet-50/60">
+                <Image
+                  src={item.visual.src}
+                  alt={item.visual.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              </div>
               <h3 className="text-lg font-semibold text-violet-900">{item.title}</h3>
               <p className="text-base leading-7 text-violet-800">{item.description}</p>
             </div>
@@ -148,7 +184,15 @@ export default function WaiFourPage() {
           </h2>
         </header>
         <div className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
-          <VisualPlaceholder label="Cosmic Visual" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200/60 bg-white shadow-lg">
+            <Image
+              src={courseVisual}
+              alt="Sacred Om symbol emanating cosmic vibration"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <div className="space-y-4 rounded-3xl bg-violet-100/70 p-6 shadow-sm sm:p-8">
             <h3 className="text-lg font-semibold text-violet-900">The series will discuss:</h3>
             <ul className="space-y-2 text-base leading-7 text-violet-800">
@@ -164,7 +208,15 @@ export default function WaiFourPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <VisualPlaceholder label="Sacred Feet Artwork" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-white shadow-lg">
+          <Image
+            src={uniquenessVisual}
+            alt="Radiant light flowing through the subtle body"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
             What Makes This Series Unique
@@ -192,7 +244,15 @@ export default function WaiFourPage() {
             ))}
           </ul>
         </div>
-        <VisualPlaceholder label="Golden Body Visual" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-violet-100/40 shadow-lg">
+          <Image
+            src={whyWatchVisual}
+            alt="Golden pathway representing the soul's return to source"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+          />
+        </div>
       </section>
 
       <EnrollBlock
