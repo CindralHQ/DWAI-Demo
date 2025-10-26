@@ -15,9 +15,9 @@ const quickLinks = [
 ]
 
 const seriesLinks = [
-  { label: "About Santosh Ma's Teachings", href: '#' },
-  { label: 'Kundalini Diary', href: '#' },
-  { label: 'Eight Spiritual Breaths', href: '#' }
+  { label: "About Santosh Ma's Teachings", href: 'https://santoshsachdeva.com/articles/' },
+  { label: 'Kundalini Diary', href: 'https://santoshsachdeva.com/kundalini-diary/' },
+  { label: 'Eight Spiritual Breaths', href: 'https://eightspiritualbreaths.com/' }
 ]
 
 const socialLinks = [

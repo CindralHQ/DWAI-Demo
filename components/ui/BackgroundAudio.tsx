@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 const audioSource = '/audio/bg.mp3'
+const TARGET_VOLUME = 0.1
 
 type ThemeVariant = 'default' | 'wai1' | 'wai2' | 'wai3' | 'wai4'
 
@@ -21,7 +22,12 @@ const BUTTON_VARIANTS: Record<ThemeVariant, string> = {
 }
 
 const baseButtonClass =
-  'fixed bottom-6 right-6 z-[1100] flex h-12 w-12 items-center justify-center rounded-full shadow-lg backdrop-blur-md transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+  'flex h-12 w-12 items-center justify-center rounded-full shadow-lg backdrop-blur-md transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+
+const FONT_SCALE_MIN = 0.9
+const FONT_SCALE_MAX = 1.25
+const FONT_SCALE_STEP = 0.1
+const FONT_SCALE_STORAGE_KEY = 'dwai-font-scale'
 
 function SpeakerIcon({ muted }: { muted: boolean }) {
   return (
@@ -66,55 +72,104 @@ function resolveVariant(pathname: string | null | undefined): ThemeVariant {
 
 export function BackgroundAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const fadeTimeoutRef = useRef<number | null>(null)
   const pathname = usePathname()
   const [isMuted, setIsMuted] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
+  const [fontScale, setFontScale] = useState(1)
+  const [fontScaleInitialized, setFontScaleInitialized] = useState(false)
 
   useEffect(() => {
     const audioEl = audioRef.current
     if (!audioEl) return
 
-    let isUnlocked = false
-
-    const safelyPlay = async () => {
-      if (!audioEl || isUnlocked) return
+    const attemptAutoPlay = async (allowMutedFallback: boolean) => {
+      if (!audioEl) return false
       try {
-        audioEl.volume = 0.28
+        audioEl.muted = isMuted
+        audioEl.volume = isMuted ? 0 : TARGET_VOLUME
         await audioEl.play()
-        isUnlocked = true
         setHasInteracted(true)
-      } catch {
-        // Ignore autoplay rejections; wait for user interaction.
+        return true
+      } catch (error) {
+        if (!allowMutedFallback) return false
+        try {
+          audioEl.muted = true
+          audioEl.volume = 0
+          await audioEl.play()
+          setHasInteracted(true)
+          if (!isMuted) {
+            if (fadeTimeoutRef.current) {
+              window.clearTimeout(fadeTimeoutRef.current)
+            }
+            fadeTimeoutRef.current = window.setTimeout(() => {
+              const instance = audioRef.current
+              if (!instance) return
+              instance.muted = false
+              instance.volume = TARGET_VOLUME
+              fadeTimeoutRef.current = null
+            }, 250)
+          }
+          return true
+        } catch {
+          return false
+        }
       }
     }
 
     const unlockOnInteraction = async () => {
-      if (!audioEl || isUnlocked) return
-      try {
-        audioEl.volume = 0.28
-        await audioEl.play()
-        isUnlocked = true
-        setHasInteracted(true)
-      } catch {
-        // If still blocked, keep listeners active.
-      }
+      const success = await attemptAutoPlay(true)
+      if (!success) return
+      document.removeEventListener('pointerdown', unlockOnInteraction)
+      document.removeEventListener('keydown', unlockOnInteraction)
+      document.removeEventListener('visibilitychange', unlockOnInteraction)
     }
 
-    safelyPlay()
+    attemptAutoPlay(true)
     document.addEventListener('pointerdown', unlockOnInteraction)
     document.addEventListener('keydown', unlockOnInteraction)
+    document.addEventListener('visibilitychange', unlockOnInteraction)
 
     return () => {
       document.removeEventListener('pointerdown', unlockOnInteraction)
       document.removeEventListener('keydown', unlockOnInteraction)
+      document.removeEventListener('visibilitychange', unlockOnInteraction)
+      if (fadeTimeoutRef.current) {
+        window.clearTimeout(fadeTimeoutRef.current)
+      }
     }
-  }, [])
+  }, [isMuted])
 
   useEffect(() => {
     const audioEl = audioRef.current
     if (!audioEl) return
     audioEl.muted = isMuted
+    audioEl.volume = isMuted ? 0 : TARGET_VOLUME
   }, [isMuted])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const stored = window.localStorage.getItem(FONT_SCALE_STORAGE_KEY)
+    if (stored) {
+      const parsed = Number(stored)
+      if (!Number.isNaN(parsed)) {
+        const clamped = Math.min(FONT_SCALE_MAX, Math.max(FONT_SCALE_MIN, parsed))
+        document.documentElement.style.fontSize = `${(clamped * 100).toFixed(0)}%`
+        setFontScale(clamped)
+        setFontScaleInitialized(true)
+        return
+      }
+    }
+    document.documentElement.style.fontSize = '100%'
+    setFontScale(1)
+    setFontScaleInitialized(true)
+  }, [])
+
+  useEffect(() => {
+    if (!fontScaleInitialized || typeof window === 'undefined') return
+    document.documentElement.style.fontSize = `${(fontScale * 100).toFixed(0)}%`
+    window.localStorage.setItem(FONT_SCALE_STORAGE_KEY, String(fontScale))
+  }, [fontScale, fontScaleInitialized])
 
   const toggleMute = () => {
     const audioEl = audioRef.current
@@ -133,28 +188,74 @@ export function BackgroundAudio() {
     [pathname]
   )
 
+  const adjustFontScale = useCallback(
+    (delta: number) => {
+      setFontScale((current) => {
+        const next = Math.min(FONT_SCALE_MAX, Math.max(FONT_SCALE_MIN, Number((current + delta).toFixed(2))))
+        return next
+      })
+    },
+    []
+  )
+
+  const handleIncreaseFont = useCallback(() => {
+    adjustFontScale(FONT_SCALE_STEP)
+  }, [adjustFontScale])
+
+  const handleDecreaseFont = useCallback(() => {
+    adjustFontScale(-FONT_SCALE_STEP)
+  }, [adjustFontScale])
+
   return (
     <>
       <audio
         ref={audioRef}
         src={audioSource}
+        autoPlay
         loop
         preload="auto"
         playsInline
         className="hidden"
         aria-hidden="true"
       />
-      <button
-        type="button"
-        onClick={toggleMute}
-        className={[baseButtonClass, variantClass].join(' ')}
-        aria-pressed={!isMuted}
-        aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
-        title={isMuted ? 'Sound off' : 'Sound on'}
-      >
-        <SpeakerIcon muted={isMuted} />
-        <span className="sr-only">{isMuted ? 'Sound muted' : 'Sound playing'}</span>
-      </button>
+      <div className="fixed bottom-6 right-6 z-[1100] flex flex-col items-end">
+        <button
+          type="button"
+          onClick={toggleMute}
+          className={[baseButtonClass, variantClass].join(' ')}
+          aria-pressed={!isMuted}
+          aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
+          title={isMuted ? 'Sound off' : 'Sound on'}
+        >
+          <SpeakerIcon muted={isMuted} />
+          <span className="sr-only">{isMuted ? 'Sound muted' : 'Sound playing'}</span>
+        </button>
+        <div className="mt-3 flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-3 py-2 text-sm font-medium text-slate-700 shadow-lg backdrop-blur-md">
+          <span className="font-semibold text-slate-500">Aa</span>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={handleDecreaseFont}
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="Decrease font size"
+              title="Decrease font size"
+              disabled={fontScale <= FONT_SCALE_MIN + 0.01}
+            >
+              -
+            </button>
+            <button
+              type="button"
+              onClick={handleIncreaseFont}
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="Increase font size"
+              title="Increase font size"
+              disabled={fontScale >= FONT_SCALE_MAX - 0.01}
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

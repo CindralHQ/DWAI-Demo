@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { Nav } from '@/components/Nav'
 
@@ -14,12 +17,15 @@ type HeaderProps = {
 
 export function Header({ theme = 'twilight', className, sticky = true }: HeaderProps) {
   const { text, surface } = themeLibrary[theme].classes
+  const pathname = usePathname()
+  const isHome = pathname === '/'
   return (
     <header
       className={cx(
         'relative border-b backdrop-blur supports-[backdrop-filter]:bg-white/70',
         surface,
         sticky ? 'sticky top-0 z-50' : '',
+        isHome ? '' : 'mb-10',
         className
       )}
     >

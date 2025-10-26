@@ -7,6 +7,7 @@ import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import manipuraIcon from '@/assets/icons/Manipura.png'
 import heroVisual from '@/assets/visuals/Body-On-Fire.png'
 import roadmapVisual from '@/assets/visuals/AllChakras.png'
@@ -15,6 +16,7 @@ import clarityVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
 import courseVisual from '@/assets/visuals/Body-On-Fire-2.jpg'
 import uniquenessVisual from '@/assets/visuals/Head-on-Fire.png'
 import whyWatchVisual from '@/assets/visuals/Kundalini-Serpant.png'
+import quoteVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
 
 const THEME: ThemeName = 'manipura'
 
@@ -105,16 +107,16 @@ export default function WaiOnePage() {
         <div className="space-y-16 md:space-y-20">
           <section className="space-y-8 rounded-3xl bg-gradient-to-br from-orange-400 via-orange-500 to-amber-600 p-6 text-white shadow-lg ring-1 ring-amber-300/40 sm:p-7 md:p-9">
             <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-amber-200/40 bg-white/10 shadow-xl md:aspect-square">
-                <Image
-                  src={heroVisual}
-                  alt="Illustration of Manipura igniting the inner fire"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
-                  priority
-                />
-              </div>
+              <LightboxImage
+                src={heroVisual}
+                alt="Illustration of Manipura igniting the inner fire"
+                title="Manipura: Inner Fire Awakening"
+                description="This Manipura illustration captures the ignition of will, courage, and inner fire that powers the Part 1 transmission."
+                className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-amber-200/40 bg-white/10 text-left shadow-xl md:aspect-square"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+                priority
+              />
               <div className="space-y-6">
                 <div className="space-y-2">
                   <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -137,12 +139,24 @@ export default function WaiOnePage() {
             </div>
           </section>
 
-      <Quote
-        theme={THEME}
-        text={`I have this inherent quality of accepting and believing what is said, with the result that I experienced great excitement and inner joy on reading the lines, "I am now entering upon the greatest teaching accessible to man, for I am learning the secret of existence."`}
-        author="Santosh Ma"
-        role="Kundalini Diary"
-      />
+      <div className="flex flex-col items-center gap-8 rounded-3xl border border-amber-100 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+        <Quote
+          theme={THEME}
+          text={`I have this inherent quality of accepting and believing what is said, with the result that I experienced great excitement and inner joy on reading the lines, "I am now entering upon the greatest teaching accessible to man, for I am learning the secret of existence."`}
+          author="Santosh Ma"
+          role="Kundalini Diary"
+          className="flex-1"
+        />
+        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+          <Image
+            src={quoteVisual}
+            alt="Manipura chakra artwork symbolising the awakening inner fire"
+            fill
+            className="object-contain"
+            sizes="(min-width: 768px) 12rem, 10rem"
+          />
+        </div>
+      </div>
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
@@ -162,30 +176,30 @@ export default function WaiOnePage() {
               title={feature.title}
               description={feature.description}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60">
-                <Image
-                  src={feature.visual.src}
-                  alt={feature.visual.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              </div>
+              <LightboxImage
+                src={feature.visual.src}
+                alt={feature.visual.alt}
+                title={feature.title}
+                description={feature.description}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60 text-left"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
             </Card>
           ))}
         </div>
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200/50 bg-amber-100/40 shadow-md">
-          <Image
-            src={courseVisual}
-            alt="Manipura-inspired illustration representing course modules"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={courseVisual}
+          alt="Manipura-inspired illustration representing course modules"
+          title="Course Modules Visual"
+          description="A Manipura-inspired illustration representing the modules explored throughout Part 1 of the Who Am I series."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200/50 bg-amber-100/40 text-left shadow-md"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
           <p className="text-base leading-7 text-amber-800">
@@ -217,15 +231,15 @@ export default function WaiOnePage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-white shadow-lg">
-          <Image
-            src={uniquenessVisual}
-            alt="Illustration of inner fire rising through meditation"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={uniquenessVisual}
+          alt="Illustration of inner fire rising through meditation"
+          title="Inner Fire Rising"
+          description="A depiction of Manipura's transformative flames rising through meditation, highlighting the series' unique transmission."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -240,15 +254,15 @@ export default function WaiOnePage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/50 shadow-lg">
-          <Image
-            src={whyWatchVisual}
-            alt="Kundalini serpent artwork symbolising awakened energy"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={whyWatchVisual}
+          alt="Kundalini serpent artwork symbolising awakened energy"
+          title="Awakened Kundalini Energy"
+          description="This kundalini serpent visual invites seekers to engage with the awakened energy Part 1 helps cultivate."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/50 text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <EnrollBlock

@@ -39,10 +39,12 @@ export default function About() {
   return (
     <div className="space-y-16">
       <WaiIntroOverlay theme={ABOUT_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
-      <section className="space-y-4 rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-800 to-slate-900 p-10 text-white shadow-lg">
-        <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-200">About</p>
-        <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Discover Who Am I</h1>
-        <p className="max-w-3xl text-base leading-7 text-indigo-100">
+      <section className="text-indigo-800">
+        <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-400">About</p>
+        <h1 className="mt-2 mb-3 text-4xl font-semibold tracking-tight text-indigo-900 md:text-5xl">
+          Discover Who Am I
+        </h1>
+        <p className="max-w-3xl text-base leading-7 text-indigo-500">
           Discover Who Am I is guided by Santosh Ma (Santosh Sachdeva), whose direct Kundalini awakening in 1995
           opened a lifetime of surrender to Higher Forces. Her journey continues to illuminate the teachings we
           share with seekers across the world.
@@ -109,7 +111,7 @@ export default function About() {
 
       <section className="rounded-3xl bg-indigo-50 p-8 text-base leading-7 text-indigo-800 ring-1 ring-indigo-100/70">
         <h2 className="text-2xl font-semibold text-indigo-900">Stay Connected</h2>
-        <p className="mt-3">
+        <p className="mt-3 text-indigo-800">
           Santosh Ma hosts ongoing mentoring circles where questions on meditation, chakras, and Kundalini are met
           with warmth and clarity. Learn more about The Eight Spiritual Breaths at{' '}
           <a href="https://www.eightspiritualbreaths.com" rel="noopener noreferrer" target="_blank" className="font-semibold text-indigo-600 underline decoration-indigo-400 hover:text-indigo-700">

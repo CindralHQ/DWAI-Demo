@@ -99,7 +99,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     description: 'Deep indigo gradients mirroring dusk reflections.',
     classes: {
       surface: 'bg-indigo-50',
-      text: 'text-indigo-950',
+      text: 'text-indigo-800',
       muted: 'text-indigo-700',
       quote: {
         wrapper: 'bg-white border border-indigo-200 shadow-sm',

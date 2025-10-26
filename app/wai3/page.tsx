@@ -6,6 +6,7 @@ import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
 import heroVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 import crownRoadmapVisual from '@/assets/visuals/Ajna-Chakra-Concentration.png'
@@ -14,6 +15,7 @@ import resonanceVisual from '@/assets/visuals/OM.png'
 import courseVisual from '@/assets/visuals/Gurus-Blessings-2.png'
 import uniquenessVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 import whyWatchVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
+import quoteVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 
 const THEME: ThemeName = 'vishuddha'
 
@@ -108,16 +110,16 @@ export default function WaiThreePage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-blue-600 p-6 text-white shadow-lg ring-1 ring-sky-300/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-sky-200/40 bg-white/10 shadow-xl md:aspect-square">
-            <Image
-              src={heroVisual}
-              alt="Sahasrara blossoming with radiant light"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
-              priority
-            />
-          </div>
+          <LightboxImage
+            src={heroVisual}
+            alt="Sahasrara blossoming with radiant light"
+            title="Sahasrar Blossoming"
+            description="A luminous sahasrar visual charting the radiant blossoming explored throughout Part 3."
+            className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-sky-200/40 bg-white/10 text-left shadow-xl md:aspect-square"
+            imageClassName="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+            priority
+          />
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -138,12 +140,24 @@ export default function WaiThreePage() {
         </div>
       </section>
 
-      <Quote
-              theme={THEME}
-              text="Journey of the Jeev-Atma to the Anahat Chakra, Shaktipat and Blossoming of the Spiritual Heart. To the right of the chest lies the spiritual heart where the Creator dwells."
-              author="Santosh Ma"
-              role="Kundalini Diary"
-            />
+      <div className="flex flex-col items-center gap-8 rounded-3xl border border-sky-200 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+        <Quote
+          theme={THEME}
+          text="There comes a moment in the soul’s long journey where the ascent is no longer an effort, but an act of Grace."
+          author="Santosh Ma"
+          role="Kundalini Diary"
+          className="flex-1"
+        />
+        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+          <Image
+            src={quoteVisual}
+            alt="Sahasrara blossoming into cascades of light"
+            fill
+            className="object-contain"
+            sizes="(min-width: 768px) 12rem, 10rem"
+          />
+        </div>
+      </div>
 
       <section className="space-y-8">
         <header className="space-y-3 text-center">
@@ -169,15 +183,15 @@ export default function WaiThreePage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-400">
                 Insight {String(index + 1).padStart(2, '0')}
               </span>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-sky-100 bg-sky-50/60">
-                <Image
-                  src={item.visual.src}
-                  alt={item.visual.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              </div>
+              <LightboxImage
+                src={item.visual.src}
+                alt={item.visual.alt}
+                title={item.title}
+                description={item.description}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-sky-100 bg-sky-50/60 text-left"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
               <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
               <p className="text-base leading-7 text-sky-800">{item.description}</p>
             </div>
@@ -201,15 +215,15 @@ export default function WaiThreePage() {
             the soul's final ascent.
           </p>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 bg-white shadow-lg">
-          <Image
-            src={courseVisual}
-            alt="Guru's blessing transmitted through luminous light"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={courseVisual}
+          alt="Guru's blessing transmitted through luminous light"
+          title="Guru's Luminous Blessing"
+          description="A luminous blessing visual that anchors the teachings delivered throughout Part 3."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -230,15 +244,15 @@ export default function WaiThreePage() {
             this is your invitation.
           </p>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-white shadow-lg">
-          <Image
-            src={uniquenessVisual}
-            alt="Sahasrara blossoming with cascades of light"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={uniquenessVisual}
+          alt="Sahasrara blossoming with cascades of light"
+          title="Cascades of Sahasrar Light"
+          description="A sahasrar blossoming visual conveying the cascades of light described in Part 3."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -253,15 +267,15 @@ export default function WaiThreePage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-sky-100/40 shadow-lg">
-          <Image
-            src={whyWatchVisual}
-            alt="Guru enveloped in blue light symbolising sahasrara grace"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={whyWatchVisual}
+          alt="Guru enveloped in blue light symbolising sahasrara grace"
+          title="Sahasrar Grace"
+          description="A blue-lit guru visual embodying the sahasrar grace that permeates Part 3."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-sky-100/40 text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <EnrollBlock

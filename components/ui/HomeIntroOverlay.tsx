@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 
 import celestialBackground from '@/assets/celestialbg.png'
 
-const WORDS = ['WHO', 'AM', 'I', '?'] as const
+const WORDS = ['WHO', 'AM', 'I', '?','DISCOVER WHO AM I'] as const
 const FINAL_WORD_INDEX = WORDS.length - 1
 const WORD_DISPLAY_DURATION = 1111
 const WORD_TRANSITION_DURATION = 500

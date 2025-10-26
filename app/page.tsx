@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
 import { SunShine } from '@/components/ui/SunShine'
 import { HomeIntroOverlay } from '@/components/ui/HomeIntroOverlay'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
 import manipuraIcon from '@/assets/icons/Manipura.png'
@@ -158,45 +159,45 @@ export default function HomePage() {
   const palette = themeLibrary[HOME_THEME].classes
 
   return (
-    <div className="space-y-16">
-      <HomeIntroOverlay />
-      <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-300 via-sky-200 to-sky-100 py-20">
-        <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
-          <div className="space-y-6 text-sky-900">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-600">
-                About The Series
+    <>
+      <div className="space-y-16">
+        <HomeIntroOverlay />
+        <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-300 via-sky-200 to-sky-100 py-20">
+          <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
+            <div className="space-y-6 text-sky-900">
+              <div className="space-y-3">
+                <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-600">
+                  About The Series
+                </p>
+                <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Who Am I</h1>
+                <p className="text-xl font-medium text-sky-700">
+                  Journey of Jeev Atma to the Blossoming of Consciousness
+                </p>
+              </div>
+              <p className="max-w-2xl text-base leading-7 text-sky-800">
+                The 'Who Am I Series' is a gift for humanity. A must-watch journey for every seeker, yoga teacher,
+                yoga practitioner, and meditator - no matter the path.
               </p>
-              <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Who Am I</h1>
-              <p className="text-xl font-medium text-sky-700">
-                Journey of Jeev Atma to the Blossoming of Consciousness
-              </p>
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink href="/wai1" theme={SUPPORT_THEME} size="lg">
+                  Explore the Course
+                </ButtonLink>
+              </div>
             </div>
-            <p className="max-w-2xl text-base leading-7 text-sky-800">
-              The 'Who Am I Series' is a gift for humanity. A must-watch journey for every seeker, yoga teacher,
-              yoga practitioner, and meditator - no matter the path.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <ButtonLink href="/wai1" theme={SUPPORT_THEME} size="lg">
-                Explore the Course
-              </ButtonLink>
-            </div>
-          </div>
-          <div className="relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl md:aspect-square lg:max-w-none">
-            <Image
+            <LightboxImage
               src={heroVisual}
               alt="Radiant illustration of all chakras aligned through the subtle body"
-              fill
-              className="object-cover object-bottom"
+              title="Who Am I - Visual Journey"
+              description="This artwork captures the complete chakra alignment shared throughout the Who Am I series, symbolising the ascent of human consciousness."
+              className="aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl text-left focus-visible:outline-sky-500 md:aspect-square lg:max-w-none"
+              imageClassName="object-cover object-bottom"
               sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
               priority
             />
           </div>
-        </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
-      </section>
-
-      <div className="container space-y-20">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+        </section>
+        <div className="container space-y-20">
         <Quote
           theme={SUPPORT_THEME}
           text="Today, I realise that my life has been touched by a love and a gentleness to a depth which no individual can possibly match - as is given to me, in the course of the daily meditation by the Kundalini force residing within my own being. I am aware that this feeling of being cherished must emanate from the very Source itself."
@@ -205,15 +206,15 @@ export default function HomePage() {
         />
 
         <section className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src={seriesVisual}
-              alt="Blue-hued guru guiding seeker with radiant blessings"
-              fill
-              className="object-cover object-bottom"
-              sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"
-            />
-          </div>
+          <LightboxImage
+            src={seriesVisual}
+            alt="Blue-hued guru guiding seeker with radiant blessings"
+            title="Series Blessing Visual"
+            description="A blessing visual introducing the Who Am I series, showing the guiding presence that supports seekers through each part of the journey."
+            className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 text-left shadow-md hover:shadow-lg"
+            imageClassName="object-cover object-bottom"
+            sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"
+          />
           <div className="space-y-6">
             <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
               About The 'Who Am I' Series
@@ -250,15 +251,15 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="relative aspect-[4/3] w-full max-w-xl overflow-hidden rounded-3xl">
-            <Image
-              src={portraitVisual}
-              alt="Portrait of Santosh Ma during her spiritual practice"
-              fill
-              className="object-cover object-top"
-              sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-            />
-          </div>
+          <LightboxImage
+            src={portraitVisual}
+            alt="Portrait of Santosh Ma during her spiritual practice"
+            title="Santosh Ma's Awakening"
+            description="Santosh Ma in deep spiritual practice, reflecting the inner inquiry that sparked the Who Am I series' detailed awakening account."
+            className="aspect-[4/3] w-full max-w-xl overflow-hidden rounded-3xl border border-slate-200 text-left shadow-md hover:shadow-lg"
+            imageClassName="object-cover object-top"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+          />
         </section>
 
         <section className="space-y-8">
@@ -273,15 +274,15 @@ export default function HomePage() {
                 key={index}
                 className="flex flex-col gap-4 rounded-3xl border border-indigo-100 bg-white p-6 text-left shadow-sm"
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-indigo-50">
-                  <Image
-                    src={item.visual.src}
-                    alt={item.visual.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                  />
-                </div>
+                <LightboxImage
+                  src={item.visual.src}
+                  alt={item.visual.alt}
+                  title={item.title}
+                  description={item.body}
+                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-indigo-100/70 bg-indigo-50 text-left hover:border-indigo-200 hover:shadow-md"
+                  imageClassName="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
                   <p className="text-base leading-7 text-indigo-700">{item.body}</p>
@@ -312,15 +313,15 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-        <div className="relative aspect-[3/2] w-full overflow-hidden">
-          <Image
-            src={journeyVisual}
-            alt="Blue guru guiding a seeker through inner light"
-            fill
-            className="object-cover object-center"
-            sizes="(min-width: 1280px) 640px, (min-width: 768px) 60vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={journeyVisual}
+          alt="Blue guru guiding a seeker through inner light"
+          title="Guided Inner Journey Visual"
+          description="The journey visual illustrates how guidance from awakened masters supports seekers through layers of inner light."
+          className="aspect-[2/2] w-full overflow-hidden rounded-3xl text-left"
+          imageClassName="object-cover object-center"
+          sizes="(min-width: 1280px) 640px, (min-width: 768px) 60vw, 100vw"
+        />
       </section>
 
       <section className="space-y-8">
@@ -332,15 +333,15 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-3">
           {awakenTruth.map((item, index) => (
             <div key={index} className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-50">
-                <Image
-                  src={item.visual.src}
-                  alt={item.visual.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              </div>
+              <LightboxImage
+                src={item.visual.src}
+                alt={item.visual.alt}
+                title={item.title}
+                description={item.body}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50 text-left hover:border-slate-300 hover:shadow-md"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
               <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
               <p className="text-base leading-7 text-indigo-700">{item.body}</p>
             </div>
@@ -350,15 +351,15 @@ export default function HomePage() {
 
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 p-10 text-white shadow-lg">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src={signatureVisual}
-              alt="Radiant illustration of all chakras aligned through the subtle body"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
-            />
-          </div>
+          <LightboxImage
+            src={signatureVisual}
+            alt="Radiant illustration of all chakras aligned through the subtle body"
+            title="Signature Chakra Alignment"
+            description="A signature artwork of all chakras illuminated, encapsulating the transformative energy held within the Who Am I transmission."
+            className="aspect-[7/8] overflow-hidden rounded-3xl text-left"
+            imageClassName="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+          />
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold tracking-tight">
               Why This Series is Unlike Anything You've Seen Before
@@ -387,15 +388,15 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/40 shadow-lg">
-          <Image
-            src={callToActionVisual}
-            alt="Blue lotus inviting viewers into contemplative practice"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 440px, (min-width: 768px) 40vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={callToActionVisual}
+          alt="Blue lotus inviting viewers into contemplative practice"
+          title="Invitation to Contemplative Practice"
+          description="A luminous lotus inviting seekers into stillness, mirroring the call to engage deeply with the wisdom of the series."
+          className="aspect-[3/3] overflow-hidden rounded-3xl border border-amber-200 bg-amber-100/40 text-left shadow-lg hover:shadow-xl"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 440px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <section className="space-y-8">
@@ -475,21 +476,22 @@ export default function HomePage() {
         <h3 className="text-center text-2xl font-semibold text-emerald-900">Disclaimer</h3>
         <div className="space-y-4">
           <p>
-            The information contained in 'the books by the author' and the 'Who Am I' are not intended to serve
-            as a replacement for professional medical advice. Any use of the information in the books and the
-            courses is at the participants discretion. Author specifically disclaims any implied warranties of
-            merchantability and fitness for a particular purpose and all liability arising directly or indirectly
-            from the use or application of any information contained in the book or the various courses.
+            The information contained in 'the books by the author' and the 'Who Am I' are not intended to serve as a
+            replacement for professional medical advice. Any use of the information in the books and the courses is at
+            the participants discretion. Author specifically disclaims any implied warranties of merchantability and
+            fitness for a particular purpose and all liability arising directly or indirectly from the use or application
+            of any information contained in the book or the various courses.
           </p>
           <p>
-            The author does not recommend the self-management of health or mental health problems. You should
-            never disregard medical advice, or delay in seeking it, because of something you have learned in this
-            book or these courses. 'The Who Am I' are a structured self-study and self-development programme that
-            shouldn't be taken lightly.
+            The author does not recommend the self-management of health or mental health problems. You should never
+            disregard medical advice, or delay in seeking it, because of something you have learned in this book or
+            these courses. 'The Who Am I' are a structured self-study and self-development programme that shouldn't be
+            taken lightly.
           </p>
         </div>
       </section>
+      </div>
     </div>
-    </div>
+    </>
   )
 }

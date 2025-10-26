@@ -6,6 +6,7 @@ import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import anahataIcon from '@/assets/icons/Anahata.png'
 import heroVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
 import ascentVisual from '@/assets/visuals/All-Chakras-Aligned.png'
@@ -14,6 +15,7 @@ import heartMechanicsVisual from '@/assets/visuals/Gurus-Blessings-2.png'
 import courseVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
 import uniquenessVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
 import whyWatchVisual from '@/assets/visuals/Sitting-on-Lotus.jpg'
+import quoteVisual from '@/assets/visuals/Blue_Lotus.jpeg'
 
 const THEME: ThemeName = 'anahata'
 
@@ -94,16 +96,16 @@ export default function WaiTwoPage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-green-600 p-6 text-white shadow-lg ring-1 ring-emerald-300/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-emerald-200/40 bg-white/10 shadow-xl md:aspect-square">
-            <Image
-              src={heroVisual}
-              alt="Blessing visual symbolising the opening of the spiritual heart"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
-              priority
-            />
-          </div>
+          <LightboxImage
+            src={heroVisual}
+            alt="Blessing visual symbolising the opening of the spiritual heart"
+            title="Spiritual Heart Blessing"
+            description="A blessing visual illustrating the opening of the spiritual heart as the seeker moves into Part 2."
+            className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-emerald-200/40 bg-white/10 text-left shadow-xl md:aspect-square"
+            imageClassName="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+            priority
+          />
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -124,12 +126,24 @@ export default function WaiTwoPage() {
         </div>
       </section>
 
-      <Quote
-        theme={THEME}
-        text="Journey of the Jeev-Atma to the Anahat Chakra, Shaktipat and Blossoming of the Spiritual Heart. To the right of the chest lies the spiritual heart where the Creator dwells."
-        author="Santosh Ma"
-        role="Kundalini Diary"
-      />
+      <div className="flex flex-col items-center gap-8 rounded-3xl border border-emerald-100 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+        <Quote
+          theme={THEME}
+          text="Journey of the Jeev-Atma to the Anahat Chakra, Shaktipat and Blossoming of the Spiritual Heart. To the right of the chest lies the spiritual heart where the Creator dwells."
+          author="Santosh Ma"
+          role="Kundalini Diary"
+          className="flex-1"
+        />
+        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+          <Image
+            src={quoteVisual}
+            alt="Blue lotus artwork representing the awakened spiritual heart"
+            fill
+            className="object-contain"
+            sizes="(min-width: 768px) 12rem, 10rem"
+          />
+        </div>
+      </div>
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
@@ -149,15 +163,15 @@ export default function WaiTwoPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-400">
                 Insight {String(index + 1).padStart(2, '0')}
               </span>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/60">
-                <Image
-                  src={item.visual.src}
-                  alt={item.visual.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              </div>
+              <LightboxImage
+                src={item.visual.src}
+                alt={item.visual.alt}
+                title={item.title}
+                description={item.description}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/60 text-left"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
               <h3 className="text-lg font-semibold text-emerald-900">{item.title}</h3>
               <p className="text-base leading-7 text-emerald-700">{item.description}</p>
             </div>
@@ -166,15 +180,15 @@ export default function WaiTwoPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200/50 bg-emerald-100/40 shadow-md">
-          <Image
-            src={courseVisual}
-            alt="Portrait of Santosh Ma channeling heart-centered wisdom"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={courseVisual}
+          alt="Portrait of Santosh Ma channeling heart-centered wisdom"
+          title="Heart-Centered Guidance"
+          description="Santosh Ma channeling heart-centered wisdom that anchors the teachings within Part 2."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200/50 bg-emerald-100/40 text-left shadow-md"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
           <h3 className="text-lg font-semibold text-emerald-900">What You Will Learn</h3>
@@ -207,15 +221,15 @@ export default function WaiTwoPage() {
             awakens the heart's own remembering.
           </p>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-white shadow-lg">
-          <Image
-            src={uniquenessVisual}
-            alt="Energy exchange illustration representing heart transmission"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={uniquenessVisual}
+          alt="Energy exchange illustration representing heart transmission"
+          title="Heart Transmission Visual"
+          description="An energetic exchange depicting the heart transmission that makes Part 2 a living, breathing experience."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
@@ -230,15 +244,15 @@ export default function WaiTwoPage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-emerald-100/50 shadow-lg">
-          <Image
-            src={whyWatchVisual}
-            alt="Meditative figure seated on a lotus bathed in emerald light"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={whyWatchVisual}
+          alt="Meditative figure seated on a lotus bathed in emerald light"
+          title="Emerald Lotus Meditation"
+          description="A meditative lotus visual that anchors the compassionate, heart-forward focus of the Part 2 teachings."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-emerald-100/50 text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <EnrollBlock

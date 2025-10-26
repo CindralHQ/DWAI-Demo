@@ -3,6 +3,7 @@ import { BackgroundAudio } from '@/components/ui/BackgroundAudio'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/ui/Header'
 import { PageFade } from '@/components/ui/PageFade'
+import { ImageLightboxProvider } from '@/components/ui/ImageLightbox'
 
 export const metadata = {
   title: 'Who Am I - Series',
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BackgroundAudio />
         <Header />
         <main className="px-4 pb-10 sm:px-6 lg:px-8">
-          <PageFade>{children}</PageFade>
+          <ImageLightboxProvider>
+            <PageFade>{children}</PageFade>
+          </ImageLightboxProvider>
         </main>
         <Footer />
       </body>

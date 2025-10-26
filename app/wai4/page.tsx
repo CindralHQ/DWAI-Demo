@@ -6,6 +6,7 @@ import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
 import { EnrollBlock } from '@/components/ui/EnrollBlock'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
 import heroVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 import granthiVisual from '@/assets/visuals/All-Chakras-Aligned.png'
@@ -14,6 +15,7 @@ import bodyOfGoldVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 import courseVisual from '@/assets/visuals/OM.png'
 import uniquenessVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
 import whyWatchVisual from '@/assets/visuals/Pathway-To-Light.png'
+import quoteVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 
 const THEME: ThemeName = 'sahasrara'
 
@@ -101,16 +103,16 @@ export default function WaiFourPage() {
         <div className="space-y-16 md:space-y-20">
       <section className="space-y-8 rounded-3xl bg-gradient-to-br from-violet-600 via-violet-700 to-purple-900 p-6 text-white shadow-lg shadow-[0_0_45px_rgba(245,197,53,0.28)] ring-1 ring-amber-200/40 sm:p-7 md:p-9">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-violet-200/40 bg-white/10 shadow-xl md:aspect-square">
-            <Image
-              src={heroVisual}
-              alt="Sahasrara blossoming into the body of gold"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
-              priority
-            />
-          </div>
+          <LightboxImage
+            src={heroVisual}
+            alt="Sahasrara blossoming into the body of gold"
+            title="Body of Gold Awakening"
+            description="The Part 4 hero visual representing the sahasrara blossoming into the luminous body of gold."
+            className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-violet-200/40 bg-white/10 text-left shadow-xl md:aspect-square"
+            imageClassName="object-cover"
+            sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
+            priority
+          />
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
@@ -135,12 +137,24 @@ export default function WaiFourPage() {
         </div>
       </section>
 
-      <Quote
-              theme={THEME}
-              text="Journey of the Jeev-Atma to the Anahat Chakra, Shaktipat and Blossoming of the Spiritual Heart. To the right of the chest lies the spiritual heart where the Creator dwells."
-              author="Santosh Ma"
-              role="Kundalini Diary"
-            />
+      <div className="flex flex-col items-center gap-8 rounded-3xl border border-violet-200 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+        <Quote
+          theme={THEME}
+          text="At the summit of the ascent, the seeker realises that the body of gold is nothing but the light of the Self revealing itself."
+          author="Santosh Ma"
+          role="Kundalini Diary"
+          className="flex-1"
+        />
+        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+          <Image
+            src={quoteVisual}
+            alt="Sahasrara blossoming into the body of gold"
+            fill
+            className="object-contain"
+            sizes="(min-width: 768px) 12rem, 10rem"
+          />
+        </div>
+      </div>
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
@@ -161,15 +175,15 @@ export default function WaiFourPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-500">
                 Teaching {String(index + 1).padStart(2, '0')}
               </span>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-violet-100 bg-violet-50/60">
-                <Image
-                  src={item.visual.src}
-                  alt={item.visual.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              </div>
+              <LightboxImage
+                src={item.visual.src}
+                alt={item.visual.alt}
+                title={item.title}
+                description={item.description}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-violet-100 bg-violet-50/60 text-left"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
               <h3 className="text-lg font-semibold text-violet-900">{item.title}</h3>
               <p className="text-base leading-7 text-violet-800">{item.description}</p>
             </div>
@@ -184,15 +198,15 @@ export default function WaiFourPage() {
           </h2>
         </header>
         <div className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200/60 bg-white shadow-lg">
-            <Image
-              src={courseVisual}
-              alt="Sacred Om symbol emanating cosmic vibration"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-            />
-          </div>
+        <LightboxImage
+          src={courseVisual}
+          alt="Sacred Om symbol emanating cosmic vibration"
+          title="Sacred Om Resonance"
+          description="The sacred Om symbol emanating cosmic vibration, anchoring the teachings explored in Part 4."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200/60 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
           <div className="space-y-4 rounded-3xl bg-violet-100/70 p-6 shadow-sm sm:p-8">
             <h3 className="text-lg font-semibold text-violet-900">The series will discuss:</h3>
             <ul className="space-y-2 text-base leading-7 text-violet-800">
@@ -208,15 +222,15 @@ export default function WaiFourPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-white shadow-lg">
-          <Image
-            src={uniquenessVisual}
-            alt="Radiant light flowing through the subtle body"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={uniquenessVisual}
+          alt="Radiant light flowing through the subtle body"
+          title="Radiant Subtle Body"
+          description="Radiant light flowing through the subtle body, mirroring the transmissions held within Part 4."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
             What Makes This Series Unique
@@ -244,15 +258,15 @@ export default function WaiFourPage() {
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-violet-100/40 shadow-lg">
-          <Image
-            src={whyWatchVisual}
-            alt="Golden pathway representing the soul's return to source"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-          />
-        </div>
+        <LightboxImage
+          src={whyWatchVisual}
+          alt="Golden pathway representing the soul's return to source"
+          title="Pathway Back to Source"
+          description="A golden pathway illustration representing the soul's return to source, encapsulating the Part 4 journey."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-violet-100/40 text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <EnrollBlock
