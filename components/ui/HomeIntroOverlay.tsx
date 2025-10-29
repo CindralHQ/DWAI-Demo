@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-import celestialBackground from '@/assets/celestialbg.png'
+import celestialBackground from '@/assets/celestialBackground.webp'
 
 const WORDS = ['WHO', 'AM', 'I', '?','DISCOVER WHO AM I'] as const
 const FINAL_WORD_INDEX = WORDS.length - 1

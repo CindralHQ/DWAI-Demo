@@ -37,3 +37,16 @@ body { @apply bg-white text-slate-900 antialiased overflow-x-hidden; }
   animation-fill-mode: both;
   will-change: transform, opacity, filter;
 }
+
+img,
+picture,
+figure,
+svg,
+canvas {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+img {
+  pointer-events: none;
+}

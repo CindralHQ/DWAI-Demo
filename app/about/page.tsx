@@ -1,4 +1,6 @@
 import homeLogo from '@/assets/Logo.png'
+import portraitVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
+import { LightboxImage } from '@/components/ui/LightboxImage'
 import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 
@@ -21,6 +23,12 @@ const supportHighlights = [
     title: 'Guided Sangha',
     body: 'Weekly online and in-person meditations provide a safe space to discuss experiences and receive personalised counsel.'
   }
+]
+
+const awakeningHighlights = [
+  'Almost immediately, Santosh Ma found herself on a spiritual journey with visions emerging during daily meditation.',
+  'These visions were illustrated by her, mapping each phase the human body and mind traverses through awakening.',
+  'Documented with rare detail, this visual journal shares a process of evolution seldom captured in spiritual literature.'
 ]
 
 function PortraitPlaceholder() {
@@ -49,6 +57,38 @@ export default function About() {
           opened a lifetime of surrender to Higher Forces. Her journey continues to illuminate the teachings we
           share with seekers across the world.
         </p>
+      </section>
+
+      <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-start">
+        <div className="space-y-6 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm">
+          <header className="space-y-2">
+            <h3 className={`text-2xl font-semibold ${palette.text}`}>
+              Santosh Ma&apos;s Spiritual Awakening Has Been Unique
+            </h3>
+            <p className={`text-base leading-7 ${palette.muted}`}>
+              The question surfaced in her mind:
+              <br />
+              Who am I? Where do I come from? Where am I going?
+            </p>
+          </header>
+          <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
+            {awakeningHighlights.map((item, index) => (
+              <li key={index} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <LightboxImage
+          src={portraitVisual}
+          alt="Portrait of Santosh Ma during her spiritual practice"
+          title="Santosh Ma's Awakening"
+          description="Santosh Ma in deep spiritual practice, reflecting the inner inquiry that sparked the Who Am I series' detailed awakening account."
+          className="aspect-[4/3] w-full max-w-xl overflow-hidden rounded-3xl border border-indigo-100 text-left shadow-md hover:shadow-lg"
+          imageClassName="object-cover object-top"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-10 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">

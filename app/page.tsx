@@ -1,11 +1,12 @@
+import type { SVGProps } from 'react'
 import Image, { type StaticImageData } from 'next/image'
 
 import { ButtonLink } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Quote } from '@/components/ui/Quote'
 import { SunShine } from '@/components/ui/SunShine'
 import { HomeIntroOverlay } from '@/components/ui/HomeIntroOverlay'
 import { LightboxImage } from '@/components/ui/LightboxImage'
+import { JourneyPricingTable, type JourneyScheduleEntry } from '@/components/ui/JourneyPricingTable'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
 import manipuraIcon from '@/assets/icons/Manipura.png'
@@ -14,7 +15,7 @@ import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
 import heroVisual from '@/assets/visuals/AllChakras.png'
 import seriesVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
-import portraitVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
+import quotePortrait from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
 import journeyVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 import signatureVisual from '@/assets/visuals/AllChakras.png'
 import callToActionVisual from '@/assets/visuals/Kundalini-Serpant.png'
@@ -68,12 +69,6 @@ const aboutBulletPoints = [
   'Supported by 250+ sacred, vibrant visuals illustrating the full spectrum of human evolution.'
 ]
 
-const awakeningHighlights = [
-  'Almost immediately, Santosh Ma found herself on a spiritual journey with visions emerging during daily meditation.',
-  'These visions were illustrated by her, mapping each phase the human body and mind traverses through awakening.',
-  'Documented with rare detail, this visual journal shares a process of evolution seldom captured in spiritual literature.'
-]
-
 const needOfHour = [
   {
     title: 'Steadying The Self',
@@ -99,6 +94,58 @@ const needOfHour = [
       alt: 'Ajna chakra receiving and transmitting divine energy'
     }
   }
+]
+
+const journeySchedule = [
+  {
+    part: 'Part 1',
+    videos: 12,
+    weeks: 12,
+    costPerSeriesInr: 12_000,
+    costEntireSeriesInr: 10_000,
+    repeatersCostInr: 2_000
+  },
+  {
+    part: 'Part 2',
+    videos: 4,
+    weeks: 4,
+    costPerSeriesInr: 12_000,
+    costEntireSeriesInr: 10_000,
+    repeatersCostInr: 2_000
+  },
+  {
+    part: 'Part 3',
+    videos: 3,
+    weeks: 3,
+    costPerSeriesInr: 15_000,
+    costEntireSeriesInr: 10_000,
+    repeatersCostInr: 2_000
+  },
+  {
+    part: 'Part 4',
+    videos: 4,
+    weeks: 4,
+    costPerSeriesInr: 15_000,
+    costEntireSeriesInr: 10_000,
+    repeatersCostInr: 2_000
+  },
+  {
+    part: 'Total',
+    videos: 23,
+    weeks: 23,
+    costPerSeriesInr: 54_000,
+    costEntireSeriesInr: 40_000,
+    repeatersCostInr: 8_000,
+    isTotal: true
+  }
+] as const satisfies readonly JourneyScheduleEntry[]
+
+const journeyPacing = ['1 month break between each series', 'Total minimum time needed: 26 weeks or 7 months']
+
+const journeyReminders = [
+  'Students are urged to move methodically and give Part 1 their complete focus—it lays the foundation for everything that follows.',
+  'After completing the series, revisit the teachings. Many seekers return to the sessions multiple times and discover fresh insights with each viewing.',
+  'The sadhak’s subtle body recognises this knowledge; the unfolding energy continues to support your evolution as the series is watched year after year.'
 ]
 
 const awakenTruth = [
@@ -148,11 +195,92 @@ const whyNow = [
   'Feels like a visual shaktipat.'
 ]
 
-const audiences = [
-  { label: 'Seekers', copy: 'Individuals asking the essential question: Who Am I?' },
-  { label: 'Yoga Teachers & Students', copy: 'Those seeking an authentic, advanced understanding of subtle body science.' },
-  { label: 'Scholars & Researchers', copy: 'Explorers of consciousness, kundalini dynamics, and meditative physiology.' },
-  { label: 'Interdisciplinary Faculties', copy: 'Learners connecting mysticism, neurobiology, and human evolution.' }
+type AudienceIconKey = 'seekers' | 'teachers' | 'scholars' | 'faculties'
+
+const audienceIconMap: Record<AudienceIconKey, (props: SVGProps<SVGSVGElement>) => JSX.Element> = {
+  seekers: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="12" r="2.6" stroke="currentColor" strokeWidth={1.6} />
+    </svg>
+  ),
+  teachers: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 4.2c1.1 2.6 3 4.2 5.4 5-1 3.1-3.2 5.8-5.4 7.4-2.2-1.6-4.4-4.3-5.4-7.4 2.4-.8 4.3-2.4 5.4-5Z"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.2 15.3c2-.8 4.4-1.2 6.8-1.2s4.8.4 6.8 1.2"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
+  scholars: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 5 4.5 8.8v7.4L12 12.8l7.5 3.4V8.8L12 5Z"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinejoin="round"
+      />
+      <path d="M12 5v7.8" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
+    </svg>
+  ),
+  faculties: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <circle cx="12" cy="12" r="2.4" stroke="currentColor" strokeWidth={1.6} />
+      <path
+        d="M4.6 7.2C6.3 4.7 9 3 12 3s5.7 1.7 7.4 4.2"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+      />
+      <path
+        d="M4.6 16.8C6.3 19.3 9 21 12 21s5.7-1.7 7.4-4.2"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+      />
+      <path d="M3 12h18" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
+    </svg>
+  )
+}
+
+type AudienceDefinition = {
+  key: AudienceIconKey
+  label: string
+  copy: string
+}
+
+const audiences: AudienceDefinition[] = [
+  { key: 'seekers', label: 'Seekers', copy: 'Individuals asking the essential question: Who Am I?' },
+  {
+    key: 'teachers',
+    label: 'Yoga Teachers & Students',
+    copy: 'Those seeking an authentic, advanced understanding of subtle body science.'
+  },
+  {
+    key: 'scholars',
+    label: 'Scholars & Researchers',
+    copy: 'Explorers of consciousness, kundalini dynamics, and meditative physiology.'
+  },
+  {
+    key: 'faculties',
+    label: 'Interdisciplinary Faculties',
+    copy: 'Learners connecting mysticism, neurobiology, and human evolution.'
+  }
 ]
 
 export default function HomePage() {
@@ -198,12 +326,35 @@ export default function HomePage() {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
         </section>
         <div className="container space-y-20">
-        <Quote
-          theme={SUPPORT_THEME}
-          text="Today, I realise that my life has been touched by a love and a gentleness to a depth which no individual can possibly match - as is given to me, in the course of the daily meditation by the Kundalini force residing within my own being. I am aware that this feeling of being cherished must emanate from the very Source itself."
-          author="Santosh Ma"
-          role="Kundalini Diary"
-        />
+          <section className="rounded-3xl bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-6 text-slate-100 shadow-2xl ring-1 ring-indigo-500/20 sm:p-10">
+            <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_minmax(0,1fr)] md:items-center">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg md:max-w-sm">
+                <Image
+                  src={quotePortrait}
+                  alt="Santosh Ma in meditative reflection"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 260px, 100vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/60 via-transparent to-indigo-900/30" />
+              </div>
+              <figure className="space-y-6">
+                <blockquote className="relative rounded-2xl bg-white/10 p-6 pl-14 text-lg font-medium leading-relaxed shadow-inner md:text-xl">
+                  <span className="absolute left-5 top-5 text-5xl font-serif text-indigo-300/70">“</span>
+                  <p className="text-slate-100">
+                    Today, I realise that my life has been touched by a love and a gentleness to a depth which no
+                    individual can possibly match - as is given to me, in the course of the daily meditation by the
+                    Kundalini force residing within my own being. I am aware that this feeling of being cherished must
+                    emanate from the very Source itself.
+                  </p>
+                </blockquote>
+                <figcaption className="pl-14">
+                  <div className="text-lg font-semibold text-sky-200">Santosh Ma</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-100/70">Kundalini Diary</div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
 
         <section className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
           <LightboxImage
@@ -230,37 +381,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-start">
-          <div className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <header className="space-y-2">
-              <h3 className={`text-2xl font-semibold ${palette.text}`}>
-                Santosh Ma's Spiritual Awakening has been Unique
-              </h3>
-              <p className={`text-base leading-7 ${palette.muted}`}>
-                The question surfaced in her mind,
-                <br />
-                Who am I? Where do I come from? Where am I going?
-              </p>
-            </header>
-            <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
-              {awakeningHighlights.map((item, index) => (
-                <li key={index} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <LightboxImage
-            src={portraitVisual}
-            alt="Portrait of Santosh Ma during her spiritual practice"
-            title="Santosh Ma's Awakening"
-            description="Santosh Ma in deep spiritual practice, reflecting the inner inquiry that sparked the Who Am I series' detailed awakening account."
-            className="aspect-[4/3] w-full max-w-xl overflow-hidden rounded-3xl border border-slate-200 text-left shadow-md hover:shadow-lg"
-            imageClassName="object-cover object-top"
-            sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-          />
-        </section>
+
 
         <section className="space-y-8">
           <header className="space-y-2 text-center">
@@ -407,17 +528,25 @@ export default function HomePage() {
           <p className={`text-base leading-7 ${palette.muted}`}>The course resonates most with:</p>
         </header>
         <div className="grid gap-6 md:grid-cols-2">
-          {audiences.map((audience, index) => (
-            <div
-              key={index}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-indigo-200"
-            >
-              <div className="text-xs font-semibold uppercase tracking-[0.4em] text-indigo-400">
-                {audience.label}
+          {audiences.map((audience) => {
+            const Icon = audienceIconMap[audience.key]
+            return (
+              <div
+                key={audience.key}
+                className="flex items-start gap-4 rounded-3xl border border-indigo-100 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-md"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-500">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-base font-semibold uppercase tracking-[0.3em] text-indigo-900">
+                    {audience.label}
+                  </h3>
+                  <p className="text-sm leading-6 text-indigo-600">{audience.copy}</p>
+                </div>
               </div>
-              <div className="mt-2 text-base leading-7 text-indigo-800">{audience.copy}</div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
@@ -471,6 +600,21 @@ export default function HomePage() {
           })}
         </div>
       </section>
+        <section className="space-y-6 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm">
+          <header className="space-y-2">
+            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+              Your Journey of Discover Who Am I
+            </h2>
+            <p className={`text-base leading-7 ${palette.muted}`}>
+              Move through each part with the spaciousness it deserves while staying rooted in consistent practice.
+            </p>
+          </header>
+          <JourneyPricingTable
+            schedule={journeySchedule}
+            pacing={journeyPacing}
+            reminders={journeyReminders}
+          />
+        </section>
 
       <section className="space-y-4 rounded-3xl bg-emerald-50 p-8 text-base leading-7 text-slate-700 ring-1 ring-emerald-100/70">
         <h3 className="text-center text-2xl font-semibold text-emerald-900">Disclaimer</h3>

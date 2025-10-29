@@ -121,7 +121,7 @@ export default function WaiFourPage() {
                 Beyond the Veil: Three Granthis, Shiva-Lingam & The Body of Gold 
               </p>
             </div>
-            <div className="space-y-2 text-base leading-7 text-white/90">
+            <div className="space-y-2 text-lg leading-8 text-white/90">
               <p>
                 Based not on philosophy but on lived transformation, Part 4 reveals the deepest layers of
                 yogic evolution - teachings historically reserved for seekers guided by a realised master.

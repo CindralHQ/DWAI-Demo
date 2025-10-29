@@ -12,7 +12,7 @@ import heroVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
 import ascentVisual from '@/assets/visuals/All-Chakras-Aligned.png'
 import journeyVisual from '@/assets/visuals/Blue_Lotus.jpeg'
 import heartMechanicsVisual from '@/assets/visuals/Gurus-Blessings-2.png'
-import courseVisual from '@/assets/visuals/Santosh-Ma-Shivratri-1.png'
+import courseVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
 import uniquenessVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
 import whyWatchVisual from '@/assets/visuals/Sitting-on-Lotus.jpg'
 import quoteVisual from '@/assets/visuals/Blue_Lotus.jpeg'
@@ -112,7 +112,7 @@ export default function WaiTwoPage() {
                   <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part II</h1>
               <p className="text-xl font-semibold text-white">Shaktipat & Blossoming of the Spiritual Heart</p>
             </div>
-            <p className="text-base leading-7 text-white/90">
+            <p className="text-lg leading-8 text-white/90">
               This course is a visual, energetic, and philosophical breakthrough for every sincere seeker on
               the spiritual path.
             </p>

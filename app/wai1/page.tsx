@@ -125,7 +125,7 @@ export default function WaiOnePage() {
                     Understanding the Role of Chakras & Kundalini Shakti
                   </p>
                 </div>
-                <p className="text-base leading-7 text-white/90">
+                <p className="text-lg leading-8 text-white/90">
                   This is not a course. It is a living transmission. Each session of the 12-part series carries
                   energetic resonance, like a visual shaktipat, awakening your own inner knowing.
                 </p>
@@ -175,17 +175,18 @@ export default function WaiOnePage() {
               eyebrow={`Insight ${String(index + 1).padStart(2, '0')}`}
               title={feature.title}
               description={feature.description}
-            >
-              <LightboxImage
-                src={feature.visual.src}
-                alt={feature.visual.alt}
-                title={feature.title}
-                description={feature.description}
-                className="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60 text-left"
-                imageClassName="object-cover"
-                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-              />
-            </Card>
+              leadingVisual={
+                <LightboxImage
+                  src={feature.visual.src}
+                  alt={feature.visual.alt}
+                  title={feature.title}
+                  description={feature.description}
+                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60 text-left"
+                  imageClassName="object-cover"
+                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+                />
+              }
+            />
           ))}
         </div>
       </section>

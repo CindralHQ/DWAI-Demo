@@ -40,7 +40,7 @@ export function EnrollBlock({
         .join(' ')}
     >
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-3 text-base leading-7 text-white/90">
+        <div className="space-y-3 text-lg leading-8 text-white/90">
           {typeof description === 'string' ? <p>{description}</p> : description}
         </div>
         <div className="flex flex-col gap-3 md:items-end md:text-right">

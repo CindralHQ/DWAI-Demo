@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer'
 import { Header } from '@/components/ui/Header'
 import { PageFade } from '@/components/ui/PageFade'
 import { ImageLightboxProvider } from '@/components/ui/ImageLightbox'
+import { ContentProtectionLayer } from '@/components/ui/ContentProtectionLayer'
 
 export const metadata = {
   title: 'Who Am I - Series',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <BackgroundAudio />
+        <ContentProtectionLayer />
         <Header />
         <main className="px-4 pb-10 sm:px-6 lg:px-8">
           <ImageLightboxProvider>

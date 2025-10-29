@@ -126,7 +126,7 @@ export default function WaiThreePage() {
               <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part III</h1>
               <p className="text-xl font-semibold text-white">Journey to the Sahasrar: The Final Ascent of Consciousness</p>
             </div>
-            <p className="text-base leading-7 text-white/90">
+            <p className="text-lg leading-8 text-white/90">
               This is not a course. It is a living transmission. Each session in this 12-part series carries
               energetic resonance - like a visual shaktipat that awakens your own inner knowing.
             </p>

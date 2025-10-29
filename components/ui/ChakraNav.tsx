@@ -78,7 +78,7 @@ export function ChakraNav({ active, className }: ChakraNavProps) {
         return (
           <div
             key={chakra.slug}
-            className="flex flex-col items-center gap-2 text-center text-[11px] font-medium text-white/80 md:items-start md:text-left"
+            className="flex flex-col items-center gap-2 text-center text-sm font-semibold text-white/90 md:items-start md:text-left"
           >
             <Link
               href={chakra.slug}
@@ -97,10 +97,12 @@ export function ChakraNav({ active, className }: ChakraNavProps) {
               <Image src={chakra.icon} alt={`${chakra.chakra} symbol`} className="h-9 w-9" />
             </Link>
             <div className="flex flex-col items-center gap-0.5 md:items-start">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.35em] text-white/60">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.32em] text-white/70">
                 {chakra.part}
               </span>
-              <span className="uppercase tracking-[0.3em] text-white">{chakra.chakra}</span>
+              <span className="text-sm uppercase tracking-[0.28em] text-white">
+                {chakra.chakra}
+              </span>
             </div>
           </div>
         )
