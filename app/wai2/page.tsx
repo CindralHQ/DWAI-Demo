@@ -29,7 +29,7 @@ const aboutHighlights: Array<{
   {
     title: 'Sacred Ascent Revealed',
     description:
-      'For the first time, the sacred ascent of consciousness and awakening of the Spiritual Heart is shared with vivid clarity.',
+      'It is perhaps for the first time in the history of spiritual literature that the sacred ascent of consciousness and the awakening of the Spiritual Heart has been revealed with such vivid clarity.',
     visual: {
       src: ascentVisual,
       alt: 'Chakra alignment artwork symbolising sacred ascent'
@@ -38,7 +38,7 @@ const aboutHighlights: Array<{
   {
     title: 'Journey to the Anahat Chakra',
     description:
-      "Part 2 traces the soul's journey from creation to reunion with the Self at the Anahat Chakra - the spiritual heart centre.",
+      "Who Am I – Part 2 is a rare transmission from Santosh Ma that traces the soul’s journey from creation to its sacred reunion with the Self at the Anahat Chakra — the spiritual heart centre.",
     visual: {
       src: journeyVisual,
       alt: 'Blue lotus artwork representing the spiritual heart opening'
@@ -47,7 +47,7 @@ const aboutHighlights: Array<{
   {
     title: 'Living Mechanics of the Heart',
     description:
-      'Through her own awakening, Santosh Ma unveils how divine love and wisdom blossom within the heart.',
+      'Through her own profound awakening, Santosh Ma reveals the deep inner mechanics of human evolution and the blossoming of divine love and wisdom within the heart.',
     visual: {
       src: heartMechanicsVisual,
       alt: 'Teacher bestowing blessings as light radiates through the heart'
@@ -129,7 +129,7 @@ export default function WaiTwoPage() {
       <div className="flex flex-col items-center gap-8 rounded-3xl border border-emerald-100 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
         <Quote
           theme={THEME}
-          text="Journey of the Jeev-Atma to the Anahat Chakra, Shaktipat and Blossoming of the Spiritual Heart. To the right of the chest lies the spiritual heart where the Creator dwells."
+          text="To the right of the chest lies the spiritual heart where the Creator dwells."
           author="Santosh Ma"
           role="Kundalini Diary"
           className="flex-1"

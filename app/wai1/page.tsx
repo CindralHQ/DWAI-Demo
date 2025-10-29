@@ -1,7 +1,6 @@
 import Image, { type StaticImageData } from 'next/image'
 
 import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
@@ -10,13 +9,13 @@ import { WaiIntroOverlay } from '@/components/ui/WaiIntroOverlay'
 import { LightboxImage } from '@/components/ui/LightboxImage'
 import manipuraIcon from '@/assets/icons/Manipura.png'
 import heroVisual from '@/assets/visuals/Body-On-Fire.png'
-import roadmapVisual from '@/assets/visuals/AllChakras.png'
-import synthesisVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
-import clarityVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
+import roadmapVisual from '@/assets/visuals/All-Chakras-Aligned.png'
+import synthesisVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
+import clarityVisual from '@/assets/visuals/Pathway-To-Light.png'
 import courseVisual from '@/assets/visuals/Body-On-Fire-2.jpg'
 import uniquenessVisual from '@/assets/visuals/Head-on-Fire.png'
 import whyWatchVisual from '@/assets/visuals/Kundalini-Serpant.png'
-import quoteVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
+import quoteVisual from '@/assets/visuals/Boat-And-Sun.jpeg'
 
 const THEME: ThemeName = 'manipura'
 
@@ -169,24 +168,25 @@ export default function WaiOnePage() {
         </header>
         <div className="grid gap-6 md:grid-cols-3">
           {seriesHighlights.map((feature, index) => (
-            <Card
+            <div
               key={feature.title}
-              theme={THEME}
-              eyebrow={`Insight ${String(index + 1).padStart(2, '0')}`}
-              title={feature.title}
-              description={feature.description}
-              leadingVisual={
-                <LightboxImage
-                  src={feature.visual.src}
-                  alt={feature.visual.alt}
-                  title={feature.title}
-                  description={feature.description}
-                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60 text-left"
-                  imageClassName="object-cover"
-                  sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
-                />
-              }
-            />
+              className="flex flex-col gap-4 rounded-3xl border border-amber-200 bg-white p-5 shadow-sm sm:p-6"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-400">
+                Insight {String(index + 1).padStart(2, '0')}
+              </span>
+              <LightboxImage
+                src={feature.visual.src}
+                alt={feature.visual.alt}
+                title={feature.title}
+                description={feature.description}
+                className="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/60 text-left"
+                imageClassName="object-cover"
+                sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
+              />
+              <h3 className="text-lg font-semibold text-amber-900">{feature.title}</h3>
+              <p className="text-base leading-7 text-amber-800">{feature.description}</p>
+            </div>
           ))}
         </div>
       </section>
