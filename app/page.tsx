@@ -133,7 +133,7 @@ const journeyPacing = ['1 month break between each series', 'Total minimum time 
 
 const journeyReminders = [
   'Students are urged to move methodically and give Part 1 their complete focus—it lays the foundation for everything that follows.',
-  'After completing the series, revisit the teachings. Many seekers return to the sessions multiple times and discover fresh insights with each viewing.',
+  'After completing the series, revisit the teachings. Many seekers return to the sessions multiple times at a small repeater token fee and discover fresh insights with each viewing.',
   'The sadhak’s subtle body recognises this knowledge; the unfolding energy continues to support your evolution as the series is watched year after year.'
 ]
 
