@@ -50,3 +50,13 @@ canvas {
 img {
   pointer-events: none;
 }
+
+.material-symbols-rounded {
+  font-size: inherit;
+  line-height: 1;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}

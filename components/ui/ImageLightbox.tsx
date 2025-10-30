@@ -110,10 +110,10 @@ export function ImageLightboxProvider({ children }: { children: ReactNode }) {
                   />
                 </div>
                 <div className="space-y-2 p-6 text-slate-700">
-                  <h3 id="image-lightbox-title" className="text-2xl font-semibold text-slate-900">
+                  <h3 id="image-lightbox-title" className="text-2xl font-semibold text-sky-800">
                     {content.title}
                   </h3>
-                  <p id="image-lightbox-description" className="text-base leading-7">
+                  <p id="image-lightbox-description" className="text-sky-700 leading-7">
                     {content.description}
                   </p>
                 </div>

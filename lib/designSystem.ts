@@ -98,29 +98,31 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     label: 'Twilight Indigo',
     description: 'Deep indigo gradients mirroring dusk reflections.',
     classes: {
-      surface: 'bg-indigo-50',
-      text: 'text-indigo-800',
-      muted: 'text-indigo-700',
+      surface: 'bg-sky-50',
+      text: 'text-sky-900',
+      muted: 'text-sky-600',
       quote: {
-        wrapper: 'bg-white border border-indigo-200 shadow-sm',
-        accent: 'text-indigo-500',
-        author: 'text-indigo-600'
+        wrapper: 'bg-white border border-sky-200 shadow-sm',
+        accent: 'text-sky-500',
+        author: 'text-sky-600'
       },
       nav: {
-        base: 'text-indigo-700 hover:text-indigo-900',
-        active: 'bg-indigo-100 text-indigo-900',
-        focus: 'focus-visible:ring-indigo-300'
+        base: 'text-sky-700 hover:text-sky-900',
+        active: 'bg-sky-100 text-sky-900',
+        focus: 'focus-visible:ring-sky-300'
       },
       button: {
-        primary: 'bg-indigo-600 text-white border-transparent hover:bg-indigo-500 focus-visible:ring-indigo-500',
-        secondary: 'bg-white text-indigo-700 border-indigo-200 hover:bg-indigo-100 focus-visible:ring-indigo-300',
-        subtle: 'text-indigo-700 border-transparent hover:bg-indigo-100 focus-visible:ring-indigo-200'
+        primary:
+          'bg-sky-700 text-white border-transparent hover:bg-sky-600 focus-visible:ring-sky-500',
+        secondary:
+          'bg-white text-sky-700 border-sky-200 hover:bg-sky-100 focus-visible:ring-sky-300',
+        subtle: 'text-sky-700 border-transparent hover:bg-sky-100 focus-visible:ring-sky-200'
       },
       card: {
-        wrapper: 'bg-white border border-indigo-200 shadow-sm hover:border-indigo-300 hover:shadow-md',
-        eyebrow: 'text-indigo-500',
-        title: 'text-indigo-900',
-        body: 'text-indigo-700'
+        wrapper: 'bg-white border border-sky-200 shadow-sm hover:border-sky-300 hover:shadow-md',
+        eyebrow: 'text-sky-500',
+        title: 'text-sky-900',
+        body: 'text-sky-700'
       }
     }
   },

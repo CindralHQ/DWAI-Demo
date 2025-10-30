@@ -5,7 +5,8 @@ import { createPortal } from 'react-dom'
 
 import celestialBackground from '@/assets/celestialBackground.webp'
 
-const WORDS = ['WHO', 'AM', 'I', '?','DISCOVER WHO AM I'] as const
+const WORDS = ['WHO', 'AM', 'I', '?', 'DISCOVER WHO AM I'] as const
+const HOME_INTRO_SEEN_STORAGE_KEY = 'dwai-home-intro-overlay-seen'
 const FINAL_WORD_INDEX = WORDS.length - 1
 const WORD_DISPLAY_DURATION = 1111
 const WORD_TRANSITION_DURATION = 500
@@ -15,7 +16,8 @@ const OVERLAY_HIDE_DELAY = 1200
 export function HomeIntroOverlay() {
   const [portalEl, setPortalEl] = useState<HTMLElement | null>(null)
   const [hasMounted, setHasMounted] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
+  const [shouldRunOverlay, setShouldRunOverlay] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const [isFading, setIsFading] = useState(false)
   const [wordIndex, setWordIndex] = useState(0)
   const [isWordVisible, setIsWordVisible] = useState(false)
@@ -27,29 +29,45 @@ export function HomeIntroOverlay() {
   }, [])
 
   useEffect(() => {
+    // Gate the intro animation so it only plays once per browser.
+    if (typeof window === 'undefined') return
+    const hasSeenIntro = window.localStorage.getItem(HOME_INTRO_SEEN_STORAGE_KEY) === 'true'
+
+    if (hasSeenIntro) {
+      setShouldRunOverlay(false)
+      setIsVisible(false)
+      return
+    }
+
+    window.localStorage.setItem(HOME_INTRO_SEEN_STORAGE_KEY, 'true')
+    setShouldRunOverlay(true)
+    setIsVisible(true)
+  }, [])
+
+  useEffect(() => {
     const frame = window.requestAnimationFrame(() => setHasMounted(true))
     return () => window.cancelAnimationFrame(frame)
   }, [])
 
   useEffect(() => {
-    if (!hasMounted) return
+    if (!hasMounted || !shouldRunOverlay) return
     const startTimer = window.setTimeout(() => setIsWordVisible(true), 80)
     const introTimer = window.setTimeout(() => setIsIntroFlashVisible(false), 400)
     return () => {
       window.clearTimeout(startTimer)
       window.clearTimeout(introTimer)
     }
-  }, [hasMounted])
+  }, [hasMounted, shouldRunOverlay])
 
   useEffect(() => {
-    if (!hasMounted || !isVisible) return
+    if (!hasMounted || !isVisible || !shouldRunOverlay) return
     if (!isWordVisible) return
     const holdTimer = window.setTimeout(() => setIsWordVisible(false), WORD_DISPLAY_DURATION)
     return () => window.clearTimeout(holdTimer)
-  }, [hasMounted, isVisible, isWordVisible, wordIndex])
+  }, [hasMounted, isVisible, isWordVisible, shouldRunOverlay, wordIndex])
 
   useEffect(() => {
-    if (!hasMounted || !isVisible) return
+    if (!hasMounted || !isVisible || !shouldRunOverlay) return
     if (isWordVisible) return
 
     if (wordIndex === FINAL_WORD_INDEX) {
@@ -68,10 +86,10 @@ export function HomeIntroOverlay() {
     }, WORD_TRANSITION_DURATION)
 
     return () => window.clearTimeout(transitionTimer)
-  }, [hasMounted, isVisible, isWordVisible, wordIndex])
+  }, [hasMounted, isVisible, isWordVisible, shouldRunOverlay, wordIndex])
 
   const portalContent = useMemo(() => {
-    if (!isVisible) return null
+    if (!shouldRunOverlay || !isVisible) return null
 
     const nebulaBackdrop =
       'bg-[radial-gradient(circle_at_20%_20%,rgba(199,210,254,0.28),rgba(15,23,42,0))] md:bg-[radial-gradient(circle_at_18%_25%,rgba(199,210,254,0.28),rgba(15,23,42,0)_60%),radial-gradient(circle_at_78%_28%,rgba(167,139,250,0.28),rgba(12,10,36,0)_55%),radial-gradient(circle_at_50%_80%,rgba(32,211,238,0.18),rgba(8,11,26,0)_50%)]'
@@ -139,9 +157,9 @@ export function HomeIntroOverlay() {
         </div>
       </div>
     )
-  }, [hasMounted, isFading, isFinale, isVisible, isWordVisible, wordIndex])
+  }, [hasMounted, isFading, isFinale, isVisible, isWordVisible, shouldRunOverlay, wordIndex])
 
-  if (!portalEl) return null
+  if (!portalEl || !shouldRunOverlay) return null
 
   return createPortal(portalContent, portalEl)
 }

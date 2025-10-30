@@ -1,14 +1,13 @@
-import type { SVGProps } from 'react'
 import Image, { type StaticImageData } from 'next/image'
 
 import { ButtonLink } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { SunShine } from '@/components/ui/SunShine'
 import { HomeIntroOverlay } from '@/components/ui/HomeIntroOverlay'
 import { LightboxImage } from '@/components/ui/LightboxImage'
 import { JourneyPricingTable, type JourneyScheduleEntry } from '@/components/ui/JourneyPricingTable'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
 import { courses } from '@/data/courses'
+import mastheadBackground from '@/assets/masthead.png'
 import manipuraIcon from '@/assets/icons/Manipura.png'
 import anahataIcon from '@/assets/icons/Anahata.png'
 import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
@@ -99,43 +98,33 @@ const needOfHour = [
 const journeySchedule = [
   {
     part: 'Part 1',
+    title: 'Understanding the Role of Chakras and Kundalini Shakti',
     videos: 12,
-    weeks: 12,
-    costPerSeriesInr: 12_000,
-    costEntireSeriesInr: 10_000,
-    repeatersCostInr: 2_000
+    weeks: 12
   },
   {
     part: 'Part 2',
+    title: 'Shaktipat and Blossoming of The Spiritual Heart',
     videos: 4,
-    weeks: 4,
-    costPerSeriesInr: 12_000,
-    costEntireSeriesInr: 10_000,
-    repeatersCostInr: 2_000
+    weeks: 4
   },
   {
     part: 'Part 3',
+    title: 'Journey of the Atman From the Spiritual Heart to the Sahasrar',
     videos: 3,
-    weeks: 3,
-    costPerSeriesInr: 15_000,
-    costEntireSeriesInr: 10_000,
-    repeatersCostInr: 2_000
+    weeks: 3
   },
   {
     part: 'Part 4',
+    title: 'The 3 Granthis, the Shiva-Linga & the Body of Gold',
     videos: 4,
-    weeks: 4,
-    costPerSeriesInr: 15_000,
-    costEntireSeriesInr: 10_000,
-    repeatersCostInr: 2_000
+    weeks: 4
   },
   {
     part: 'Total',
+    title: 'Complete Journey Totals',
     videos: 23,
     weeks: 23,
-    costPerSeriesInr: 54_000,
-    costEntireSeriesInr: 40_000,
-    repeatersCostInr: 8_000,
     isTotal: true
   }
 ] as const satisfies readonly JourneyScheduleEntry[]
@@ -197,65 +186,11 @@ const whyNow = [
 
 type AudienceIconKey = 'seekers' | 'teachers' | 'scholars' | 'faculties'
 
-const audienceIconMap: Record<AudienceIconKey, (props: SVGProps<SVGSVGElement>) => JSX.Element> = {
-  seekers: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="12" r="2.6" stroke="currentColor" strokeWidth={1.6} />
-    </svg>
-  ),
-  teachers: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M12 4.2c1.1 2.6 3 4.2 5.4 5-1 3.1-3.2 5.8-5.4 7.4-2.2-1.6-4.4-4.3-5.4-7.4 2.4-.8 4.3-2.4 5.4-5Z"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5.2 15.3c2-.8 4.4-1.2 6.8-1.2s4.8.4 6.8 1.2"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  scholars: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M12 5 4.5 8.8v7.4L12 12.8l7.5 3.4V8.8L12 5Z"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinejoin="round"
-      />
-      <path d="M12 5v7.8" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
-    </svg>
-  ),
-  faculties: (props) => (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <circle cx="12" cy="12" r="2.4" stroke="currentColor" strokeWidth={1.6} />
-      <path
-        d="M4.6 7.2C6.3 4.7 9 3 12 3s5.7 1.7 7.4 4.2"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-      />
-      <path
-        d="M4.6 16.8C6.3 19.3 9 21 12 21s5.7-1.7 7.4-4.2"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-      />
-      <path d="M3 12h18" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" />
-    </svg>
-  )
+const audienceIconMap: Record<AudienceIconKey, string> = {
+  seekers: 'self_improvement',
+  teachers: 'school',
+  scholars: 'menu_book',
+  faculties: 'diversity_3'
 }
 
 type AudienceDefinition = {
@@ -290,24 +225,36 @@ export default function HomePage() {
     <>
       <div className="space-y-16">
         <HomeIntroOverlay />
-        <section className="relative isolate -mt-6 full-bleed bg-gradient-to-br from-sky-300 via-sky-200 to-sky-100 py-20">
-          <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 md:flex-row md:items-center md:px-12 lg:px-16">
-            <div className="space-y-6 text-sky-900">
-              <div className="space-y-3">
-                <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-600">
+        <section
+          className="relative isolate -mt-6 full-bleed overflow-hidden py-24 text-white"
+          style={{
+            backgroundImage: `url(${mastheadBackground.src})`,
+            backgroundPosition: '40% 20%',
+            backgroundSize: 'cover'
+          }}
+        >
+          <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 text-center md:min-h-[540px] md:flex-row md:items-end md:justify-between md:px-12 md:text-left lg:px-16">
+            <div className="relative flex w-full flex-col items-center gap-6 md:max-w-xl md:items-start">
+              <div className="space-y-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-100/90">
                   About The Series
                 </p>
-                <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Who Am I</h1>
-                <p className="text-xl font-medium text-sky-700">
+                <h1 className="text-4xl font-semibold tracking-tight drop-shadow md:text-5xl">Who Am I</h1>
+                <p className="text-xl font-medium text-sky-50/95 drop-shadow">
                   Journey of Jeev Atma to the Blossoming of Consciousness
                 </p>
               </div>
-              <p className="max-w-2xl text-base leading-7 text-sky-800">
+              <p className="max-w-2xl text-base leading-7 text-white/85">
                 The 'Who Am I Series' is a gift for humanity. A must-watch journey for every seeker, yoga teacher,
                 yoga practitioner, and meditator - no matter the path.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <ButtonLink href="/wai1" theme={SUPPORT_THEME} size="lg">
+              <div className="flex flex-wrap justify-center gap-3 md:justify-start">
+                <ButtonLink
+                  href="/wai1"
+                  theme={SUPPORT_THEME}
+                  size="lg"
+                  className="!bg-amber-500/90 !text-white !border-white/40 !shadow-[0_18px_40px_rgba(255,176,0,0.25)] hover:!bg-amber-400 focus-visible:!outline-white"
+                >
                   Explore the Course
                 </ButtonLink>
               </div>
@@ -317,18 +264,17 @@ export default function HomePage() {
               alt="Radiant illustration of all chakras aligned through the subtle body"
               title="Who Am I - Visual Journey"
               description="This artwork captures the complete chakra alignment shared throughout the Who Am I series, symbolising the ascent of human consciousness."
-              className="aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl text-left focus-visible:outline-sky-500 md:aspect-square lg:max-w-none"
-              imageClassName="object-cover object-bottom"
+              className="aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl text-left focus-visible:outline-sky-500 md:ml-auto md:max-w-lg md:self-start lg:max-w-none"
+              imageClassName="object-cover object-top md:object-[75%_0%]"
               sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
               priority
             />
           </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
         </section>
         <div className="container space-y-20">
-          <section className="rounded-3xl bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-6 text-slate-100 shadow-2xl ring-1 ring-indigo-500/20 sm:p-10">
+          <section className="rounded-3xl bg-gradient-to-br from-sky-900/80 via-sky-600 to-sky-400 p-6 text-slate-900 shadow-2xl sm:p-10">
             <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_minmax(0,1fr)] md:items-center">
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg md:max-w-sm">
+              <div className="relative aspect-[3/4] w-full overflow-hidden ring-1 ring-sky-100 ring-opacity-55 rounded-2xl shadow-xl md:max-w-sm">
                 <Image
                   src={quotePortrait}
                   alt="Santosh Ma in meditative reflection"
@@ -336,12 +282,12 @@ export default function HomePage() {
                   className="object-cover object-center"
                   sizes="(min-width: 1280px) 320px, (min-width: 768px) 260px, 100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/60 via-transparent to-indigo-900/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-sky-900/40 via-transparent to-sky-800/20" />
               </div>
               <figure className="space-y-6">
-                <blockquote className="relative rounded-2xl bg-white/10 p-6 pl-14 text-lg font-medium leading-relaxed shadow-inner md:text-xl">
-                  <span className="absolute left-5 top-5 text-5xl font-serif text-indigo-300/70">“</span>
-                  <p className="text-slate-100">
+                <blockquote className="relative overflow-hidden rounded-2xl bg-slate-100 bg-opacity-25 ring-1 ring-sky-100 ring-opacity-55 p-6 pl-14 text-lg font-medium leading-relaxed text-white shadow-lg backdrop-blur md:text-xl">
+                  <span className="absolute left-5 top-5 text-5xl font-serif text-white/70">“</span>
+                  <p className="text-white drop-shadow">
                     Today, I realise that my life has been touched by a love and a gentleness to a depth which no
                     individual can possibly match - as is given to me, in the course of the daily meditation by the
                     Kundalini force residing within my own being. I am aware that this feeling of being cherished must
@@ -350,7 +296,7 @@ export default function HomePage() {
                 </blockquote>
                 <figcaption className="pl-14">
                   <div className="text-lg font-semibold text-sky-200">Santosh Ma</div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-100/70">Kundalini Diary</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-300/90">Kundalini Diary</div>
                 </figcaption>
               </figure>
             </div>
@@ -373,8 +319,8 @@ export default function HomePage() {
             <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
               {aboutBulletPoints.map((point, index) => (
                 <li key={index} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-indigo-400" />
-                  <span>{point}</span>
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-400" />
+                  <span className="text-sky-800">{point}</span>
                 </li>
               ))}
             </ul>
@@ -393,20 +339,20 @@ export default function HomePage() {
             {needOfHour.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-4 rounded-3xl border border-indigo-100 bg-white p-6 text-left shadow-sm"
+                className="flex flex-col gap-4 rounded-3xl border border-sky-100 bg-white p-6 text-left shadow-sm"
               >
                 <LightboxImage
                   src={item.visual.src}
                   alt={item.visual.alt}
                   title={item.title}
                   description={item.body}
-                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-indigo-100/70 bg-indigo-50 text-left hover:border-indigo-200 hover:shadow-md"
+                  className="aspect-[4/4] overflow-hidden rounded-2xl border border-sky-100/70 bg-sky-50 text-left hover:border-sky-200 hover:shadow-md"
                   imageClassName="object-cover"
                   sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
                 />
                 <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
-                  <p className="text-base leading-7 text-indigo-700">{item.body}</p>
+                  <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+                  <p className="text-base leading-7 text-sky-700">{item.body}</p>
                 </div>
               </div>
             ))}
@@ -416,7 +362,7 @@ export default function HomePage() {
       <section className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
         <div className="space-y-4">
           <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-            Dive Deep Into The Sacred Journey of Who Am I?
+            Dive Deep Into The Sacred Journey of <br /> Who Am I?
           </h2>
           <div className={`space-y-4 text-base leading-7 ${palette.muted}`}>
             <p>
@@ -424,7 +370,7 @@ export default function HomePage() {
               revealed through vivid, divinely inspired visuals and direct personal experiences.
             </p>
             <p>
-              Through visions received in deep meditation over five years, Santosh Ma guides you through the
+              Through visions received in deep meditation over five years, helps guide a seeker through the
               journey of spiritual evolution; a process never before shared in yogic literature with such
               clarity.
             </p>
@@ -453,24 +399,24 @@ export default function HomePage() {
         </header>
         <div className="grid gap-6 md:grid-cols-3">
           {awakenTruth.map((item, index) => (
-            <div key={index} className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div key={index} className="flex flex-col gap-4 rounded-3xl border border-sky-100 bg-white p-6 shadow-sm">
               <LightboxImage
                 src={item.visual.src}
                 alt={item.visual.alt}
                 title={item.title}
                 description={item.body}
-                className="aspect-[4/3] overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50 text-left hover:border-slate-300 hover:shadow-md"
+                className="aspect-[4/4] overflow-hidden rounded-2xl border border-sky-100/80 bg-sky-50 text-left hover:border-sky-200 hover:shadow-md"
                 imageClassName="object-cover"
                 sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
               />
-              <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
-              <p className="text-base leading-7 text-indigo-700">{item.body}</p>
+              <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+              <p className="text-base leading-7 text-sky-700">{item.body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 p-10 text-white shadow-lg">
+      <section className="space-y-8 rounded-3xl bg-gradient-to-br from-blue-500 via-sky-700 to-sky-900 p-10 text-white shadow-lg">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center">
           <LightboxImage
             src={signatureVisual}
@@ -529,20 +475,20 @@ export default function HomePage() {
         </header>
         <div className="grid gap-6 md:grid-cols-2">
           {audiences.map((audience) => {
-            const Icon = audienceIconMap[audience.key]
+            const iconName = audienceIconMap[audience.key]
             return (
               <div
                 key={audience.key}
-                className="flex items-start gap-4 rounded-3xl border border-indigo-100 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-md"
+                className="flex items-start gap-4 rounded-3xl border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-blue-100 p-6 shadow-sm transition hover:-translate-y-1 hover:border-sky-300 hover:shadow-md"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-500">
-                  <Icon className="h-6 w-6" />
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-sky-100 text-sky-600 shadow-inner">
+                  <span className="material-symbols-rounded text-4xl scale-150">{iconName}</span>
                 </div>
                 <div className="space-y-1.5">
                   <h3 className="text-base font-semibold uppercase tracking-[0.3em] text-indigo-900">
                     {audience.label}
                   </h3>
-                  <p className="text-sm leading-6 text-indigo-600">{audience.copy}</p>
+                  <p className="text-sm leading-6 text-sky-600">{audience.copy}</p>
                 </div>
               </div>
             )
@@ -562,7 +508,7 @@ export default function HomePage() {
             return (
             <Card
               key={course.slug}
-              theme={(course.theme as ThemeName) ?? HOME_THEME}
+              theme={course.slug === 'wai4' ? 'sahasrara' : ((course.theme as ThemeName) ?? HOME_THEME)}
               className={iconConfig?.cardClass}
               eyebrow={`Part ${String(index + 1).padStart(2, '0')}`}
               title={course.title}
@@ -616,9 +562,9 @@ export default function HomePage() {
           />
         </section>
 
-      <section className="space-y-4 rounded-3xl bg-emerald-50 p-8 text-base leading-7 text-slate-700 ring-1 ring-emerald-100/70">
-        <h3 className="text-center text-2xl font-semibold text-emerald-900">Disclaimer</h3>
-        <div className="space-y-4">
+      <section className="space-y-4 rounded-3xl bg-sky-50 p-8 text-base leading-7 text-slate-700 ring-1 ring-sky-100/80">
+        <h3 className="text-center text-2xl font-semibold text-sky-900">Disclaimer</h3>
+        <div className="space-y-4 text-sky-600">
           <p>
             The information contained in 'the books by the author' and the 'Who Am I' are not intended to serve as a
             replacement for professional medical advice. Any use of the information in the books and the courses is at

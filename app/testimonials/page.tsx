@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
-import { fetchTestimonialsFromSheet, type SheetTestimonial } from '@/lib/googleSheets'
+import { fetchTestimonials, type SheetTestimonial } from '@/lib/googleSheets'
 
 const TESTIMONIALS_THEME: ThemeName = 'lotus'
 
@@ -32,10 +32,10 @@ export const metadata = { title: 'Testimonials' }
 
 export default async function Testimonials() {
   const palette = themeLibrary[TESTIMONIALS_THEME].classes
-  const sheetTestimonials = await fetchTestimonialsFromSheet()
+  const remoteTestimonials = await fetchTestimonials()
   const testimonials: SheetTestimonial[] =
-    sheetTestimonials.length > 0 ? sheetTestimonials : FALLBACK_TESTIMONIALS
-  const usingFallback = sheetTestimonials.length === 0
+    remoteTestimonials.length > 0 ? remoteTestimonials : FALLBACK_TESTIMONIALS
+  const usingFallback = remoteTestimonials.length === 0
 
   return (
     <div className="space-y-12">
@@ -50,7 +50,7 @@ export default async function Testimonials() {
           <h1 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>What Our Students Share</h1>
           <p className={`text-base leading-7 ${palette.muted}`}>
             {usingFallback
-              ? 'Live testimonials will appear here once Google Sheets access is configured. Meanwhile, a curated selection is shown below.'
+              ? 'Live testimonials will appear here once Airtable access is configured. Meanwhile, a curated selection is shown below.'
               : 'These reflections are streamed directly from the community submissions we have permission to share.'}
           </p>
         </header>

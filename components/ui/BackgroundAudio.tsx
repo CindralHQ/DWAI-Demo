@@ -10,15 +10,15 @@ type ThemeVariant = 'default' | 'wai1' | 'wai2' | 'wai3' | 'wai4'
 
 const BUTTON_VARIANTS: Record<ThemeVariant, string> = {
   default:
-    'bg-indigo-600/90 text-white hover:bg-indigo-500 focus-visible:outline-indigo-200 border border-white/30',
+    'bg-sky-700/90 text-white hover:bg-sky-600 focus-visible:outline-sky-200 border border-white/30 shadow-[0_10px_28px_rgba(56,189,248,0.35)]',
   wai1:
     'bg-amber-500 text-slate-900 hover:bg-amber-400 focus-visible:outline-amber-200 border border-amber-200',
   wai2:
-    'bg-emerald-500 text-white hover:bg-emerald-400 focus-visible:outline-emerald-200 border border-emerald-200',
+    'bg-teal-500 text-white hover:bg-teal-400 focus-visible:outline-teal-200 border border-teal-200',
   wai3:
-    'bg-sky-500 text-white hover:bg-sky-400 focus-visible:outline-sky-200 border border-sky-200',
+    'bg-sky-600 text-white hover:bg-sky-500 focus-visible:outline-sky-200 border border-sky-200',
   wai4:
-    'bg-violet-600 text-white hover:bg-violet-500 focus-visible:outline-violet-200 border border-violet-300'
+    'bg-blue-700 text-white hover:bg-blue-600 focus-visible:outline-blue-200 border border-blue-300/80'
 }
 
 const baseButtonClass =
@@ -236,7 +236,7 @@ export function BackgroundAudio() {
             <button
               type="button"
               onClick={handleDecreaseFont}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
               aria-label="Decrease font size"
               title="Decrease font size"
               disabled={fontScale <= FONT_SCALE_MIN + 0.01}
@@ -246,7 +246,7 @@ export function BackgroundAudio() {
             <button
               type="button"
               onClick={handleIncreaseFont}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-base font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
               aria-label="Increase font size"
               title="Increase font size"
               disabled={fontScale >= FONT_SCALE_MAX - 0.01}
