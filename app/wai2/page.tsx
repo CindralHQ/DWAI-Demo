@@ -126,21 +126,21 @@ export default function WaiTwoPage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center gap-8 rounded-3xl border border-emerald-100 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+      <div className="flex flex-col md:flex-row">
         <Quote
           theme={THEME}
           text="To the right of the chest lies the spiritual heart where the Creator dwells."
           author="Santosh Ma"
           role="Kundalini Diary"
-          className="flex-1"
+          className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Blue lotus artwork representing the awakened spiritual heart"
             fill
-            className="object-contain"
-            sizes="(min-width: 768px) 12rem, 10rem"
+            className="object-contain drop-shadow-xl"
+            sizes="(min-width: 1280px) 24rem, (min-width: 768px) 16rem, 14rem"
           />
         </div>
       </div>
@@ -153,6 +153,11 @@ export default function WaiTwoPage() {
           <p className={`text-base leading-7 ${palette.muted}`}>
             A rare transmission that illuminates the sacred expansion of the spiritual heart.
           </p>
+          <p className={`text-base leading-7 ${palette.muted}`}>
+            Santosh Ma shares her direct inner experience of the culminating phases of spiritual evolution.
+            Sacred visuals &mdash; downloaded from the Empyrean realms &mdash; guide seekers through the final stages of
+            the soul&rsquo;s return.
+          </p>
         </header>
         <div className="grid gap-6 md:grid-cols-3">
           {aboutHighlights.map((item, index) => (
@@ -160,9 +165,7 @@ export default function WaiTwoPage() {
               key={item.title}
               className="flex flex-col gap-4 rounded-3xl border border-emerald-200 bg-white p-5 shadow-sm sm:p-6"
             >
-              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-400">
-                Insight {String(index + 1).padStart(2, '0')}
-              </span>
+
               <LightboxImage
                 src={item.visual.src}
                 alt={item.visual.alt}
@@ -227,7 +230,7 @@ export default function WaiTwoPage() {
           title="Heart Transmission Visual"
           description="An energetic exchange depicting the heart transmission that makes Part 2 a living, breathing experience."
           className="aspect-[4/3] overflow-hidden rounded-3xl border border-emerald-200 bg-white text-left shadow-lg"
-          imageClassName="object-cover"
+          imageClassName="object-top cover"
           sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
         />
       </section>

@@ -42,7 +42,8 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-rose-950',
       muted: 'text-rose-700',
       quote: {
-        wrapper: 'bg-white border border-rose-200 shadow-sm',
+        wrapper:
+          'bg-gradient-to-br from-rose-50 via-white to-rose-100/70 border border-rose-200/70 shadow-lg shadow-black/10 ring-1 ring-rose-100/60',
         accent: 'text-rose-500',
         author: 'text-rose-600'
       },
@@ -72,9 +73,10 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-amber-950',
       muted: 'text-amber-700',
       quote: {
-        wrapper: 'bg-white border border-amber-200 shadow-sm',
-        accent: 'text-amber-500',
-        author: 'text-amber-600'
+        wrapper:
+          'bg-gradient-to-br from-amber-50 via-white to-amber-100/70 border border-amber-200/70 shadow-lg shadow-black/10 ring-1 ring-amber-100/60',
+        accent: 'text-amber-600',
+        author: 'text-amber-700'
       },
       nav: {
         base: 'text-amber-700 hover:text-amber-900',
@@ -102,9 +104,10 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-sky-900',
       muted: 'text-sky-600',
       quote: {
-        wrapper: 'bg-white border border-sky-200 shadow-sm',
-        accent: 'text-sky-500',
-        author: 'text-sky-600'
+        wrapper:
+          'bg-gradient-to-br from-sky-50 via-white to-sky-100/70 border border-sky-200/70 shadow-lg shadow-black/10 ring-1 ring-sky-100/60',
+        accent: 'text-sky-600',
+        author: 'text-sky-700'
       },
       nav: {
         base: 'text-sky-700 hover:text-sky-900',
@@ -134,9 +137,10 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-emerald-950',
       muted: 'text-emerald-700',
       quote: {
-        wrapper: 'bg-white border border-emerald-200 shadow-sm',
-        accent: 'text-emerald-500',
-        author: 'text-emerald-600'
+        wrapper:
+          'bg-gradient-to-br from-emerald-50 via-white to-emerald-100/70 border border-emerald-200/70 shadow-lg shadow-black/10 ring-1 ring-emerald-100/60',
+        accent: 'text-emerald-600',
+        author: 'text-emerald-700'
       },
       nav: {
         base: 'text-emerald-700 hover:text-emerald-900',
@@ -167,9 +171,10 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-sky-950',
       muted: 'text-sky-700',
       quote: {
-        wrapper: 'bg-white border border-sky-200 shadow-sm',
-        accent: 'text-sky-500',
-        author: 'text-sky-600'
+        wrapper:
+          'bg-gradient-to-br from-sky-50 via-white to-sky-100/70 border border-sky-200/70 shadow-lg shadow-black/10 ring-1 ring-sky-100/60',
+        accent: 'text-sky-600',
+        author: 'text-sky-700'
       },
       nav: {
         base: 'text-sky-700 hover:text-sky-900',
@@ -199,9 +204,10 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
       text: 'text-violet-950',
       muted: 'text-violet-700',
       quote: {
-        wrapper: 'bg-white border border-violet-200 shadow-[0_0_28px_rgba(245,197,53,0.2)]',
-        accent: 'text-violet-500',
-        author: 'text-violet-600'
+        wrapper:
+          'bg-gradient-to-br from-violet-50 via-white to-amber-50/60 border border-violet-200/70 shadow-[0_0_28px_rgba(245,197,53,0.2)] ring-1 ring-amber-100/60',
+        accent: 'text-violet-600',
+        author: 'text-violet-700'
       },
       nav: {
         base: 'text-violet-700 hover:text-violet-900',

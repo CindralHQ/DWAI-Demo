@@ -118,7 +118,7 @@ export default function WaiFourPage() {
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
               <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part IV</h1>
               <p className="text-xl font-semibold text-white">
-                Beyond the Veil: Three Granthis, Shiva-Lingam & The Body of Gold 
+                Beyond the Veil: The Body of Gold 
               </p>
             </div>
             <div className="space-y-2 text-lg leading-8 text-white/90">
@@ -137,21 +137,21 @@ export default function WaiFourPage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center gap-8 rounded-3xl border border-violet-200 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+      <div className="flex flex-col md:flex-row">
         <Quote
           theme={THEME}
           text="At the summit of the ascent, the seeker realises that the body of gold is nothing but the light of the Self revealing itself."
           author="Santosh Ma"
           role="Kundalini Diary"
-          className="flex-1"
+          className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Sahasrara blossoming into the body of gold"
             fill
-            className="object-contain"
-            sizes="(min-width: 768px) 12rem, 10rem"
+            className="object-contain drop-shadow-xl"
+            sizes="(min-width: 1280px) 24rem, (min-width: 768px) 16rem, 14rem"
           />
         </div>
       </div>
@@ -165,6 +165,11 @@ export default function WaiFourPage() {
             Secret of Secrets explores the most esoteric dimensions of human evolution - long considered
             inaccessible.
           </p>
+          <p className={`text-base leading-7 ${palette.muted}`}>
+            Santosh Ma shares her direct inner experience of the culminating phases of spiritual evolution.
+            Sacred visuals &mdash; downloaded from the Empyrean realms &mdash; guide seekers through the final stages of
+            the soul&rsquo;s return.
+          </p>
         </header>
         <div className="grid gap-6 md:grid-cols-3">
           {seriesOverview.map((item, index) => (
@@ -172,9 +177,6 @@ export default function WaiFourPage() {
               key={item.title}
               className="flex flex-col gap-4 rounded-3xl border border-violet-200 bg-white p-6 shadow-sm"
             >
-              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-500">
-                Teaching {String(index + 1).padStart(2, '0')}
-              </span>
               <LightboxImage
                 src={item.visual.src}
                 alt={item.visual.alt}

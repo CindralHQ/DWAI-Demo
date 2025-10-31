@@ -12,10 +12,10 @@ import heroVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 import crownRoadmapVisual from '@/assets/visuals/Ajna-Chakra-Concentration.png'
 import ascentPathVisual from '@/assets/visuals/Pathway-To-Light.png'
 import resonanceVisual from '@/assets/visuals/OM.png'
-import courseVisual from '@/assets/visuals/Gurus-Blessings-2.png'
-import uniquenessVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
-import whyWatchVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
-import quoteVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
+import courseVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
+import uniquenessVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
+import whyWatchVisual from '@/assets/visuals/Gurus-Blessings-2.png'
+import quoteVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 
 const THEME: ThemeName = 'vishuddha'
 
@@ -38,7 +38,7 @@ const ascentHighlights: Array<{
   {
     title: 'Inner Witness Accounts',
     description:
-      'Santosh Ma shares the culminating phases of her own evolution, received through sacred transmissions from the Empyrean realms.',
+      "This is the sacred culmination of every seeker's path - the rise of consciousness to its divine summit. Through rare visuals and timeless wisdom, experience the revelation of the highest truth with.",
     visual: {
       src: ascentPathVisual,
       alt: 'A luminous pathway ascending toward the sahasrar'
@@ -124,7 +124,7 @@ export default function WaiThreePage() {
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
               <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part III</h1>
-              <p className="text-xl font-semibold text-white">Journey to the Sahasrar: The Final Ascent of Consciousness</p>
+              <p className="text-xl font-semibold text-white">Journey to Sahasrar: The Final Ascent of Consciousness</p>
             </div>
             <p className="text-lg leading-8 text-white/90">
               This is not a course. It is a living transmission. Each session in this 12-part series carries
@@ -140,21 +140,21 @@ export default function WaiThreePage() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center gap-8 rounded-3xl border border-sky-200 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:gap-12">
+      <div className="flex flex-col md:flex-row">
         <Quote
           theme={THEME}
           text="There comes a moment in the soul’s long journey where the ascent is no longer an effort, but an act of Grace."
           author="Santosh Ma"
           role="Kundalini Diary"
-          className="flex-1"
+          className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-40 w-40 shrink-0 md:h-48 md:w-48">
+        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Sahasrara blossoming into cascades of light"
             fill
-            className="object-contain"
-            sizes="(min-width: 768px) 12rem, 10rem"
+            className="object-contain drop-shadow-xl"
+            sizes="(min-width: 1280px) 24rem, (min-width: 768px) 16rem, 14rem"
           />
         </div>
       </div>
@@ -180,9 +180,6 @@ export default function WaiThreePage() {
               key={item.title}
               className="flex flex-col gap-4 rounded-3xl border border-sky-200 bg-white p-5 shadow-sm sm:p-6"
             >
-              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-400">
-                Insight {String(index + 1).padStart(2, '0')}
-              </span>
               <LightboxImage
                 src={item.visual.src}
                 alt={item.visual.alt}

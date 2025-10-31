@@ -62,8 +62,17 @@ const courseIconMap: Record<
   }
 }
 
-const aboutBulletPoints = [
+const aboutBulletPoints: Array<string | { text: string; subPoints: string[] }> = [
   "The 'Who Am I Series' consisting of four parts shares pristine sacred knowledge of human evolution from the Mooladhar chakra to the Sahasrar.",
+  {
+    text: 'The series unfolds through four distinct parts that guide the seeker step by step:',
+    subPoints: [
+      'Part 1 – Understanding the Role of Chakras and Kundalini Shakti',
+      'Part 2 – Shaktipat and Blossoming of The Spiritual Heart',
+      'Part 3 – Journey of the Atman From the Spiritual Heart to the Sahasrar',
+      'Part 4 – The 3 Granthis, the Shiva-Linga & the Body of Gold'
+    ]
+  },
   'For the first time in human history, the deepest layers of yogic evolution traditionally reserved for advanced seekers have been decoded and presented with clarity.',
   'Supported by 250+ sacred, vibrant visuals illustrating the full spectrum of human evolution.'
 ]
@@ -317,12 +326,26 @@ export default function HomePage() {
               About The 'Who Am I' Series
             </h2>
             <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
-              {aboutBulletPoints.map((point, index) => (
-                <li key={index} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-400" />
-                  <span className="text-sky-800">{point}</span>
-                </li>
-              ))}
+              {aboutBulletPoints.map((point, index) => {
+                const isStringPoint = typeof point === 'string'
+                return (
+                  <li key={index} className="flex gap-3">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-400" />
+                    <div className="space-y-2">
+                      <span className="text-sky-800">{isStringPoint ? point : point.text}</span>
+                      {!isStringPoint && (
+                        <ul className="ml-5 list-disc space-y-1 text-sky-700">
+                          {point.subPoints.map((subPoint, subIndex) => (
+                            <li key={subIndex} className="leading-6">
+                              {subPoint}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </section>

@@ -25,7 +25,7 @@ const seriesLinks = [
 const socialLinks = [
   { label: 'Instagram', href: '#' },
   { label: 'YouTube', href: 'https://www.youtube.com/@SantoshSachdevaTalks' },
-  { label: 'Facebook', href: '#' },
+  { label: 'Facebook', href: 'https://www.facebook.com/eightspiritualbreaths/' },
 ]
 
 export function Footer({ className }: FooterProps) {
