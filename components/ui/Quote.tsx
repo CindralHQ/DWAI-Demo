@@ -20,7 +20,6 @@ export function Quote({ text, author, role, theme = 'lotus', className }: QuoteP
         <span
           aria-hidden
           className={cx(
-            'absolute left-4 top-8 h-[calc(100%-4rem)] w-[4px] rounded-full opacity-25 md:left-6 md:w-[6px] md:opacity-30',
             'bg-current',
             quote.accent
           )}
