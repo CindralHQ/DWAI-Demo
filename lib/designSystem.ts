@@ -84,7 +84,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
         focus: 'focus-visible:ring-amber-300'
       },
       button: {
-        primary: 'bg-amber-500 text-slate-900 border-transparent hover:bg-amber-400 focus-visible:ring-amber-500',
+        primary: 'bg-amber-500 text-white-900 border-transparent hover:bg-amber-400 focus-visible:ring-amber-500',
         secondary: 'bg-white text-amber-700 border-amber-200 hover:bg-amber-100 focus-visible:ring-amber-300',
         subtle: 'text-amber-700 border-transparent hover:bg-amber-100 focus-visible:ring-amber-200'
       },

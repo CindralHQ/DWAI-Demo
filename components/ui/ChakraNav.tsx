@@ -21,7 +21,7 @@ const chakras: ChakraNavItem[] = [
   {
     slug: '/wai1',
     part: 'Part I',
-    chakra: 'Manipura',
+    chakra: 'Chakras & Kundalini',
     icon: manipuraIcon,
     ring: 'ring-amber-300/70',
     offset: 'ring-offset-orange-100',
@@ -31,7 +31,7 @@ const chakras: ChakraNavItem[] = [
   {
     slug: '/wai2',
     part: 'Part II',
-    chakra: 'Anahata',
+    chakra: 'Spiritual Heart',
     icon: anahataIcon,
     ring: 'ring-emerald-300/70',
     offset: 'ring-offset-emerald-100',
@@ -41,7 +41,7 @@ const chakras: ChakraNavItem[] = [
   {
     slug: '/wai3',
     part: 'Part III',
-    chakra: 'Vishuddha',
+    chakra: 'Journey to Sahasrar',
     icon: vishuddhaIcon,
     ring: 'ring-sky-300/70',
     offset: 'ring-offset-sky-100',
@@ -51,7 +51,7 @@ const chakras: ChakraNavItem[] = [
   {
     slug: '/wai4',
     part: 'Part IV',
-    chakra: 'Sahasrara',
+    chakra: 'The Body of Gold',
     icon: sahasraraIcon,
     ring: 'ring-violet-300/70',
     offset: 'ring-offset-amber-100',
