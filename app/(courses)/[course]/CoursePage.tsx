@@ -58,6 +58,7 @@ export default function CoursePage({ slug }: { slug: string }) {
   }
 
   const palette = themeLibrary[courseTheme].classes
+  const headingClass = palette.card.title
 
   return (
     <div className="space-y-12">
@@ -66,7 +67,11 @@ export default function CoursePage({ slug }: { slug: string }) {
       <article className="space-y-10">
         <header className="space-y-4">
           <span className={`text-sm font-semibold uppercase tracking-[0.3em] ${palette.muted}`}>Course</span>
-          <h1 className={`text-3xl md:text-4xl font-semibold tracking-tight ${palette.text}`}>{course.title}</h1>
+          <h1
+            className={`text-3xl md:text-4xl font-semibold tracking-tight ${headingClass}`}
+          >
+            {course.title}
+          </h1>
           <p className={`text-lg leading-8 ${palette.muted}`}>{course.subtitle}</p>
           <div className="flex flex-wrap items-center gap-4">
             <div className="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-slate-200">
@@ -84,7 +89,7 @@ export default function CoursePage({ slug }: { slug: string }) {
         </header>
 
         <section className="space-y-3">
-          <h2 className={`text-2xl font-semibold ${palette.text}`}>Overview</h2>
+          <h2 className={`text-2xl font-semibold ${headingClass}`}>Overview</h2>
           <ul className={`list-disc space-y-2 pl-5 text-base leading-7 ${palette.muted}`}>
             {course.bullets.map((bullet, index) => (
               <li key={index}>{bullet}</li>
@@ -93,7 +98,7 @@ export default function CoursePage({ slug }: { slug: string }) {
         </section>
 
         <section className="space-y-3">
-          <h2 className={`text-2xl font-semibold ${palette.text}`}>What You Will Learn</h2>
+          <h2 className={`text-2xl font-semibold ${headingClass}`}>What You Will Learn</h2>
           <ul className={`list-disc space-y-2 pl-5 text-base leading-7 ${palette.muted}`}>
             <li>Replace with sectioned bullet points per part.</li>
             <li>This scaffold mirrors headings from the live site.</li>

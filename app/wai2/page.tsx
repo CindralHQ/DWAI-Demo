@@ -10,12 +10,12 @@ import { LightboxImage } from '@/components/ui/LightboxImage'
 import anahataIcon from '@/assets/icons/Anahata.png'
 import heroVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
 import ascentVisual from '@/assets/visuals/All-Chakras-Aligned.png'
-import journeyVisual from '@/assets/visuals/Blue_Lotus.jpeg'
+import journeyVisual from '@/assets/visuals/Body-On-Fire-2.jpg'
 import heartMechanicsVisual from '@/assets/visuals/Gurus-Blessings-2.png'
 import courseVisual from '@/assets/visuals/Freeing-Manipura-Blocks.png'
 import uniquenessVisual from '@/assets/visuals/Receiving-Giving-Through-Ajna-Chakra.jpg'
 import whyWatchVisual from '@/assets/visuals/Sitting-on-Lotus.jpg'
-import quoteVisual from '@/assets/visuals/Blue_Lotus.jpeg'
+import quoteVisual from '@/assets/visuals/pink_lotus.png'
 
 const THEME: ThemeName = 'anahata'
 
@@ -79,10 +79,22 @@ const whyWatch = [
   'Anchor your path with compassionate mentorship for seekers, teachers, and researchers alike.'
 ]
 
+const uniqueCallout =
+  "This is not a course - it is a living transmission. Each session carries energetic resonance that awakens the heart's own remembering."
+
+const uniqueCardStyles = {
+  wrapper:
+    'rounded-3xl border border-emerald-200/70 bg-gradient-to-br from-white/95 via-emerald-50/90 to-emerald-100/70 p-6 shadow-[0_18px_40px_rgba(16,185,129,0.12)]',
+  icon:
+    'inline-flex h-14 w-14 items-center justify-center rounded-[20px] bg-white/90 text-emerald-600 shadow-inner shadow-emerald-500/20',
+  text: 'text-base leading-7 text-emerald-800'
+} as const
+
 export const metadata = { title: 'Who Am I - Part 2' }
 
 export default function WaiTwoPage() {
   const palette = themeLibrary[THEME].classes
+  const headingClass = palette.card.title
 
   return (
     <>
@@ -109,7 +121,7 @@ export default function WaiTwoPage() {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part II</h1>
+                  <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">Part II</h1>
               <p className="text-xl font-semibold text-white">Shaktipat & Blossoming of the Spiritual Heart</p>
             </div>
             <p className="text-lg leading-8 text-white/90">
@@ -134,7 +146,7 @@ export default function WaiTwoPage() {
           role="Kundalini Diary"
           className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
+        <div className="relative h-48 w-48 shrink-0 mx-auto md:mx-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Blue lotus artwork representing the awakened spiritual heart"
@@ -147,7 +159,7 @@ export default function WaiTwoPage() {
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             About the Who Am I - Part 2 Series
           </h2>
           <p className={`text-base leading-7 ${palette.muted}`}>
@@ -175,7 +187,7 @@ export default function WaiTwoPage() {
                 imageClassName="object-cover"
                 sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
               />
-              <h3 className="text-lg font-semibold text-emerald-900">{item.title}</h3>
+              <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
               <p className="text-base leading-7 text-emerald-700">{item.description}</p>
             </div>
           ))}
@@ -193,8 +205,8 @@ export default function WaiTwoPage() {
           sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
         />
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
-          <h3 className="text-lg font-semibold text-emerald-900">What You Will Learn</h3>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>Course Content</h2>
+          <h3 className={`text-lg font-semibold ${headingClass}`}>What You Will Learn</h3>
           <ul className="space-y-2 text-base leading-7 text-emerald-800">
             {courseContent.map((point) => (
               <li key={point} className="flex gap-3">
@@ -208,7 +220,7 @@ export default function WaiTwoPage() {
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             What Makes This Series Unique?
           </h2>
           <ul className="space-y-3 text-base leading-7 text-emerald-800">
@@ -219,10 +231,11 @@ export default function WaiTwoPage() {
               </li>
             ))}
           </ul>
-          <p className="rounded-3xl bg-white p-5 text-base leading-7 text-emerald-700 shadow-sm">
-            This is not a course - it is a living transmission. Each session carries energetic resonance that
-            awakens the heart's own remembering.
-          </p>
+          <div className={uniqueCardStyles.wrapper}>
+            <div className="flex items-start gap-4">
+              <p className={uniqueCardStyles.text}>{uniqueCallout}</p>
+            </div>
+          </div>
         </div>
         <LightboxImage
           src={uniquenessVisual}
@@ -236,17 +249,6 @@ export default function WaiTwoPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
-        <div className="space-y-4 rounded-3xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8">
-          <h3 className={`text-2xl font-semibold text-emerald-900`}>Why You Must Watch It</h3>
-          <ul className="space-y-2 text-base leading-7 text-emerald-800">
-            {whyWatch.map((entry) => (
-              <li key={entry} className="flex gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-emerald-500" />
-                <span>{entry}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
         <LightboxImage
           src={whyWatchVisual}
           alt="Meditative figure seated on a lotus bathed in emerald light"
@@ -256,6 +258,18 @@ export default function WaiTwoPage() {
           imageClassName="object-cover"
           sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
         />
+        <div className="space-y-4 rounded-3xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8">
+          <h3 className={`text-2xl font-semibold ${headingClass}`}>Why You Must Watch It</h3>
+          <ul className="space-y-2 text-base leading-7 text-emerald-800">
+            {whyWatch.map((entry) => (
+              <li key={entry} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-emerald-500" />
+                <span>{entry}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
       </section>
 
       <EnrollBlock

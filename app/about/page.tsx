@@ -43,13 +43,16 @@ function PortraitPlaceholder() {
 
 export default function About() {
   const palette = themeLibrary[ABOUT_THEME].classes
+  const headingClass = palette.card.title
 
   return (
     <div className="space-y-16">
       <WaiIntroOverlay theme={ABOUT_THEME} icon={homeLogo} label="Discover Who Am I" size="hero" applyBodyTint={false} />
       <section className="text-indigo-800">
         <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-400">About</p>
-        <h1 className="mt-2 mb-3 text-4xl font-semibold tracking-tight text-indigo-900 md:text-5xl">
+        <h1
+          className={`mt-2 mb-3 text-4xl font-semibold tracking-tight ${headingClass} md:text-5xl`}
+        >
           Discover Who Am I
         </h1>
         <p className="max-w-3xl text-base leading-7 text-indigo-500">
@@ -62,7 +65,7 @@ export default function About() {
       <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-start">
         <div className="space-y-6 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm">
           <header className="space-y-2">
-            <h3 className={`text-2xl font-semibold ${palette.text}`}>
+            <h3 className={`text-2xl font-semibold ${headingClass}`}>
               Santosh Ma&apos;s Spiritual Awakening Has Been Unique
             </h3>
             <p className={`text-base leading-7 ${palette.muted}`}>
@@ -93,7 +96,9 @@ export default function About() {
 
       <section className="grid gap-10 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Santosh Ma&apos;s Path</h2>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
+            Santosh Ma&apos;s Path
+          </h2>
           <p className={`text-base leading-7 ${palette.muted}`}>
             Santosh Ma immersed herself in Brahma Vidya under Justice M. L. Dudhat in 1995. The initiation ignited an
             enduring relationship with Kundalini energy, chronicled through the Kundalini Trilogy—<em>
@@ -115,7 +120,7 @@ export default function About() {
 
       <section className="space-y-6">
         <div className="rounded-3xl bg-gradient-to-br from-indigo-50 via-white to-indigo-50 p-8 ring-1 ring-indigo-100/70">
-          <h3 className={`text-2xl font-semibold ${palette.text}`}>Mission</h3>
+          <h3 className={`text-2xl font-semibold ${headingClass}`}>Mission</h3>
           <p className="mt-3 text-base leading-7 text-indigo-700">
             The heart of Discover Who Am I is to share lived wisdom with tenderness and structure so every seeker feels
             held on their path. These guiding principles keep our work authentic and human.
@@ -135,14 +140,16 @@ export default function About() {
           </div>
         </div>
 
-        <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>How We Support Seekers</h2>
+        <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
+          How We Support Seekers
+        </h2>
         <div className="grid gap-6 md:grid-cols-3">
           {supportHighlights.map((item, index) => (
             <div
               key={index}
               className="flex flex-col gap-3 rounded-3xl border border-indigo-100 bg-white p-6 shadow-sm"
             >
-              <h3 className="text-lg font-semibold text-indigo-900">{item.title}</h3>
+              <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
               <p className="text-base leading-7 text-indigo-700">{item.body}</p>
             </div>
           ))}
@@ -150,7 +157,7 @@ export default function About() {
       </section>
 
       <section className="rounded-3xl bg-indigo-50 p-8 text-base leading-7 text-indigo-800 ring-1 ring-indigo-100/70">
-        <h2 className="text-2xl font-semibold text-indigo-900">Stay Connected</h2>
+        <h2 className={`text-2xl font-semibold ${headingClass}`}>Stay Connected</h2>
         <p className="mt-3 text-indigo-800">
           Santosh Ma hosts ongoing mentoring circles where questions on meditation, chakras, and Kundalini are met
           with warmth and clarity. Learn more about The Eight Spiritual Breaths at{' '}

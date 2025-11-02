@@ -70,7 +70,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     description: 'Solar plexus fire rendered in luminous golds and ambers.',
     classes: {
       surface: 'bg-amber-50',
-      text: 'text-amber-950',
+      text: 'text-amber-800',
       muted: 'text-amber-700',
       quote: {
         wrapper:
@@ -134,7 +134,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     description: 'Heart-centre greens thriving with gentle vibrancy.',
     classes: {
       surface: 'bg-emerald-50',
-      text: 'text-emerald-950',
+      text: 'text-emerald-800',
       muted: 'text-emerald-700',
       quote: {
         wrapper:
@@ -168,7 +168,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     description: 'Azure resonance tuned to the throat chakra.',
     classes: {
       surface: 'bg-sky-50',
-      text: 'text-sky-950',
+      text: 'text-sky-800',
       muted: 'text-sky-700',
       quote: {
         wrapper:
@@ -201,7 +201,7 @@ export const themeLibrary: Record<ThemeName, ThemeDefinition> = {
     description: 'Crown-centre violets illuminated by a golden aura.',
     classes: {
       surface: 'bg-violet-50',
-      text: 'text-violet-950',
+      text: 'text-violet-800',
       muted: 'text-violet-700',
       quote: {
         wrapper:

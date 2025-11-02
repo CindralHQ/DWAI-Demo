@@ -14,12 +14,12 @@ import vishuddhaIcon from '@/assets/icons/Vishuddha.png'
 import sahasraraIcon from '@/assets/icons/Sahasrara.png'
 import heroVisual from '@/assets/visuals/AllChakras.png'
 import seriesVisual from '@/assets/visuals/Blue-Guru-Blessings.png'
-import quotePortrait from '@/assets/visuals/SnakesOnHead.png'
+import quotePortrait from '@/assets/visuals/Body-On-Fire-2.jpg'
 import journeyVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 import signatureVisual from '@/assets/visuals/AllChakras.png'
 import callToActionVisual from '@/assets/visuals/Kundalini-Serpant.png'
 import steadyingSelfVisual from '@/assets/visuals/Pathway-To-Light.png'
-import livingTransmissionVisual from '@/assets/visuals/Kundalini-Serpant.png'
+import livingTransmissionVisual from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 import guidanceTodayVisual from '@/assets/visuals/Light-Emitting-Through-Body.png'
 import roadmapVisual from '@/assets/visuals/ShivLingam.png'
 import ancientKnowledgeVisual from '@/assets/visuals/Ajna-Chakra-Concentration.png'
@@ -67,10 +67,10 @@ const aboutBulletPoints: Array<string | { text: string; subPoints: string[] }> =
   {
     text: 'The series unfolds through four distinct parts that guide the seeker step by step:',
     subPoints: [
-      'Part 1 – Understanding the Role of Chakras and Kundalini Shakti',
-      'Part 2 – Shaktipat and Blossoming of The Spiritual Heart',
-      'Part 3 – Journey of the Atman From the Spiritual Heart to the Sahasrar',
-      'Part 4 – The 3 Granthis, the Shiva-Linga & the Body of Gold'
+      'Part 1: Understanding the Role of Chakras and Kundalini Shakti',
+      'Part 2: Shaktipat and Blossoming of The Spiritual Heart',
+      'Part 3: Journey of the Atman From the Spiritual Heart to the Sahasrar',
+      'Part 4: The 3 Granthis, the Shiva-Linga & the Body of Gold'
     ]
   },
   'For the first time in human history, the deepest layers of yogic evolution traditionally reserved for advanced seekers have been decoded and presented with clarity.',
@@ -125,7 +125,7 @@ const journeySchedule = [
   },
   {
     part: 'Part 4',
-    title: 'The 3 Granthis, the Shiva-Linga & the Body of Gold',
+    title: 'Beyond The Veil: The Secret of The 3 Granthis, The Shiva-Lingam & The Body of Gold',
     videos: 4,
     weeks: 4
   },
@@ -229,6 +229,7 @@ const audiences: AudienceDefinition[] = [
 
 export default function HomePage() {
   const palette = themeLibrary[HOME_THEME].classes
+  const headingClass = palette.card.title
 
   return (
     <>
@@ -248,7 +249,9 @@ export default function HomePage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.45em] text-sky-100/90">
                   About The Series
                 </p>
-                <h1 className="text-4xl font-semibold tracking-tight drop-shadow md:text-5xl">Who Am I</h1>
+                <h1 className="text-4xl font-semibold tracking-tight text-white drop-shadow md:text-5xl">
+                  Who Am I
+                </h1>
                 <p className="text-xl font-medium text-sky-50/95 drop-shadow">
                   Journey of Jeev Atma to the Blossoming of Consciousness
                 </p>
@@ -317,12 +320,12 @@ export default function HomePage() {
             alt="Blue-hued guru guiding seeker with radiant blessings"
             title="Series Blessing Visual"
             description="A blessing visual introducing the Who Am I series, showing the guiding presence that supports seekers through each part of the journey."
-            className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 text-left shadow-md hover:shadow-lg"
+            className="aspect-[4/4] overflow-hidden rounded-3xl border border-sky-200/60 text-left shadow-md hover:shadow-lg"
             imageClassName="object-cover object-bottom"
             sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"
           />
           <div className="space-y-6">
-            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+            <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
               About The 'Who Am I' Series
             </h2>
             <ul className={`space-y-3 text-base leading-7 ${palette.muted}`}>
@@ -354,7 +357,7 @@ export default function HomePage() {
 
         <section className="space-y-8">
           <header className="space-y-2 text-center">
-            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+            <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
               Need of the Hour: Rapid Evolution of Human Consciousness
             </h2>
           </header>
@@ -374,7 +377,7 @@ export default function HomePage() {
                   sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
                 />
                 <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+                  <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
                   <p className="text-base leading-7 text-sky-700">{item.body}</p>
                 </div>
               </div>
@@ -384,7 +387,7 @@ export default function HomePage() {
 
       <section className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             Dive Deep Into The Sacred Journey of <br /> Who Am I?
           </h2>
           <div className={`space-y-4 text-base leading-7 ${palette.muted}`}>
@@ -393,7 +396,7 @@ export default function HomePage() {
               revealed through vivid, divinely inspired visuals and direct personal experiences.
             </p>
             <p>
-              Through visions received in deep meditation over five years, helps guide a seeker through the
+              These visions received in deep meditation over five years, helps guide a seeker through the
               journey of spiritual evolution; a process never before shared in yogic literature with such
               clarity.
             </p>
@@ -416,7 +419,7 @@ export default function HomePage() {
 
       <section className="space-y-8">
         <header className="text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             Awaken to the Truth Within
           </h2>
         </header>
@@ -432,7 +435,7 @@ export default function HomePage() {
                 imageClassName="object-cover"
                 sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
               />
-              <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+              <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
               <p className="text-base leading-7 text-sky-700">{item.body}</p>
             </div>
           ))}
@@ -451,7 +454,7 @@ export default function HomePage() {
             sizes="(min-width: 1280px) 480px, (min-width: 768px) 50vw, 100vw"
           />
           <div className="space-y-4">
-            <h2 className="text-3xl font-semibold tracking-tight">
+            <h2 className="text-3xl font-semibold tracking-tight text-white">
               Why This Series is Unlike Anything You've Seen Before
             </h2>
             <ul className="space-y-3 text-base leading-7 text-blue-100">
@@ -467,7 +470,7 @@ export default function HomePage() {
       </section>
 
       <section className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
-        <div className="space-y-4 rounded-3xl border border-amber-100 bg-amber-50 p-8">
+        <div className="">
           <h2 className="text-2xl font-semibold text-amber-900">Why You Must Watch This Now</h2>
           <ul className="space-y-2 text-base leading-7 text-amber-800">
             {whyNow.map((item, index) => (
@@ -491,7 +494,7 @@ export default function HomePage() {
 
       <section className="space-y-8">
         <header className="text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             For Whom Is This Series?
           </h2>
           <p className={`text-base leading-7 ${palette.muted}`}>The course resonates most with:</p>
@@ -508,7 +511,9 @@ export default function HomePage() {
                   <span className="material-symbols-rounded text-4xl scale-150">{iconName}</span>
                 </div>
                 <div className="space-y-1.5">
-                  <h3 className="text-base font-semibold uppercase tracking-[0.3em] text-indigo-900">
+                  <h3
+                    className={`text-base font-semibold uppercase tracking-[0.3em] ${headingClass}`}
+                  >
                     {audience.label}
                   </h3>
                   <p className="text-sm leading-6 text-sky-600">{audience.copy}</p>
@@ -521,7 +526,7 @@ export default function HomePage() {
 
       <section className="space-y-6">
         <header className="text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             Who Am I Course Details
           </h2>
         </header>
@@ -571,8 +576,8 @@ export default function HomePage() {
       </section>
         <section className="space-y-6 rounded-3xl border border-indigo-100 bg-white p-8 shadow-sm">
           <header className="space-y-2">
-            <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
-              Your Journey of Discover Who Am I
+            <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
+              Your Journey of Discover Who Am I ; Liberation Through Seeing
             </h2>
             <p className={`text-base leading-7 ${palette.muted}`}>
               Move through each part with the spaciousness it deserves while staying rooted in consistent practice.
@@ -586,7 +591,7 @@ export default function HomePage() {
         </section>
 
       <section className="space-y-4 rounded-3xl bg-sky-50 p-8 text-base leading-7 text-slate-700 ring-1 ring-sky-100/80">
-        <h3 className="text-center text-2xl font-semibold text-sky-900">Disclaimer</h3>
+        <h3 className={`text-center text-2xl font-semibold ${headingClass}`}>Disclaimer</h3>
         <div className="space-y-4 text-sky-600">
           <p>
             The information contained in 'the books by the author' and the 'Who Am I' are not intended to serve as a

@@ -86,10 +86,22 @@ const whyWatch = [
   'Interdisciplinary faculties synthesising ancient wisdom with neurobiology and human evolution.'
 ]
 
+const uniqueCallout =
+  'Part 4 lifts the final veil—inviting you to embody the golden body and live from the light of Sahasrara each day.'
+
+const uniqueCardStyles = {
+  wrapper:
+    'rounded-3xl border border-violet-200/70 bg-gradient-to-br from-white/95 via-violet-50/90 to-amber-100/70 p-6 shadow-[0_18px_40px_rgba(109,40,217,0.16)]',
+  icon:
+    'inline-flex h-14 w-14 items-center justify-center rounded-[20px] bg-white/90 text-violet-600 shadow-inner shadow-amber-500/20',
+  text: 'text-base leading-7 text-violet-800'
+} as const
+
 export const metadata = { title: 'Who Am I - Part 4' }
 
 export default function WaiFourPage() {
   const palette = themeLibrary[THEME].classes
+  const headingClass = palette.card.title
 
   return (
     <>
@@ -116,7 +128,7 @@ export default function WaiFourPage() {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
-              <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part IV</h1>
+              <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">Part IV</h1>
               <p className="text-xl font-semibold text-white">
                 Beyond the Veil: The Body of Gold 
               </p>
@@ -145,7 +157,7 @@ export default function WaiFourPage() {
           role="Kundalini Diary"
           className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
+        <div className="relative h-48 w-48 shrink-0 mx-auto md:mx-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Sahasrara blossoming into the body of gold"
@@ -158,7 +170,7 @@ export default function WaiFourPage() {
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             About the Series
           </h2>
           <p className={`text-base leading-7 ${palette.muted}`}>
@@ -186,7 +198,7 @@ export default function WaiFourPage() {
                 imageClassName="object-cover"
                 sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
               />
-              <h3 className="text-lg font-semibold text-violet-900">{item.title}</h3>
+              <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
               <p className="text-base leading-7 text-violet-800">{item.description}</p>
             </div>
           ))}
@@ -195,7 +207,7 @@ export default function WaiFourPage() {
 
       <section className="space-y-8">
         <header className="space-y-2 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             Course Content
           </h2>
         </header>
@@ -209,8 +221,8 @@ export default function WaiFourPage() {
           imageClassName="object-cover"
           sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
         />
-          <div className="space-y-4 rounded-3xl bg-violet-100/70 p-6 shadow-sm sm:p-8">
-            <h3 className="text-lg font-semibold text-violet-900">The series will discuss:</h3>
+          <div className="space-y-4 rounded-3xl sm:p-8">
+            <h3 className={`text-lg font-semibold ${headingClass}`}>The series will discuss:</h3>
             <ul className="space-y-2 text-base leading-7 text-violet-800">
               {courseContent.map((item) => (
                 <li key={item} className="flex gap-3">
@@ -224,17 +236,8 @@ export default function WaiFourPage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-10 md:items-center">
-        <LightboxImage
-          src={uniquenessVisual}
-          alt="Radiant light flowing through the subtle body"
-          title="Radiant Subtle Body"
-          description="Radiant light flowing through the subtle body, mirroring the transmissions held within Part 4."
-          className="aspect-[4/3] overflow-hidden rounded-3xl border border-violet-200 bg-white text-left shadow-lg"
-          imageClassName="object-cover"
-          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-        />
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             What Makes This Series Unique
           </h2>
           <ul className="space-y-2 text-base leading-7 text-violet-800">
@@ -245,21 +248,25 @@ export default function WaiFourPage() {
               </li>
             ))}
           </ul>
+          <div className={uniqueCardStyles.wrapper}>
+            <div className="flex items-start gap-4">
+              <p className={uniqueCardStyles.text}>{uniqueCallout}</p>
+            </div>
+          </div>
         </div>
+
+        <LightboxImage
+          src={uniquenessVisual}
+          alt="Radiant light flowing through the subtle body"
+          title="Radiant Subtle Body"
+          description="Radiant light flowing through the subtle body, mirroring the transmissions held within Part 4."
+          className="aspect-[4/4] overflow-hidden rounded-3xl border border-violet-200 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
-        <div className="space-y-4 rounded-3xl border border-violet-200 bg-violet-50 p-6 sm:p-8">
-          <h3 className={`text-2xl font-semibold text-violet-900`}>Why You Must Watch It</h3>
-          <ul className="space-y-2 text-base leading-7 text-violet-800">
-            {whyWatch.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
         <LightboxImage
           src={whyWatchVisual}
           alt="Golden pathway representing the soul's return to source"
@@ -269,6 +276,18 @@ export default function WaiFourPage() {
           imageClassName="object-cover"
           sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
         />
+        <div className="space-y-4 rounded-3xl sm:p-8">
+          <h3 className={`text-2xl font-semibold ${headingClass}`}>Why You Must Watch It</h3>
+          <ul className="space-y-2 text-base leading-7 text-violet-800">
+            {whyWatch.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-2 w-2 rounded-full bg-amber-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
       </section>
 
       <EnrollBlock

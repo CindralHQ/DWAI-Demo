@@ -93,10 +93,22 @@ const uniqueness = [
 const uniquePoints = [...luminousResonance, ...uniqueness]
 const whyWatch = [...audience, ...sacredOffering]
 
+const uniqueCallout =
+  'If you are ready to step into a deeper experience of consciousness and recognise your true self, this is your invitation.'
+
+const uniqueCardStyles = {
+  wrapper:
+    'rounded-3xl border border-sky-200/70 bg-gradient-to-br from-white/95 via-sky-50/90 to-sky-100/70 p-6 shadow-[0_18px_40px_rgba(14,165,233,0.12)]',
+  icon:
+    'inline-flex h-14 w-14 items-center justify-center rounded-[20px] bg-white/90 text-sky-600 shadow-inner shadow-sky-500/20',
+  text: 'text-base leading-7 text-sky-800'
+} as const
+
 export const metadata = { title: 'Who Am I - Part 3' }
 
 export default function WaiThreePage() {
   const palette = themeLibrary[THEME].classes
+  const headingClass = palette.card.title
 
   return (
     <>
@@ -123,7 +135,7 @@ export default function WaiThreePage() {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-white/70">Who Am I Series</p>
-              <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Part III</h1>
+              <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">Part III</h1>
               <p className="text-xl font-semibold text-white">Journey to Sahasrar: The Final Ascent of Consciousness</p>
             </div>
             <p className="text-lg leading-8 text-white/90">
@@ -148,7 +160,7 @@ export default function WaiThreePage() {
           role="Kundalini Diary"
           className="mb-8 flex-1 min-w-0 md:mb-0 md:mr-10"
         />
-        <div className="relative h-48 w-48 shrink-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
+        <div className="relative h-48 w-48 shrink-0 mx-auto md:mx-0 md:h-64 md:w-64 lg:h-96 lg:w-96">
           <Image
             src={quoteVisual}
             alt="Sahasrara blossoming into cascades of light"
@@ -161,7 +173,7 @@ export default function WaiThreePage() {
 
       <section className="space-y-8">
         <header className="space-y-3 text-center">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             About the Who Am I - Part 3 Series
           </h2>
           <p className="text-base leading-7 text-sky-800">
@@ -189,7 +201,7 @@ export default function WaiThreePage() {
                 imageClassName="object-cover"
                 sizes="(min-width: 1280px) 320px, (min-width: 768px) 33vw, 100vw"
               />
-              <h3 className="text-lg font-semibold text-sky-900">{item.title}</h3>
+              <h3 className={`text-lg font-semibold ${headingClass}`}>{item.title}</h3>
               <p className="text-base leading-7 text-sky-800">{item.description}</p>
             </div>
           ))}
@@ -197,8 +209,17 @@ export default function WaiThreePage() {
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
+        <LightboxImage
+          src={courseVisual}
+          alt="Guru's blessing transmitted through luminous light"
+          title="Guru's Luminous Blessing"
+          description="A luminous blessing visual that anchors the teachings delivered throughout Part 3."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 bg-white text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
+        />
         <div className="space-y-4 rounded-3xl bg-sky-50 p-6 shadow-sm sm:p-8">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>Course Content</h2>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>Course Content</h2>
           <ul className="space-y-2 text-base leading-7 text-sky-800">
             {courseReveals.map((item) => (
               <li key={item} className="flex gap-3">
@@ -212,20 +233,12 @@ export default function WaiThreePage() {
             the soul's final ascent.
           </p>
         </div>
-        <LightboxImage
-          src={courseVisual}
-          alt="Guru's blessing transmitted through luminous light"
-          title="Guru's Luminous Blessing"
-          description="A luminous blessing visual that anchors the teachings delivered throughout Part 3."
-          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200/60 bg-white text-left shadow-lg"
-          imageClassName="object-cover"
-          sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
-        />
+        
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
         <div className="space-y-4">
-          <h2 className={`text-3xl font-semibold tracking-tight ${palette.text}`}>
+          <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
             What Makes This Series Unique?
           </h2>
           <ul className="space-y-3 text-base leading-7 text-sky-800">
@@ -236,25 +249,35 @@ export default function WaiThreePage() {
               </li>
             ))}
           </ul>
-          <p className="rounded-3xl bg-white p-5 text-base leading-7 text-sky-700 shadow-sm">
-            If you are ready to step into a deeper experience of consciousness and recognise your true self,
-            this is your invitation.
-          </p>
+          <div className={uniqueCardStyles.wrapper}>
+            <div className="flex items-start gap-4">
+              <p className={uniqueCardStyles.text}>{uniqueCallout}</p>
+            </div>
+          </div>
         </div>
         <LightboxImage
           src={uniquenessVisual}
           alt="Sahasrara blossoming with cascades of light"
           title="Cascades of Sahasrar Light"
           description="A sahasrar blossoming visual conveying the cascades of light described in Part 3."
-          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-white text-left shadow-lg"
+          className="aspect-[4/4] overflow-hidden rounded-3xl border border-sky-200 bg-white text-left shadow-lg"
           imageClassName="object-cover"
           sizes="(min-width: 1280px) 520px, (min-width: 768px) 50vw, 100vw"
         />
       </section>
 
       <section className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-10 md:items-center">
-        <div className="space-y-4 rounded-3xl border border-sky-200 bg-sky-50 p-6 sm:p-8">
-          <h3 className={`text-2xl font-semibold text-sky-900`}>Why You Must Watch It</h3>
+         <LightboxImage
+          src={whyWatchVisual}
+          alt="Guru enveloped in blue light symbolising sahasrara grace"
+          title="Sahasrar Grace"
+          description="A blue-lit guru visual embodying the sahasrar grace that permeates Part 3."
+          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-sky-100/40 text-left shadow-lg"
+          imageClassName="object-cover"
+          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
+        />
+        <div className="space-y-4 rounded-3xl sm:p-8">
+          <h3 className={`text-2xl font-semibold ${headingClass}`}>Why You Must Watch It</h3>
           <ul className="space-y-2 text-base leading-7 text-sky-800">
             {whyWatch.map((item) => (
               <li key={item} className="flex gap-3">
@@ -264,15 +287,7 @@ export default function WaiThreePage() {
             ))}
           </ul>
         </div>
-        <LightboxImage
-          src={whyWatchVisual}
-          alt="Guru enveloped in blue light symbolising sahasrara grace"
-          title="Sahasrar Grace"
-          description="A blue-lit guru visual embodying the sahasrar grace that permeates Part 3."
-          className="aspect-[4/3] overflow-hidden rounded-3xl border border-sky-200 bg-sky-100/40 text-left shadow-lg"
-          imageClassName="object-cover"
-          sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
-        />
+       
       </section>
 
       <EnrollBlock
