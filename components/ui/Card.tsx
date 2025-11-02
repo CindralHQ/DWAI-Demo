@@ -8,8 +8,8 @@ function cx(...classes: Array<string | false | null | undefined>) {
 export type CardProps = {
   theme?: ThemeName
   eyebrow?: string
-  title: string
-  description: string
+  title?: string
+  description?: string
   href?: string
   className?: string
   children?: React.ReactNode
@@ -37,10 +37,14 @@ export function Card({
         </span>
       ) : null}
       {leadingVisual ? <div>{leadingVisual}</div> : null}
-      <div className="space-y-2">
-        <h3 className={cx('text-xl font-semibold', styles.title)}>{title}</h3>
-        <p className={cx('text-base leading-7', styles.body)}>{description}</p>
-      </div>
+      {title || description ? (
+        <div className="space-y-2">
+          {title ? <h3 className={cx('text-xl font-semibold', styles.title)}>{title}</h3> : null}
+          {description ? (
+            <p className={cx('text-base leading-7', styles.body)}>{description}</p>
+          ) : null}
+        </div>
+      ) : null}
       {children ? <div className="mt-auto pt-2">{children}</div> : null}
     </>
   )
