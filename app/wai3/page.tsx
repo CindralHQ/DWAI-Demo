@@ -139,8 +139,7 @@ export default function WaiThreePage() {
               <p className="text-xl font-semibold text-white">Journey to Sahasrar: The Final Ascent of Consciousness</p>
             </div>
             <p className="text-lg leading-8 text-white/90">
-              This is not a course. It is a living transmission. Each session in this 12-part series carries
-              energetic resonance - like a visual shaktipat that awakens your own inner knowing.
+              Experience the final ascent of consciousness — a living transmission that awakens your inner awareness. This journey dissolves boundaries between self and silence, revealing the truth of Kundalini and the subtle body.
             </p>
             <ChakraNav active="wai3" />
             <div className="flex flex-wrap gap-3">
@@ -152,7 +151,7 @@ export default function WaiThreePage() {
         </div>
       </section>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row md:items-center">
         <Quote
           theme={THEME}
           text="There comes a moment in the soul’s long journey where the ascent is no longer an effort, but an act of Grace."

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 const audioSource = '/audio/bg.mp3'
-const TARGET_VOLUME = 0.1
+const TARGET_VOLUME = 0.05
 
 type ThemeVariant = 'default' | 'wai1' | 'wai2' | 'wai3' | 'wai4'
 

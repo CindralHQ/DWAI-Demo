@@ -11,21 +11,29 @@ const TESTIMONIALS_THEME: ThemeName = 'lotus'
 
 const FALLBACK_TESTIMONIALS: SheetTestimonial[] = [
   {
-    name: 'Participant, India',
+    name: 'Ananya',
+    designation: 'Yoga Practitioner',
+    country: 'India',
     testimonial:
       '“The transmissions felt personal even through the screen. I could sense the current working in real-time.”'
   },
   {
-    name: 'Retreat Guest, Australia',
+    name: 'Lucas',
+    designation: 'Retreat Guest',
+    country: 'Australia',
     testimonial:
       '“These teachings gave me language for sensations I have carried for decades. I felt held and understood.”'
   },
   {
-    name: 'Student, USA',
+    name: 'Maya',
+    designation: 'Meditation Student',
+    country: 'USA',
     testimonial: '“The practices are precise and grounded. My meditation unfolded with new steadiness.”'
   },
   {
-    name: 'Seeker, UK',
+    name: 'Asha',
+    designation: 'Seeker',
+    country: 'United Kingdom',
     testimonial: '“I revisit these sessions weekly. The energy remains alive, guiding me through major life shifts.”'
   }
 ]
@@ -35,6 +43,8 @@ export const metadata = { title: 'Testimonials' }
 const FEATURED_TESTIMONIAL = {
   name: 'Seeker, Canada',
   role: 'Featured Reflection',
+  designation: 'Energy Medicine Practitioner',
+  country: 'Canada',
   testimonial:
     '“During Who Am I, I felt the current holding me steady. Every session was like sitting with Santosh Ma in person.”',
   image: featuredPortrait
@@ -63,7 +73,7 @@ export default async function Testimonials() {
           </h1>
           <p className={`text-base leading-7 ${palette.muted}`}>
             {usingFallback
-              ? 'Live testimonials will appear here once Airtable access is configured. Meanwhile, a curated selection is shown below.'
+              ? 'Live testimonials will appear here once Google Sheets access is configured. Meanwhile, a curated selection is shown below.'
               : 'These reflections are streamed directly from the community submissions we have permission to share.'}
           </p>
         </header>
@@ -90,6 +100,13 @@ export default async function Testimonials() {
                   {FEATURED_TESTIMONIAL.name}
                   {FEATURED_TESTIMONIAL.role ? (
                     <span className="mt-0.5 block text-rose-500/80">{FEATURED_TESTIMONIAL.role}</span>
+                  ) : null}
+                  {[FEATURED_TESTIMONIAL.designation, FEATURED_TESTIMONIAL.country].filter(Boolean).length > 0 ? (
+                    <span className="mt-0.5 block text-rose-400">
+                      {[FEATURED_TESTIMONIAL.designation, FEATURED_TESTIMONIAL.country]
+                        .filter(Boolean)
+                        .join(' • ')}
+                    </span>
                   ) : null}
                 </div>
               </div>
@@ -124,6 +141,11 @@ export default async function Testimonials() {
                             Testimonial
                           </span>
                           <p className="text-base font-semibold text-rose-800">{testimonial.name}</p>
+                          {[testimonial.designation, testimonial.country].filter(Boolean).length > 0 ? (
+                            <p className="text-sm font-medium text-rose-500">
+                              {[testimonial.designation, testimonial.country].filter(Boolean).join(' • ')}
+                            </p>
+                          ) : null}
                         </div>
                       </div>
                       <p className="text-base leading-7 text-rose-700">{testimonial.testimonial}</p>

@@ -150,7 +150,7 @@ export default function WaiOnePage() {
             </div>
           </section>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row md:items-center">
         <Quote
           theme={THEME}
           text={`I have this inherent quality of accepting and believing what is said, with the result that I experienced great excitement and inner joy on reading the lines, "I am now entering upon the greatest teaching accessible to man, for I am learning the secret of existence."`}
@@ -275,7 +275,7 @@ export default function WaiOnePage() {
           sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
         />
 
-        <div className="space-y-4 rounded-3xl border border-amber-100 bg-amber-50 p-6 sm:p-8">
+        <div className="space-y-4 rounded-3xl sm:p-8">
           <h3 className={`text-2xl font-semibold ${headingClass}`}>Why You Must Watch It</h3>
           <ul className="space-y-2 text-base leading-7 text-amber-800">
             {whyWatch.map((item) => (

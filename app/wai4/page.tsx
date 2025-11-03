@@ -149,7 +149,7 @@ export default function WaiFourPage() {
         </div>
       </section>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row md:items-center">
         <Quote
           theme={THEME}
           text="At the summit of the ascent, the seeker realises that the body of gold is nothing but the light of the Self revealing itself."

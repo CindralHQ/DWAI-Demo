@@ -1,22 +1,17 @@
+import { createSign } from 'crypto'
+
 export type SheetTestimonial = {
   name: string
   testimonial: string
   photoUrl?: string
+  designation?: string
+  country?: string
 }
 
 function hasPermission(value: string | undefined) {
   if (!value) return false
   const normalised = value.trim().toLowerCase()
   return ['yes', 'y', 'true', '1', 'approved', 'permission granted'].includes(normalised)
-}
-
-type AirtableRecord = {
-  id: string
-  fields: Record<string, unknown>
-}
-
-type AirtableAttachment = {
-  url?: string
 }
 
 function asString(value: unknown) {
@@ -38,114 +33,479 @@ function asString(value: unknown) {
   return undefined
 }
 
-function extractPhotoUrl(value: unknown) {
-  if (!value) return undefined
-  if (typeof value === 'string') {
-    return value.trim() || undefined
+type SheetValuesResponse = {
+  values?: Array<string[]>
+}
+
+type SheetMetadataResponse = {
+  sheets?: Array<{
+    properties?: {
+      title?: string
+      hidden?: boolean
+      gridProperties?: {
+        columnCount?: number
+      }
+    }
+  }>
+}
+
+const DRIVE_THUMBNAIL_SIZE =
+  process.env.GOOGLE_SHEETS_DRIVE_THUMBNAIL_SIZE ?? 'w1000'
+
+const driveImageCache = new Map<string, string>()
+
+function quoteSheetTitle(title: string) {
+  const escaped = title.replace(/'/g, "''").trim()
+  return `'${escaped}'`
+}
+
+function columnIndexToLetter(index: number) {
+  if (!index || index <= 0) return 'Z'
+  let value = index
+  let result = ''
+  while (value > 0) {
+    const remainder = (value - 1) % 26
+    result = String.fromCharCode(65 + remainder) + result
+    value = Math.floor((value - 1) / 26)
   }
-  if (Array.isArray(value)) {
-    const attachment = value.find(
-      (entry): entry is AirtableAttachment =>
-        Boolean(entry) && typeof entry === 'object' && 'url' in (entry as Record<string, unknown>)
+  return result
+}
+
+function buildUrl(base: string, query: URLSearchParams) {
+  const queryString = query.toString()
+  return queryString.length > 0 ? `${base}?${queryString}` : base
+}
+
+function buildDriveThumbnailUrl(fileId: string, resourceKey?: string | null) {
+  const directUrl = new URL('https://drive.google.com/thumbnail')
+  directUrl.searchParams.set('id', fileId)
+  directUrl.searchParams.set('sz', DRIVE_THUMBNAIL_SIZE)
+  if (resourceKey) {
+    directUrl.searchParams.set('resourcekey', resourceKey)
+  }
+  return directUrl.toString()
+}
+
+async function getServiceAccountAccessToken(email: string, privateKey: string, scopes: string[]) {
+  const now = Math.floor(Date.now() / 1000)
+  const header = {
+    alg: 'RS256',
+    typ: 'JWT'
+  }
+  const claimSet = {
+    iss: email,
+    scope: scopes.join(' '),
+    aud: 'https://oauth2.googleapis.com/token',
+    exp: now + 3500,
+    iat: now
+  }
+
+  const base64Url = (input: Buffer | string) =>
+    Buffer.from(input)
+      .toString('base64')
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+
+  const headerSegment = base64Url(JSON.stringify(header))
+  const claimSegment = base64Url(JSON.stringify(claimSet))
+  const unsignedToken = `${headerSegment}.${claimSegment}`
+
+  try {
+    const signer = createSign('RSA-SHA256')
+    signer.update(unsignedToken)
+    signer.end()
+    const signature = signer.sign(privateKey)
+    const signedToken = `${unsignedToken}.${base64Url(signature)}`
+
+    const response = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: signedToken
+      }).toString()
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '')
+      console.error(
+        '[fetchTestimonials] Failed to exchange service account JWT for an access token',
+        response.status,
+        response.statusText,
+        errorText
+      )
+      return undefined
+    }
+
+    const payload = (await response.json()) as { access_token?: string }
+    if (!payload.access_token) {
+      console.error('[fetchTestimonials] Service account token response missing access_token field.')
+      return undefined
+    }
+
+    return payload.access_token
+  } catch (error) {
+    console.error('[fetchTestimonials] Error while generating service account token', error)
+    return undefined
+  }
+}
+
+function indexForHeader(headers: string[], target: string) {
+  const normalisedTarget = target.trim().toLowerCase()
+  return headers.findIndex((header) => header.trim().toLowerCase() === normalisedTarget)
+}
+
+async function fetchDriveImageAsDataUrl(fileId: string, resourceKey: string | undefined, accessToken: string) {
+  const cacheKey = `${fileId}::${resourceKey ?? ''}`
+  const cached = driveImageCache.get(cacheKey)
+  if (cached) {
+    return cached
+  }
+
+  const fileUrl = new URL(`https://www.googleapis.com/drive/v3/files/${fileId}`)
+  fileUrl.searchParams.set('alt', 'media')
+  fileUrl.searchParams.set('supportsAllDrives', 'true')
+  if (resourceKey) {
+    fileUrl.searchParams.set('resourceKey', resourceKey)
+  }
+
+  try {
+    const response = await fetch(fileUrl.toString(), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      next: { revalidate: 600 }
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '')
+      console.warn(
+        '[fetchTestimonials] Unable to download Drive image',
+        fileId,
+        response.status,
+        response.statusText,
+        errorText
+      )
+      return undefined
+    }
+
+    const contentType = response.headers.get('content-type') ?? 'image/jpeg'
+    const arrayBuffer = await response.arrayBuffer()
+    const base64 = Buffer.from(arrayBuffer).toString('base64')
+    const dataUrl = `data:${contentType};base64,${base64}`
+    driveImageCache.set(cacheKey, dataUrl)
+    return dataUrl
+  } catch (error) {
+    console.error('[fetchTestimonials] Error downloading Drive image', fileId, error)
+    return undefined
+  }
+}
+
+async function resolveRange({
+  configuredRange,
+  spreadsheetId,
+  requestHeaders,
+  query
+}: {
+  configuredRange?: string
+  spreadsheetId: string
+  requestHeaders: Record<string, string>
+  query: URLSearchParams
+}) {
+  if (configuredRange && configuredRange.trim().length > 0) {
+    let range = configuredRange.trim()
+    if (range.includes('!')) {
+      const separatorIndex = range.indexOf('!')
+      const sheetPart = range.slice(0, separatorIndex).trim()
+      const cellPart = range.slice(separatorIndex + 1)
+      const shouldQuote = /[\s!,:]/.test(sheetPart) && !/^'.*'$/.test(sheetPart)
+      const safeSheet = shouldQuote ? quoteSheetTitle(sheetPart) : sheetPart
+      range = `${safeSheet}!${cellPart}`
+    } else if (/[\s!,:]/.test(range) && !/^'.*'$/.test(range)) {
+      range = quoteSheetTitle(range)
+    }
+    return range
+  }
+
+  console.info('[fetchTestimonials] No range provided; deriving range from first visible sheet.')
+
+  try {
+    const metadataUrl = buildUrl(
+      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}`,
+      query
     )
-    if (!attachment) return undefined
-    return typeof attachment.url === 'string' ? attachment.url : undefined
+    const response = await fetch(metadataUrl, { headers: requestHeaders })
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '')
+      console.error(
+        '[fetchTestimonials] Failed to load sheet metadata',
+        response.status,
+        response.statusText,
+        errorText
+      )
+      return null
+    }
+    const metadata = (await response.json()) as SheetMetadataResponse
+    const firstVisibleSheet = metadata.sheets?.find(
+      (sheet) => sheet?.properties?.hidden !== true
+    )
+    const title = firstVisibleSheet?.properties?.title
+    if (!title) {
+      console.error(
+        '[fetchTestimonials] Unable to determine a sheet title. Provide GOOGLE_SHEETS_TESTIMONIAL_RANGE explicitly.'
+      )
+      return null
+    }
+    const columnCount =
+      firstVisibleSheet?.properties?.gridProperties?.columnCount ?? 26
+    const columnLetter = columnIndexToLetter(columnCount)
+    const derivedRange = `${quoteSheetTitle(title)}!A:${columnLetter}`
+    console.info(
+      '[fetchTestimonials] Derived range from sheet metadata',
+      JSON.stringify({
+        sheetTitle: title,
+        columnCount,
+        derivedRange
+      })
+    )
+    return derivedRange
+  } catch (error) {
+    console.error('[fetchTestimonials] Error while deriving range from metadata', error)
+    return null
   }
-  if (typeof value === 'object' && 'url' in (value as Record<string, unknown>)) {
-    const { url } = value as AirtableAttachment
-    return typeof url === 'string' ? url : undefined
+}
+
+type NormalisePhotoOptions = {
+  accessToken?: string
+}
+
+async function normalisePhotoUrl(value: string | undefined, options: NormalisePhotoOptions = {}) {
+  if (!value) return undefined
+  const trimmed = value.trim()
+  if (!trimmed) return undefined
+
+  try {
+    const url = new URL(trimmed)
+    const hostname = url.hostname.toLowerCase()
+
+    if (hostname.includes('drive.google.com')) {
+      const resourceKey = url.searchParams.get('resourcekey') ?? undefined
+      const fileIdMatch = url.pathname.match(/\/d\/([^/]+)/)
+      const fileId = fileIdMatch?.[1] ?? url.searchParams.get('id') ?? undefined
+      if (fileId) {
+        if (options.accessToken) {
+          const dataUrl = await fetchDriveImageAsDataUrl(fileId, resourceKey, options.accessToken)
+          if (dataUrl) {
+            return dataUrl
+          }
+        }
+        return buildDriveThumbnailUrl(fileId, resourceKey)
+      }
+    }
+
+    if (hostname === 'drive.googleusercontent.com') {
+      const fileId = url.searchParams.get('id')
+      const resourceKey = url.searchParams.get('resourcekey')
+      if (fileId && options.accessToken) {
+        const dataUrl = await fetchDriveImageAsDataUrl(fileId, resourceKey ?? undefined, options.accessToken)
+        if (dataUrl) {
+          return dataUrl
+        }
+      }
+      if (fileId) {
+        return buildDriveThumbnailUrl(fileId, resourceKey ?? undefined)
+      }
+      return trimmed
+    }
+  } catch {
+    return trimmed
   }
-  return undefined
+
+  return trimmed
 }
 
 export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
-  const apiKey = process.env.AIRTABLE_API_KEY
-  const baseId = process.env.AIRTABLE_BASE_ID
-  const tableName = process.env.AIRTABLE_TESTIMONIALS_TABLE ?? 'Testimonials'
-  const view = process.env.AIRTABLE_TESTIMONIALS_VIEW
+  let apiKey = process.env.GOOGLE_SHEETS_API_KEY
 
-  if (!apiKey || !baseId) {
+  if (apiKey && apiKey.includes('PRIVATE KEY')) {
     console.error(
-      '[fetchTestimonials] Missing AIRTABLE_API_KEY or AIRTABLE_BASE_ID. Set them in your environment to enable Airtable integration.'
+      '[fetchTestimonials] The value in GOOGLE_SHEETS_API_KEY appears to be a service-account private key. Move it to GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY and keep GOOGLE_SHEETS_API_KEY for public API keys only.'
+    )
+    apiKey = undefined
+  }
+
+  const spreadsheetId = process.env.GOOGLE_SHEETS_TESTIMONIAL_SPREADSHEET_ID
+  const configuredRange = process.env.GOOGLE_SHEETS_TESTIMONIAL_RANGE
+  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
+  const rawServiceAccountKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+  const serviceAccountKey = rawServiceAccountKey ? rawServiceAccountKey.replace(/\\n/g, '\n') : undefined
+  const useServiceAccount = Boolean(serviceAccountEmail && serviceAccountKey)
+  let serviceAccountToken: string | undefined
+
+  if ((!apiKey && !useServiceAccount) || !spreadsheetId) {
+    console.error(
+      '[fetchTestimonials] Missing spreadsheet ID or credentials. Set GOOGLE_SHEETS_TESTIMONIAL_SPREADSHEET_ID and either GOOGLE_SHEETS_API_KEY (for public sheets) or GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY (for private sheets).'
     )
     return []
   }
 
-  const nameField = process.env.AIRTABLE_TESTIMONIALS_NAME_FIELD ?? 'Name'
-  const testimonialField = process.env.AIRTABLE_TESTIMONIALS_TESTIMONIAL_FIELD ?? 'Testimonial'
-  const permissionField = process.env.AIRTABLE_TESTIMONIALS_PERMISSION_FIELD ?? 'Permission'
-  const photoField = process.env.AIRTABLE_TESTIMONIALS_PHOTO_FIELD ?? 'Photo'
+  const requestHeaders: Record<string, string> = {
+    Accept: 'application/json'
+  }
+  const query = new URLSearchParams()
 
-  const baseUrl = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`
-  const collected: AirtableRecord[] = []
-  let offset: string | undefined
+  if (useServiceAccount && serviceAccountEmail && serviceAccountKey) {
+    const scopes = [
+      'https://www.googleapis.com/auth/spreadsheets.readonly',
+      'https://www.googleapis.com/auth/drive.readonly'
+    ]
+    serviceAccountToken = await getServiceAccountAccessToken(serviceAccountEmail, serviceAccountKey, scopes)
+    if (!serviceAccountToken) {
+      return []
+    }
+    requestHeaders.Authorization = `Bearer ${serviceAccountToken}`
+  } else if (apiKey) {
+    query.set('key', apiKey)
+  }
 
-  try {
-    do {
-      const url = new URL(baseUrl)
-      url.searchParams.set('pageSize', '100')
-      if (view) {
-        url.searchParams.set('view', view)
-      }
-      if (offset) {
-        url.searchParams.set('offset', offset)
-      }
+  const range = await resolveRange({
+    configuredRange,
+    spreadsheetId,
+    requestHeaders,
+    query
+  })
 
-      const response = await fetch(url.toString(), {
-        headers: {
-          Authorization: `Bearer ${apiKey}`
-        },
-        next: { revalidate: 300 }
-      })
-
-      if (!response.ok) {
-        const errorText = await response.text().catch(() => '')
-        console.error(
-          '[fetchTestimonials] Airtable request failed',
-          response.status,
-          response.statusText,
-          errorText
-        )
-        return []
-      }
-
-      const payload = (await response.json()) as { records?: AirtableRecord[]; offset?: string }
-      if (Array.isArray(payload.records)) {
-        collected.push(...payload.records)
-      }
-      offset = typeof payload.offset === 'string' && payload.offset.length > 0 ? payload.offset : undefined
-    } while (offset)
-  } catch (error) {
-    console.error('[fetchTestimonials] Unexpected error while fetching Airtable data', error)
+  if (!range) {
     return []
   }
 
-  if (collected.length === 0) {
-    console.warn('[fetchTestimonials] Airtable returned zero records. Check table/view filters and permission field values.')
+  console.info(
+    '[fetchTestimonials] Starting fetch',
+    JSON.stringify({
+      hasApiKey: Boolean(apiKey),
+      useServiceAccount,
+      spreadsheetId: spreadsheetId ? `${spreadsheetId.slice(0, 4)}…` : 'missing',
+      range
+    })
+  )
+
+  const endpoint = buildUrl(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}`,
+    query
+  )
+
+  let payload: SheetValuesResponse
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: requestHeaders,
+      next: { revalidate: 300 }
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '')
+      console.error(
+        '[fetchTestimonials] Google Sheets request failed',
+        response.status,
+        response.statusText,
+        errorText
+      )
+      return []
+    }
+
+    payload = (await response.json()) as SheetValuesResponse
+  } catch (error) {
+    console.error('[fetchTestimonials] Unexpected error while fetching Google Sheets data', error)
+    return []
   }
 
-  return collected
-    .map<SheetTestimonial | null>((record) => {
-      const permissionValue = asString(record.fields[permissionField])
-      if (!hasPermission(permissionValue)) {
-        console.warn('[fetchTestimonials] Skipping record', record.id, 'due to permission value:', permissionValue)
-        return null
-      }
+  const values = Array.isArray(payload.values) ? payload.values : []
+  if (values.length === 0) {
+    console.warn('[fetchTestimonials] Google Sheets returned no values. Check sheet data and filters.')
+    return []
+  }
 
-      const testimonial = asString(record.fields[testimonialField])
+  const [rawHeaders, ...rows] = values
+  const headers = rawHeaders.map((header) => header.trim())
+
+  const nameHeader = process.env.GOOGLE_SHEETS_NAME_HEADER ?? 'Name'
+  const testimonialHeader = process.env.GOOGLE_SHEETS_TESTIMONIAL_HEADER ?? 'Testimonial'
+  const permissionHeader = process.env.GOOGLE_SHEETS_PERMISSION_HEADER ?? 'Permission'
+  const photoHeader = process.env.GOOGLE_SHEETS_PHOTO_HEADER ?? 'Photo'
+  const designationHeader = process.env.GOOGLE_SHEETS_DESIGNATION_HEADER ?? 'Designation'
+  const countryHeader = process.env.GOOGLE_SHEETS_COUNTRY_HEADER ?? 'Country'
+
+  const nameIndex = indexForHeader(headers, nameHeader)
+  const testimonialIndex = indexForHeader(headers, testimonialHeader)
+  const permissionIndex = indexForHeader(headers, permissionHeader)
+  const photoIndex = indexForHeader(headers, photoHeader)
+  const designationIndex = indexForHeader(headers, designationHeader)
+  const countryIndex = indexForHeader(headers, countryHeader)
+
+  console.info(
+    '[fetchTestimonials] Header indices',
+    JSON.stringify({
+      nameIndex,
+      testimonialIndex,
+      permissionIndex,
+      photoIndex,
+      designationIndex,
+      countryIndex
+    })
+  )
+
+  if (testimonialIndex === -1) {
+    console.error(
+      `[fetchTestimonials] Unable to locate the testimonial header "${testimonialHeader}". Verify the sheet headers or update GOOGLE_SHEETS_TESTIMONIAL_HEADER.`
+    )
+    return []
+  }
+
+  const entries = await Promise.all(
+    rows.map(async (row) => {
+      const testimonialCell = row[testimonialIndex]
+      const testimonial = asString(testimonialCell) ?? ''
       if (!testimonial) {
-        console.warn('[fetchTestimonials] Skipping record', record.id, 'because testimonial text is missing.')
         return null
       }
 
-      const name = asString(record.fields[nameField]) ?? 'Anonymous Seeker'
-      const photoUrl = extractPhotoUrl(record.fields[photoField])
+      const permissionValue = permissionIndex >= 0 ? asString(row[permissionIndex]) : 'yes'
+      if (!hasPermission(permissionValue)) {
+        return null
+      }
+
+      const nameValue = nameIndex >= 0 ? asString(row[nameIndex]) : undefined
+      const photoValue = photoIndex >= 0 ? asString(row[photoIndex]) : undefined
+      const designationValue = designationIndex >= 0 ? asString(row[designationIndex]) : undefined
+      const countryValue = countryIndex >= 0 ? asString(row[countryIndex]) : undefined
+
+      const photoUrl = await normalisePhotoUrl(photoValue, { accessToken: serviceAccountToken })
 
       return {
-        name,
+        name: nameValue && nameValue.length > 0 ? nameValue : 'Anonymous Seeker',
         testimonial,
-        photoUrl
+        photoUrl,
+        designation: designationValue && designationValue.length > 0 ? designationValue : undefined,
+        country: countryValue && countryValue.length > 0 ? countryValue : undefined
       }
     })
-    .filter((entry): entry is SheetTestimonial => entry !== null)
+  )
+
+  const filtered = entries.filter((entry): entry is SheetTestimonial => entry !== null)
+
+  if (filtered.length === 0) {
+    console.warn(
+      '[fetchTestimonials] No testimonials passed the permission filter. Check the Permission column values.'
+    )
+  } else {
+    console.info(
+      '[fetchTestimonials] Loaded testimonials',
+      JSON.stringify({ count: filtered.length })
+    )
+  }
+
+  return filtered
 }

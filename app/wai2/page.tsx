@@ -138,7 +138,7 @@ export default function WaiTwoPage() {
         </div>
       </section>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row md:items-center">
         <Quote
           theme={THEME}
           text="To the right of the chest lies the spiritual heart where the Creator dwells."
@@ -258,7 +258,7 @@ export default function WaiTwoPage() {
           imageClassName="object-cover"
           sizes="(min-width: 1280px) 480px, (min-width: 768px) 40vw, 100vw"
         />
-        <div className="space-y-4 rounded-3xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8">
+        <div className="space-y-4 rounded-3xl sm:p-8">
           <h3 className={`text-2xl font-semibold ${headingClass}`}>Why You Must Watch It</h3>
           <ul className="space-y-2 text-base leading-7 text-emerald-800">
             {whyWatch.map((entry) => (
