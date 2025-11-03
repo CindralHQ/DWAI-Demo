@@ -125,6 +125,7 @@ export default async function Testimonials() {
                   className="flex h-full flex-col gap-5 rounded-3xl bg-white/80 p-6 shadow-sm shadow-rose-200/30 md:p-7"
                   leadingVisual={
                     <div className="flex flex-col gap-4">
+                      <p className="text-base leading-7 text-rose-700">{testimonial.testimonial}</p>
                       <div className="flex items-center gap-4">
                         <div className="relative h-[5.75rem] w-[5.75rem] overflow-hidden rounded-[24px] border border-white/70 bg-white/70 shadow-inner shadow-rose-200/60 md:h-[6.5rem] md:w-[6.5rem]">
                           <Image
@@ -148,7 +149,6 @@ export default async function Testimonials() {
                           ) : null}
                         </div>
                       </div>
-                      <p className="text-base leading-7 text-rose-700">{testimonial.testimonial}</p>
                     </div>
                   }
                 />
