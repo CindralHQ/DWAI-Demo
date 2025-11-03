@@ -100,12 +100,14 @@ async function getServiceAccountAccessToken(email: string, privateKey: string, s
     iat: now
   }
 
-  const base64Url = (input: Buffer | string) =>
-    Buffer.from(input)
+  const base64Url = (input: Buffer | string) => {
+    const source = typeof input === 'string' ? Buffer.from(input) : Buffer.from(input)
+    return source
       .toString('base64')
       .replace(/=/g, '')
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
+  }
 
   const headerSegment = base64Url(JSON.stringify(header))
   const claimSegment = base64Url(JSON.stringify(claimSet))
@@ -465,7 +467,7 @@ export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
   }
 
   const entries = await Promise.all(
-    rows.map(async (row) => {
+    rows.map(async (row): Promise<SheetTestimonial | null> => {
       const testimonialCell = row[testimonialIndex]
       const testimonial = asString(testimonialCell) ?? ''
       if (!testimonial) {
@@ -484,17 +486,21 @@ export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
 
       const photoUrl = await normalisePhotoUrl(photoValue, { accessToken: serviceAccountToken })
 
-      return {
+      const testimonialEntry: SheetTestimonial = {
         name: nameValue && nameValue.length > 0 ? nameValue : 'Anonymous Seeker',
         testimonial,
         photoUrl,
         designation: designationValue && designationValue.length > 0 ? designationValue : undefined,
         country: countryValue && countryValue.length > 0 ? countryValue : undefined
       }
+      return testimonialEntry
     })
   )
 
-  const filtered = entries.filter((entry): entry is SheetTestimonial => entry !== null)
+  const filtered = entries.filter(
+    (entry): entry is SheetTestimonial =>
+      entry !== null
+  )
 
   if (filtered.length === 0) {
     console.warn(
