@@ -8,6 +8,15 @@ export type SheetTestimonial = {
   country?: string
 }
 
+export type DriveVideoTestimonial = {
+  id: string
+  title: string
+  description?: string
+  embedUrl: string
+  thumbnailUrl?: string
+  durationSeconds?: number
+}
+
 function hasPermission(value: string | undefined) {
   if (!value) return false
   const normalised = value.trim().toLowerCase()
@@ -84,6 +93,14 @@ function buildDriveThumbnailUrl(fileId: string, resourceKey?: string | null) {
     directUrl.searchParams.set('resourcekey', resourceKey)
   }
   return directUrl.toString()
+}
+
+function buildDrivePreviewUrl(fileId: string, resourceKey?: string | null) {
+  const previewUrl = new URL(`https://drive.google.com/file/d/${fileId}/preview`)
+  if (resourceKey) {
+    previewUrl.searchParams.set('resourcekey', resourceKey)
+  }
+  return previewUrl.toString()
 }
 
 async function getServiceAccountAccessToken(email: string, privateKey: string, scopes: string[]) {
@@ -327,6 +344,173 @@ async function normalisePhotoUrl(value: string | undefined, options: NormalisePh
   }
 
   return trimmed
+}
+
+type DriveFileListingResponse = {
+  files?: Array<{
+    id?: string
+    name?: string
+    description?: string
+    resourceKey?: string
+    thumbnailLink?: string
+    webViewLink?: string
+    videoMediaMetadata?: {
+      durationMillis?: string
+      width?: number
+      height?: number
+    }
+  }>
+}
+
+export async function fetchVideoTestimonials(): Promise<DriveVideoTestimonial[]> {
+  const folderId = process.env.GOOGLE_DRIVE_TESTIMONIAL_FOLDER_ID?.trim()
+  if (!folderId) {
+    console.info('[fetchVideoTestimonials] No Google Drive folder configured; skipping fetch.')
+    return []
+  }
+
+  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
+  const rawServiceAccountKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+  const serviceAccountKey = rawServiceAccountKey ? rawServiceAccountKey.replace(/\\n/g, '\n') : undefined
+  const driveApiKey = process.env.GOOGLE_DRIVE_API_KEY ?? process.env.GOOGLE_SHEETS_API_KEY
+  const requestHeaders: Record<string, string> = {
+    Accept: 'application/json'
+  }
+  const query = new URLSearchParams({
+    supportsAllDrives: 'true',
+    includeItemsFromAllDrives: 'true'
+  })
+
+  const sanitizedFolderId = folderId.replace(/['"]/g, '')
+  const escapedFolderId = sanitizedFolderId.replace(/'/g, "\\'")
+  query.set(
+    'q',
+    `'${escapedFolderId}' in parents and mimeType contains 'video/' and trashed = false`
+  )
+  query.set(
+    'fields',
+    'files(id,name,description,resourceKey,thumbnailLink,webViewLink,videoMediaMetadata(durationMillis,width,height))'
+  )
+
+  const orderBy = process.env.GOOGLE_DRIVE_TESTIMONIAL_ORDER ?? 'createdTime desc'
+  if (orderBy && orderBy.trim().length > 0) {
+    query.set('orderBy', orderBy)
+  }
+
+  const rawMaxResults =
+    process.env.GOOGLE_DRIVE_TESTIMONIAL_MAX_RESULTS ?? process.env.GOOGLE_DRIVE_TESTIMONIAL_LIMIT
+  if (rawMaxResults) {
+    const parsed = Number.parseInt(rawMaxResults, 10)
+    if (Number.isFinite(parsed) && parsed > 0) {
+      query.set('pageSize', String(Math.min(parsed, 50)))
+    }
+  }
+
+  let serviceAccountToken: string | undefined
+
+  if (serviceAccountEmail && serviceAccountKey) {
+    const scopes = ['https://www.googleapis.com/auth/drive.readonly']
+    serviceAccountToken = await getServiceAccountAccessToken(
+      serviceAccountEmail,
+      serviceAccountKey,
+      scopes
+    )
+    if (!serviceAccountToken) {
+      return []
+    }
+    requestHeaders.Authorization = `Bearer ${serviceAccountToken}`
+  } else if (driveApiKey) {
+    query.set('key', driveApiKey)
+  } else {
+    console.error(
+      '[fetchVideoTestimonials] Missing Drive credentials. Provide GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY or GOOGLE_DRIVE_API_KEY (public folders only).'
+    )
+    return []
+  }
+
+  const endpoint = buildUrl('https://www.googleapis.com/drive/v3/files', query)
+  const revalidateSeconds = Number.parseInt(
+    process.env.GOOGLE_DRIVE_TESTIMONIAL_REVALIDATE ?? '600',
+    10
+  )
+
+  console.info(
+    '[fetchVideoTestimonials] Starting fetch',
+    JSON.stringify({
+      usingServiceAccount: Boolean(serviceAccountToken),
+      folderId: `${sanitizedFolderId.slice(0, 4)}…`,
+      orderBy,
+      pageSize: query.get('pageSize') ?? 'default'
+    })
+  )
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: requestHeaders,
+      next: { revalidate: Number.isFinite(revalidateSeconds) ? Math.max(revalidateSeconds, 60) : 600 }
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => '')
+      console.error(
+        '[fetchVideoTestimonials] Google Drive request failed',
+        response.status,
+        response.statusText,
+        errorText
+      )
+      return []
+    }
+
+    const payload = (await response.json()) as DriveFileListingResponse
+    const files = Array.isArray(payload.files) ? payload.files : []
+
+    if (files.length === 0) {
+      console.warn(
+        '[fetchVideoTestimonials] No video files were returned. Check folder permissions and file types.'
+      )
+      return []
+    }
+
+    const mapped = files
+      .map((file): DriveVideoTestimonial | null => {
+        const id = file.id?.trim()
+        if (!id) {
+          return null
+        }
+
+        const resourceKey = file.resourceKey ?? undefined
+        const fallbackThumbnail = buildDriveThumbnailUrl(id, resourceKey)
+        const embedUrl = buildDrivePreviewUrl(id, resourceKey)
+        const durationMillis = file.videoMediaMetadata?.durationMillis
+        let durationSeconds: number | undefined
+        if (typeof durationMillis === 'string') {
+          const parsedDuration = Number(durationMillis)
+          if (Number.isFinite(parsedDuration) && parsedDuration > 0) {
+            durationSeconds = Math.round(parsedDuration / 1000)
+          }
+        }
+
+        return {
+          id,
+          title: file.name?.trim() ?? 'Video Testimonial',
+          description: file.description?.trim() || undefined,
+          embedUrl,
+          thumbnailUrl: file.thumbnailLink ?? fallbackThumbnail,
+          durationSeconds
+        }
+      })
+      .filter((entry): entry is DriveVideoTestimonial => entry !== null)
+
+    console.info(
+      '[fetchVideoTestimonials] Loaded videos',
+      JSON.stringify({ count: mapped.length })
+    )
+
+    return mapped
+  } catch (error) {
+    console.error('[fetchVideoTestimonials] Unexpected error while querying Google Drive', error)
+    return []
+  }
 }
 
 export async function fetchTestimonials(): Promise<SheetTestimonial[]> {

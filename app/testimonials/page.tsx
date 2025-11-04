@@ -3,7 +3,12 @@ import Image, { type StaticImageData } from 'next/image'
 import { Card } from '@/components/ui/Card'
 import { Quote } from '@/components/ui/Quote'
 import { themeLibrary, ThemeName } from '@/lib/designSystem'
-import { fetchTestimonials, type SheetTestimonial } from '@/lib/googleSheets'
+import {
+  fetchTestimonials,
+  fetchVideoTestimonials,
+  type SheetTestimonial,
+  type DriveVideoTestimonial
+} from '@/lib/googleSheets'
 import featuredPortrait from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 import placeholderPortrait from '@/assets/visuals/Blue-Guru-Blessings.png'
 
@@ -53,6 +58,7 @@ const FEATURED_TESTIMONIAL = {
 export default async function Testimonials() {
   const palette = themeLibrary[TESTIMONIALS_THEME].classes
   const headingClass = palette.card.title
+  const videoTestimonials: DriveVideoTestimonial[] = await fetchVideoTestimonials()
   const remoteTestimonials = await fetchTestimonials()
   const testimonials: SheetTestimonial[] =
     remoteTestimonials.length > 0 ? remoteTestimonials : FALLBACK_TESTIMONIALS
@@ -62,9 +68,10 @@ export default async function Testimonials() {
     <div className="space-y-12">
       <Quote
         theme={TESTIMONIALS_THEME}
-        text="We listen closely to the community. Every narrative helps refine how the transmissions are offered."
+        text="We listen to every story with gratitude. Each one reveals how the light of the teachings shines uniquely through every soul."
         author="Discover Who Am I Team"
       />
+ 
 
       <section className="space-y-5">
         <header className="space-y-2">
@@ -112,6 +119,48 @@ export default async function Testimonials() {
               </div>
             </div>
           </div>
+
+
+
+{videoTestimonials.length > 0 ? (
+        <section className="space-y-5">
+          <header className="space-y-2">
+            <h2 className={`text-3xl font-semibold tracking-tight ${headingClass}`}>
+              Expressions from the Heart - The Voice of Experience
+            </h2>
+            <p className={`text-base leading-7 ${palette.muted}`}>
+              Each voice carries the imprint of a unique journey — a shift in awareness, a deepening in presence, a quiet remembrance of truth.
+            </p>
+          </header>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {videoTestimonials.map((video) => (
+              <Card
+                key={video.id}
+                theme={TESTIMONIALS_THEME}
+                className="flex h-full flex-col gap-4 rounded-3xl bg-white/80 p-6 shadow-sm shadow-rose-200/30 md:p-7"
+                title={video.title}
+                description={video.description}
+                leadingVisual={
+                  <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full border-0"
+                    />
+                  </div>
+                }
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+
+
 
           <div className="grid gap-6 md:grid-cols-2">
             {testimonials.map((testimonial, index) => {
