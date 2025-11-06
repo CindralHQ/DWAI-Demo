@@ -7,36 +7,42 @@ import { PageFade } from '@/components/ui/PageFade'
 import { ImageLightboxProvider } from '@/components/ui/ImageLightbox'
 import { ContentProtectionLayer } from '@/components/ui/ContentProtectionLayer'
 
+const deploymentHost =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://discoverwhoami.com')
+
 const siteDescription =
   "Discover Who Am I shares Santosh Ma's guided four-part journey through the chakras, offering teachings, visuals, and testimonials for sincere seekers."
 
+const ogImage = `${deploymentHost}/og-logo.png`
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://discoverwhoami.com'),
+  metadataBase: new URL(deploymentHost),
   title: {
-    default: 'Discover Who Am I',
+    default: 'Discover Who Am I - Sacred Yogic Journey',
     template: '%s | Discover Who Am I'
   },
   description: siteDescription,
   openGraph: {
-    title: 'Discover Who Am I',
+    title: 'Discover Who Am I - Sacred Yogic Journey',
     description: siteDescription,
-    url: 'https://discoverwhoami.com',
+    url: deploymentHost,
     siteName: 'Discover Who Am I',
     type: 'website',
     images: [
       {
-        url: '/icon.png',
-        width: 512,
-        height: 512,
+        url: ogImage,
+        width: 1200,
+        height: 630,
         alt: 'Discover Who Am I logo'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Discover Who Am I',
+    title: 'Discover Who Am I - Sacred Yogic Journey',
     description: siteDescription,
-    images: ['/icon.png']
+    images: [ogImage]
   },
   icons: {
     icon: '/icon.png',
