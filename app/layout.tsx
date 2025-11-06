@@ -19,12 +19,12 @@ const ogImage = `${deploymentHost}/og-logo.png`
 export const metadata: Metadata = {
   metadataBase: new URL(deploymentHost),
   title: {
-    default: 'Discover Who Am I - Sacred Yogic Journey',
+    default: 'Discover Who Am I',
     template: '%s | Discover Who Am I'
   },
   description: siteDescription,
   openGraph: {
-    title: 'Discover Who Am I - Sacred Yogic Journey',
+    title: 'Discover Who Am I',
     description: siteDescription,
     url: deploymentHost,
     siteName: 'Discover Who Am I',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Discover Who Am I - Sacred Yogic Journey',
+    title: 'Discover Who Am I',
     description: siteDescription,
     images: [ogImage]
   },
