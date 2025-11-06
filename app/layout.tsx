@@ -1,4 +1,5 @@
 import './globals.css'
+import type { Metadata } from 'next'
 import { BackgroundAudio } from '@/components/ui/BackgroundAudio'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/ui/Header'
@@ -6,9 +7,49 @@ import { PageFade } from '@/components/ui/PageFade'
 import { ImageLightboxProvider } from '@/components/ui/ImageLightbox'
 import { ContentProtectionLayer } from '@/components/ui/ContentProtectionLayer'
 
-export const metadata = {
-  title: 'Who Am I - Series',
-  description: 'Static Next.js rebuild of discoverwhoami.com for conversion work.'
+const siteDescription =
+  "Discover Who Am I shares Santosh Ma's guided four-part journey through the chakras, offering teachings, visuals, and testimonials for sincere seekers."
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://discoverwhoami.com'),
+  title: {
+    default: 'Discover Who Am I',
+    template: '%s | Discover Who Am I'
+  },
+  description: siteDescription,
+  openGraph: {
+    title: 'Discover Who Am I',
+    description: siteDescription,
+    url: 'https://discoverwhoami.com',
+    siteName: 'Discover Who Am I',
+    type: 'website',
+    images: [
+      {
+        url: '/icon.png',
+        width: 512,
+        height: 512,
+        alt: 'Discover Who Am I logo'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Discover Who Am I',
+    description: siteDescription,
+    images: ['/icon.png']
+  },
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png'
+  },
+  keywords: [
+    'Who Am I series',
+    'Santosh Ma',
+    'kundalini course',
+    'chakra teachings',
+    'yogic wisdom'
+  ]
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
