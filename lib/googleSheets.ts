@@ -177,6 +177,17 @@ function indexForHeader(headers: string[], target: string) {
   return headers.findIndex((header) => header.trim().toLowerCase() === normalisedTarget)
 }
 
+function findHeaderIndex(headers: string[], ...candidates: Array<string | undefined>) {
+  for (const candidate of candidates) {
+    if (!candidate) continue
+    const index = indexForHeader(headers, candidate)
+    if (index !== -1) {
+      return index
+    }
+  }
+  return -1
+}
+
 async function fetchDriveImageAsDataUrl(fileId: string, resourceKey: string | undefined, accessToken: string) {
   const cacheKey = `${fileId}::${resourceKey ?? ''}`
   const cached = driveImageCache.get(cacheKey)
@@ -620,16 +631,51 @@ export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
   const nameHeader = process.env.GOOGLE_SHEETS_NAME_HEADER ?? 'Name'
   const testimonialHeader = process.env.GOOGLE_SHEETS_TESTIMONIAL_HEADER ?? 'Testimonial'
   const permissionHeader = process.env.GOOGLE_SHEETS_PERMISSION_HEADER ?? 'Permission'
+  const adminPermissionHeader = process.env.GOOGLE_SHEETS_ADMIN_PERMISSION_HEADER ?? 'Admin Permission'
   const photoHeader = process.env.GOOGLE_SHEETS_PHOTO_HEADER ?? 'Photo'
   const designationHeader = process.env.GOOGLE_SHEETS_DESIGNATION_HEADER ?? 'Designation'
   const countryHeader = process.env.GOOGLE_SHEETS_COUNTRY_HEADER ?? 'Country'
 
-  const nameIndex = indexForHeader(headers, nameHeader)
-  const testimonialIndex = indexForHeader(headers, testimonialHeader)
-  const permissionIndex = indexForHeader(headers, permissionHeader)
-  const photoIndex = indexForHeader(headers, photoHeader)
-  const designationIndex = indexForHeader(headers, designationHeader)
-  const countryIndex = indexForHeader(headers, countryHeader)
+  const nameIndex = findHeaderIndex(headers, nameHeader, 'Your Name', 'Full Name')
+  const testimonialIndex = findHeaderIndex(
+    headers,
+    testimonialHeader,
+    'Your Testimonial',
+    'Feedback',
+    'Story'
+  )
+  const permissionIndex = findHeaderIndex(
+    headers,
+    permissionHeader,
+    'Permission to showcase on website',
+    'Permission to showcase on Website',
+    'Permission Granted'
+  )
+  const adminPermissionIndex = findHeaderIndex(
+    headers,
+    adminPermissionHeader,
+    'Admin Permission',
+    'Admin Approval'
+  )
+  const photoIndex = findHeaderIndex(
+    headers,
+    photoHeader,
+    'Upload your profile picture',
+    'Profile Picture',
+    'Photo URL'
+  )
+  const designationIndex = findHeaderIndex(
+    headers,
+    designationHeader,
+    'Role',
+    'Title'
+  )
+  const countryIndex = findHeaderIndex(
+    headers,
+    countryHeader,
+    'Location',
+    'Country/Region'
+  )
 
   console.info(
     '[fetchTestimonials] Header indices',
@@ -637,6 +683,7 @@ export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
       nameIndex,
       testimonialIndex,
       permissionIndex,
+      adminPermissionIndex,
       photoIndex,
       designationIndex,
       countryIndex
@@ -659,7 +706,9 @@ export async function fetchTestimonials(): Promise<SheetTestimonial[]> {
       }
 
       const permissionValue = permissionIndex >= 0 ? asString(row[permissionIndex]) : 'yes'
-      if (!hasPermission(permissionValue)) {
+      const adminPermissionValue =
+        adminPermissionIndex >= 0 ? asString(row[adminPermissionIndex]) : 'yes'
+      if (!hasPermission(permissionValue) || !hasPermission(adminPermissionValue)) {
         return null
       }
 

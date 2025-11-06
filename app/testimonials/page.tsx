@@ -12,7 +12,7 @@ import {
 import featuredPortrait from '@/assets/visuals/Sahasrara-Blossoming-2.jpeg'
 import placeholderPortrait from '@/assets/visuals/Blue-Guru-Blessings.png'
 
-const TESTIMONIALS_THEME: ThemeName = 'lotus'
+const TESTIMONIALS_THEME: ThemeName = 'twilight'
 
 const FALLBACK_TESTIMONIALS: SheetTestimonial[] = [
   {
@@ -86,9 +86,9 @@ export default async function Testimonials() {
         </header>
 
         <div className="space-y-6">
-          <div className="rounded-3xl bg-gradient-to-br from-rose-50 via-white to-rose-100/80 p-6 shadow-lg shadow-rose-200/40 ring-1 ring-rose-200/60 md:p-8">
+          <div className="rounded-3xl bg-gradient-to-br from-sky-50 via-white to-sky-100/80 p-6 shadow-lg shadow-sky-200/40 ring-1 ring-sky-200/60 md:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center">
-              <div className="relative h-48 w-48 shrink-0 overflow-hidden rounded-[28px] border border-white/70 shadow-inner shadow-rose-300/40 md:h-48 md:w-48">
+              <div className="relative h-48 w-48 shrink-0 overflow-hidden rounded-[28px] border border-white/70 shadow-inner shadow-sky-300/40 md:h-48 md:w-48">
                 <Image
                   src={FEATURED_TESTIMONIAL.image}
                   alt={`Portrait of ${FEATURED_TESTIMONIAL.name}`}
@@ -99,17 +99,17 @@ export default async function Testimonials() {
                 />
               </div>
               <div className="space-y-3">
-                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-rose-500">
+                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-500">
                   Featured Voice
                 </span>
-                <p className="text-lg leading-7 text-rose-900">{FEATURED_TESTIMONIAL.testimonial}</p>
-                <div className="text-sm font-semibold text-rose-700">
+                <p className="text-lg leading-7 text-sky-900">{FEATURED_TESTIMONIAL.testimonial}</p>
+                <div className="text-sm font-semibold text-sky-700">
                   {FEATURED_TESTIMONIAL.name}
                   {FEATURED_TESTIMONIAL.role ? (
-                    <span className="mt-0.5 block text-rose-500/80">{FEATURED_TESTIMONIAL.role}</span>
+                    <span className="mt-0.5 block text-sky-500/80">{FEATURED_TESTIMONIAL.role}</span>
                   ) : null}
                   {[FEATURED_TESTIMONIAL.designation, FEATURED_TESTIMONIAL.country].filter(Boolean).length > 0 ? (
-                    <span className="mt-0.5 block text-rose-400">
+                    <span className="mt-0.5 block text-sky-400">
                       {[FEATURED_TESTIMONIAL.designation, FEATURED_TESTIMONIAL.country]
                         .filter(Boolean)
                         .join(' • ')}
@@ -133,12 +133,12 @@ export default async function Testimonials() {
             </p>
           </header>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {videoTestimonials.map((video) => (
               <Card
                 key={video.id}
                 theme={TESTIMONIALS_THEME}
-                className="flex h-full flex-col gap-4 rounded-3xl bg-white/80 p-6 shadow-sm shadow-rose-200/30 md:p-7"
+                className="flex h-full flex-col gap-4 rounded-3xl bg-white/80 p-6 shadow-sm shadow-sky-200/30 md:p-7"
                 title={video.title}
                 description={video.description}
                 leadingVisual={
@@ -171,12 +171,12 @@ export default async function Testimonials() {
                 <Card
                   key={`${testimonial.name}-${index}`}
                   theme={TESTIMONIALS_THEME}
-                  className="flex h-full flex-col gap-5 rounded-3xl bg-white/80 p-6 shadow-sm shadow-rose-200/30 md:p-7"
+                  className="flex h-full flex-col gap-5 rounded-3xl bg-white/80 p-6 shadow-sm shadow-sky-200/30 md:p-7"
                   leadingVisual={
                     <div className="flex flex-col gap-4">
-                      <p className="text-base leading-7 text-rose-700">{testimonial.testimonial}</p>
+                      <p className="text-base leading-7 text-sky-700">{testimonial.testimonial}</p>
                       <div className="flex items-center gap-4">
-                        <div className="relative h-[5.75rem] w-[5.75rem] overflow-hidden rounded-[24px] border border-white/70 bg-white/70 shadow-inner shadow-rose-200/60 md:h-[6.5rem] md:w-[6.5rem]">
+                        <div className="relative h-[5.75rem] w-[5.75rem] overflow-hidden rounded-[24px] border border-white/70 bg-white/70 shadow-inner shadow-sky-200/60 md:h-[6.5rem] md:w-[6.5rem]">
                           <Image
                             src={photoSrc}
                             alt={`Portrait of ${testimonial.name}`}
@@ -187,12 +187,12 @@ export default async function Testimonials() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <span className="text-sm font-semibold uppercase tracking-[0.3em] text-rose-500">
+                          <span className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-500">
                             Testimonial
                           </span>
-                          <p className="text-base font-semibold text-rose-800">{testimonial.name}</p>
+                          <p className="text-base font-semibold text-sky-800">{testimonial.name}</p>
                           {[testimonial.designation, testimonial.country].filter(Boolean).length > 0 ? (
-                            <p className="text-sm font-medium text-rose-500">
+                            <p className="text-sm font-medium text-sky-500">
                               {[testimonial.designation, testimonial.country].filter(Boolean).join(' • ')}
                             </p>
                           ) : null}
