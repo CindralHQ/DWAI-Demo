@@ -12,7 +12,7 @@ const deploymentHost =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://discoverwhoami.com')
 
 const siteDescription =
-  "Discover Who Am I shares Santosh Ma's guided four-part journey through the chakras, offering teachings, visuals, and testimonials for sincere seekers."
+  "Discover Who Am I — a Thongdrol experience that gently guides you to see, feel, and awaken the liberation within."
 
 const ogImage = `${deploymentHost}/og-logo.png`
 
