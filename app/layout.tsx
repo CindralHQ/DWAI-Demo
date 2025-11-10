@@ -6,6 +6,7 @@ import { Header } from '@/components/ui/Header'
 import { PageFade } from '@/components/ui/PageFade'
 import { ImageLightboxProvider } from '@/components/ui/ImageLightbox'
 import { ContentProtectionLayer } from '@/components/ui/ContentProtectionLayer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const deploymentHost =
   process.env.NEXT_PUBLIC_SITE_URL ??
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </ImageLightboxProvider>
         </main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
