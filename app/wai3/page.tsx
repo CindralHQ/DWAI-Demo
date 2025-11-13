@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from 'next/image'
 
-import { Button } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
@@ -18,6 +18,7 @@ import whyWatchVisual from '@/assets/visuals/Gurus-Blessings-2.png'
 import quoteVisual from '@/assets/visuals/Sahasrar-Blossoming.png'
 
 const THEME: ThemeName = 'vishuddha'
+const ENROLL_URL = 'https://discoverwhoami.com/?add-to-cart=2466&quantity=1&redirect_to_checkout=true'
 
 type VisualAsset = { src: StaticImageData; alt: string }
 
@@ -143,9 +144,9 @@ export default function WaiThreePage() {
             </p>
             <ChakraNav active="wai3" />
             <div className="flex flex-wrap gap-3">
-              <Button theme={THEME} size="lg">
+              <ButtonLink theme={THEME} size="lg" href={ENROLL_URL}>
                 Enroll Now
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -303,6 +304,7 @@ export default function WaiThreePage() {
             </p>
           </>
         }
+        buttonHref={ENROLL_URL}
       />
         </div>
       </div>

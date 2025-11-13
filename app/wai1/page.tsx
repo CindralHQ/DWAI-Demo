@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from 'next/image'
 
-import { Button } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
@@ -18,6 +18,7 @@ import whyWatchVisual from '@/assets/visuals/Kundalini-Serpant.png'
 import quoteVisual from '@/assets/visuals/Boat-And-Sun.jpeg'
 
 const THEME: ThemeName = 'manipura'
+const ENROLL_URL = 'https://discoverwhoami.com/?add-to-cart=2462&quantity=1&redirect_to_checkout=true'
 
 type VisualAsset = { src: StaticImageData; alt: string }
 
@@ -142,9 +143,9 @@ export default function WaiOnePage() {
                 </p>
                 <ChakraNav active="wai1" />
                 <div className="flex flex-wrap gap-3">
-                  <Button theme={THEME} size="lg">
+                  <ButtonLink theme={THEME} size="lg" href={ENROLL_URL}>
                     Enroll Now
-                  </Button>
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -293,6 +294,7 @@ export default function WaiOnePage() {
         theme={THEME}
         price="INR 12,000"
         description="For the first time in the history of spiritual literature, the process of awakening has been documented with such vivid detail through illustrations. These teachings show how kundalini shakti purifies and activates the subtle body, transforming the human body, mind, and intellect. The result is a deep, positive influence on daily living."
+        buttonHref={ENROLL_URL}
       />
     </div>
       </div>

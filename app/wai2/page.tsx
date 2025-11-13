@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from 'next/image'
 
-import { Button } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/Button'
 import { Quote } from '@/components/ui/Quote'
 import { ThemeName, themeLibrary } from '@/lib/designSystem'
 import { ChakraNav } from '@/components/ui/ChakraNav'
@@ -18,6 +18,7 @@ import whyWatchVisual from '@/assets/visuals/Sitting-on-Lotus.jpg'
 import quoteVisual from '@/assets/visuals/pink_lotus.png'
 
 const THEME: ThemeName = 'anahata'
+const ENROLL_URL = 'https://discoverwhoami.com/?add-to-cart=2464&quantity=1&redirect_to_checkout=true'
 
 type VisualAsset = { src: StaticImageData; alt: string }
 
@@ -130,9 +131,9 @@ export default function WaiTwoPage() {
             </p>
             <ChakraNav active="wai2" />
             <div className="flex flex-wrap gap-3">
-              <Button theme={THEME} size="lg">
+              <ButtonLink theme={THEME} size="lg" href={ENROLL_URL}>
                 Enroll Now
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -276,6 +277,7 @@ export default function WaiTwoPage() {
         theme={THEME}
         price="INR 12,000"
         description="Embark on a sacred journey inward. Allow hidden wisdom to awaken, let the heart open, and feel the light of the soul rise."
+        buttonHref={ENROLL_URL}
       />
         </div>
       </div>

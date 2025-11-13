@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Button } from '@/components/ui/Button'
+import { Button, ButtonLink } from '@/components/ui/Button'
 import { ThemeName } from '@/lib/designSystem'
 
 type EnrollBlockProps = {
@@ -8,6 +8,7 @@ type EnrollBlockProps = {
   description: ReactNode | string
   price: string
   buttonLabel?: string
+  buttonHref?: string
   className?: string
 }
 
@@ -25,6 +26,7 @@ export function EnrollBlock({
   description,
   price,
   buttonLabel = 'Enroll Now',
+  buttonHref,
   className
 }: EnrollBlockProps) {
   const background = gradientByTheme[theme] ?? gradientByTheme.manipura
@@ -45,9 +47,15 @@ export function EnrollBlock({
         </div>
         <div className="flex flex-col gap-3 md:items-end md:text-right">
           <div className="text-xl font-semibold text-white">{price}</div>
-          <Button theme={theme} size="lg">
-            {buttonLabel}
-          </Button>
+          {buttonHref ? (
+            <ButtonLink theme={theme} size="lg" href={buttonHref}>
+              {buttonLabel}
+            </ButtonLink>
+          ) : (
+            <Button theme={theme} size="lg">
+              {buttonLabel}
+            </Button>
+          )}
         </div>
       </div>
     </div>
