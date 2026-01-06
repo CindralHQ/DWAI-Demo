@@ -5,12 +5,13 @@ if (!function_exists('e')) {
   }
 }
 
-$subject = $subject ?? 'Notification from Discover Who Am I';
+$subject = $subject ?? ($email_heading ?? '');
 $preheader = $preheader ?? '';
-$site_name = $site_name ?? 'Discover Who Am I';
-$site_url = $site_url ?? 'https://discoverwhoami.com';
-$logo_url = $logo_url ?? ($site_url . '/logo-white.png');
-$support_email = $support_email ?? 'admin@discoverwhoami.org';
+$site_title = $site_title ?? (function_exists('get_bloginfo') ? get_bloginfo('name') : '');
+$site_name = $site_name ?? $site_title;
+$site_url = $site_url ?? (function_exists('site_url') ? site_url() : '');
+$logo_url = $logo_url ?? ($site_url ? ($site_url . '/logo-white.png') : '');
+$support_email = $support_email ?? (function_exists('get_option') ? get_option('admin_email') : '');
 ?>
 <!doctype html>
 <html lang="en">

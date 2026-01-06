@@ -6,7 +6,7 @@ $card_color = $card_color ?? '#FFFFFF';
 $text_color = $text_color ?? '#0F172A';
 $muted_color = $muted_color ?? '#0284C7';
 $border_color = $border_color ?? '#BAE6FD';
-$header_bg_image = $header_bg_image ?? (($site_url ?? 'https://discoverwhoami.com') . '/footerbg.png');
+$header_bg_image = $header_bg_image ?? ((isset($site_url) && $site_url) ? ($site_url . '/footerbg.png') : '');
 ?>
 <style type="text/css">
   body {
@@ -120,6 +120,58 @@ $header_bg_image = $header_bg_image ?? (($site_url ?? 'https://discoverwhoami.co
     border: 1px solid <?php echo $border_color; ?>;
     border-radius: 12px;
     overflow: hidden;
+  }
+  .order-details {
+    width: 100%;
+    margin: 18px 0 8px;
+    border: 1px solid <?php echo $border_color; ?>;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .order-details th,
+  .order-details td {
+    padding: 10px 14px;
+    font-size: 14px;
+    text-align: left;
+  }
+  .order-details th {
+    background: #E0F2FE;
+    width: 40%;
+    color: <?php echo $muted_color; ?>;
+  }
+  .order-table-items-heading {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    margin: 22px 0 10px;
+    color: <?php echo $primary_color; ?>;
+  }
+  .order-table-items {
+    width: 100%;
+    margin: 12px 0 8px;
+    border: 1px solid <?php echo $border_color; ?>;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .order-table-items th,
+  .order-table-items td {
+    padding: 10px 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid <?php echo $border_color; ?>;
+  }
+  .order-table-items th {
+    background: #E0F2FE;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    color: <?php echo $muted_color; ?>;
+  }
+  .order-table-items tr:last-child td {
+    border-bottom: none;
+  }
+  .order-table-items .column-number,
+  .order-table-items .column-quantity {
+    text-align: right;
   }
   .details td {
     padding: 10px 14px;
