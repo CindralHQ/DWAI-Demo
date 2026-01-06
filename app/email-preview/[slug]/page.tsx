@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { CSSProperties } from 'react';
 import { emailTemplateMap, emailTemplates } from '@/emails/nextjs/registry';
 
-const pageStyle = {
+const pageStyle: CSSProperties = {
   fontFamily: 'Arial, Helvetica, sans-serif',
   background: '#F0F9FF',
   color: '#0F172A',
@@ -10,7 +11,7 @@ const pageStyle = {
   padding: '24px 20px 40px',
 };
 
-const headerStyle = {
+const headerStyle: CSSProperties = {
   maxWidth: '1100px',
   margin: '0 auto 20px',
   display: 'flex',
@@ -20,7 +21,7 @@ const headerStyle = {
   gap: '12px',
 };
 
-const buttonStyle = {
+const buttonStyle: CSSProperties = {
   display: 'inline-block',
   background: '#0C4A6E',
   color: '#FFFFFF',
@@ -30,7 +31,7 @@ const buttonStyle = {
   fontSize: '13px',
 };
 
-const frameWrapStyle = {
+const frameWrapStyle: CSSProperties = {
   maxWidth: '1100px',
   margin: '0 auto',
   background: '#FFFFFF',
@@ -39,7 +40,7 @@ const frameWrapStyle = {
   overflow: 'hidden',
 };
 
-const previewStyle = {
+const previewStyle: CSSProperties = {
   width: '100%',
   minHeight: '80vh',
   background: '#FFFFFF',

@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import type { CSSProperties } from 'react';
 import { emailTemplates } from '@/emails/nextjs/registry';
 
-const pageStyle = {
+const pageStyle: CSSProperties = {
   fontFamily: 'Arial, Helvetica, sans-serif',
   background: '#F0F9FF',
   color: '#0F172A',
@@ -9,12 +10,12 @@ const pageStyle = {
   padding: '32px 20px',
 };
 
-const headerStyle = {
+const headerStyle: CSSProperties = {
   maxWidth: '960px',
   margin: '0 auto 24px',
 };
 
-const gridStyle = {
+const gridStyle: CSSProperties = {
   maxWidth: '960px',
   margin: '0 auto',
   display: 'grid',
@@ -22,7 +23,7 @@ const gridStyle = {
   gap: '16px',
 };
 
-const cardStyle = {
+const cardStyle: CSSProperties = {
   display: 'block',
   background: '#FFFFFF',
   border: '1px solid #BAE6FD',
@@ -32,7 +33,7 @@ const cardStyle = {
   color: 'inherit',
 };
 
-const slugStyle = {
+const slugStyle: CSSProperties = {
   display: 'block',
   marginTop: '8px',
   color: '#0284C7',
