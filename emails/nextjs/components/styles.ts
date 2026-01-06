@@ -1,0 +1,175 @@
+import type { CSSProperties } from 'react';
+
+export const colors = {
+  primary: '#0C4A6E',
+  accent: '#0369A1',
+  background: '#F0F9FF',
+  card: '#FFFFFF',
+  text: '#0F172A',
+  muted: '#0284C7',
+  border: '#BAE6FD',
+};
+
+export const styles: Record<string, CSSProperties> = {
+  body: {
+    margin: 0,
+    padding: 0,
+    backgroundColor: colors.background,
+    color: colors.text,
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
+  preheader: {
+    display: 'none',
+    visibility: 'hidden',
+    opacity: 0,
+    color: 'transparent',
+    height: 0,
+    width: 0,
+    overflow: 'hidden',
+  },
+  wrapper: {
+    width: '100%',
+    backgroundColor: colors.background,
+    padding: '32px 12px',
+  },
+  container: {
+    width: '100%',
+    maxWidth: '640px',
+    backgroundColor: colors.card,
+    border: `1px solid ${colors.border}`,
+    borderRadius: '18px',
+    overflow: 'hidden',
+  },
+  header: {
+    backgroundColor: colors.primary,
+    color: '#FFFFFF',
+    padding: '32px 28px',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  headerBg: {
+    position: 'absolute',
+    inset: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    filter: 'blur(8px)',
+    transform: 'scale(1.08)',
+    opacity: 0.9,
+  },
+  headerInner: {
+    position: 'relative',
+    zIndex: 1,
+  },
+  brand: {
+    fontSize: '18px',
+    fontWeight: 700,
+    color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  brandName: {
+    marginTop: '10px',
+    display: 'block',
+    letterSpacing: '0.4px',
+  },
+  headerMeta: {
+    fontSize: '12px',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+  content: {
+    padding: '28px 32px 20px',
+    fontSize: '15px',
+    lineHeight: '1.6',
+  },
+  h1: {
+    fontFamily: "Georgia, 'Times New Roman', serif",
+    fontSize: '26px',
+    margin: '0 0 16px',
+    color: colors.primary,
+  },
+  h2: {
+    fontFamily: "Georgia, 'Times New Roman', serif",
+    fontSize: '20px',
+    margin: '28px 0 12px',
+    color: colors.primary,
+  },
+  p: {
+    margin: '0 0 14px',
+  },
+  note: {
+    backgroundColor: '#E0F2FE',
+    border: '1px solid #7DD3FC',
+    padding: '12px 14px',
+    borderRadius: '12px',
+    fontSize: '14px',
+  },
+  detailsTable: {
+    width: '100%',
+    margin: '18px 0 8px',
+    border: `1px solid ${colors.border}`,
+    borderRadius: '12px',
+    overflow: 'hidden',
+  },
+  detailCell: {
+    padding: '10px 14px',
+    fontSize: '14px',
+  },
+  detailLabel: {
+    backgroundColor: '#E0F2FE',
+    width: '40%',
+    color: colors.muted,
+  },
+  detailValue: {
+    fontWeight: 600,
+  },
+  button: {
+    display: 'inline-block',
+    backgroundColor: colors.accent,
+    color: '#FFFFFF',
+    textDecoration: 'none',
+    padding: '12px 20px',
+    borderRadius: '999px',
+    fontWeight: 700,
+    marginTop: '8px',
+  },
+  itemsTable: {
+    width: '100%',
+    margin: '16px 0 8px',
+    border: `1px solid ${colors.border}`,
+    borderRadius: '12px',
+    overflow: 'hidden',
+  },
+  itemsHeader: {
+    backgroundColor: '#E0F2FE',
+    textTransform: 'uppercase',
+    fontSize: '11px',
+    letterSpacing: '0.6px',
+    color: colors.muted,
+    padding: '10px 12px',
+    textAlign: 'left',
+  },
+  itemsCell: {
+    padding: '10px 12px',
+    fontSize: '13px',
+    textAlign: 'left',
+    borderBottom: `1px solid ${colors.border}`,
+  },
+  itemsTotal: {
+    textAlign: 'right',
+    fontWeight: 700,
+  },
+  footer: {
+    padding: '20px 32px 28px',
+    backgroundColor: '#E0F2FE',
+    color: colors.muted,
+    fontSize: '12px',
+  },
+  link: {
+    color: colors.primary,
+  },
+  muted: {
+    color: colors.muted,
+  },
+};
