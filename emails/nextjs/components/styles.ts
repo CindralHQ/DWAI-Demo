@@ -43,7 +43,7 @@ export const styles: Record<string, CSSProperties> = {
   header: {
     backgroundColor: colors.primary,
     color: '#FFFFFF',
-    padding: '32px 28px',
+    padding: '15px 28px',
     position: 'relative',
     overflow: 'hidden',
   },

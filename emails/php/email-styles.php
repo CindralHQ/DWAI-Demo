@@ -50,7 +50,7 @@ $header_bg_image = $header_bg_image ?? ((isset($site_url) && $site_url) ? ($site
   .header {
     background-color: <?php echo $primary_color; ?>;
     color: #FFFFFF;
-    padding: 32px 28px;
+    padding: 15px 28px;
     position: relative;
     overflow: hidden;
   }
