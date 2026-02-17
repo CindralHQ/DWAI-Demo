@@ -349,17 +349,22 @@ export async function userHasCourseAccess(
   const normalizedHints = (Array.isArray(hints) ? hints : [hints]).map((hint) => hint.toLowerCase())
   if (normalizedHints.length === 0) return false
 
-  const courses = await fetchLearnPressCourses({ perPage: 50, learned: true, authToken })
-  return courses.some((course) => {
-    const candidates = [
-      course.slug,
-      course.name,
-      course.title?.rendered,
-    ].filter(Boolean) as string[]
+  try {
+    const courses = await fetchLearnPressCourses({ perPage: 50, learned: true, authToken })
+    return courses.some((course) => {
+      const candidates = [
+        course.slug,
+        course.name,
+        course.title?.rendered,
+      ].filter(Boolean) as string[]
 
-    return candidates.some((value) => {
-      const lower = value.toLowerCase()
-      return normalizedHints.some((hint) => lower.includes(hint))
+      return candidates.some((value) => {
+        const lower = value.toLowerCase()
+        return normalizedHints.some((hint) => lower.includes(hint))
+      })
     })
-  })
+  } catch (error) {
+    console.warn('[userHasCourseAccess] LearnPress unavailable; defaulting to no access.', error)
+    return false
+  }
 }
